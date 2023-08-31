@@ -80,3 +80,4 @@ examples/provider/provider.tf
 internal/provider/zone_resource.go
 internal/provider/zone_resource_sdk.go
 examples/resources/newtest_zone/resource.tf
+.gitattributes
