@@ -6,39 +6,22 @@ type ZoneVcenterConfigNetworkServer struct {
 	ID *string `json:"id,omitempty"`
 }
 
-type ZoneVcenterConfig struct {
-	EnableNetworkTypeSelection *string                         `json:"_enableNetworkTypeSelection,omitempty"`
-	APIURL                     *string                         `json:"apiUrl,omitempty"`
-	APIVersion                 *string                         `json:"apiVersion,omitempty"`
-	ApplianceURL               *string                         `json:"applianceUrl,omitempty"`
-	BackupMode                 *string                         `json:"backupMode,omitempty"`
-	CertificateProvider        *string                         `json:"certificateProvider,omitempty"`
-	Cluster                    *string                         `json:"cluster,omitempty"`
-	ConfigCmID                 *string                         `json:"configCmId,omitempty"`
-	ConfigCmdbDiscovery        *bool                           `json:"configCmdbDiscovery,omitempty"`
-	ConfigCmdbID               *string                         `json:"configCmdbId,omitempty"`
-	ConfigManagementID         *string                         `json:"configManagementId,omitempty"`
-	Datacenter                 *string                         `json:"datacenter,omitempty"`
-	DatacenterID               *string                         `json:"datacenterId,omitempty"`
-	DatacenterName             *string                         `json:"datacenterName,omitempty"`
-	DiskStorageType            *string                         `json:"diskStorageType,omitempty"`
-	DistributedWorkerID        *string                         `json:"distributedWorkerId,omitempty"`
-	DNSIntegrationID           *string                         `json:"dnsIntegrationId,omitempty"`
-	EnableDiskTypeSelection    *string                         `json:"enableDiskTypeSelection,omitempty"`
-	EnableVnc                  *string                         `json:"enableVnc,omitempty"`
-	HideHostSelection          *string                         `json:"hideHostSelection,omitempty"`
-	ImportExisting             *string                         `json:"importExisting,omitempty"`
-	KubeURL                    *string                         `json:"kubeUrl,omitempty"`
-	NetworkServer              *ZoneVcenterConfigNetworkServer `json:"networkServer,omitempty"`
-	NetworkServerID            *string                         `json:"networkServer.id,omitempty"`
-	Password                   *string                         `json:"password,omitempty"`
-	PasswordHash               *string                         `json:"passwordHash,omitempty"`
-	ReplicationMode            *string                         `json:"replicationMode,omitempty"`
-	ResourcePool               *string                         `json:"resourcePool,omitempty"`
-	ResourcePoolID             *string                         `json:"resourcePoolId,omitempty"`
-	RPCMode                    *string                         `json:"rpcMode,omitempty"`
-	SecurityMode               *string                         `json:"securityMode,omitempty"`
-	SecurityServer             *string                         `json:"securityServer,omitempty"`
-	ServiceRegistryID          *string                         `json:"serviceRegistryId,omitempty"`
-	Username                   *string                         `json:"username,omitempty"`
+type ZoneGcpConfig struct {
+	ApplianceURL        *string                     `json:"applianceUrl,omitempty"`
+	BackupMode          *string                     `json:"backupMode,omitempty"`
+	CertificateProvider *string                     `json:"certificateProvider,omitempty"`
+	ClientEmail         *string                     `json:"clientEmail,omitempty"`
+	ConfigManagementID  *string                     `json:"configManagementId,omitempty"`
+	DatacenterName      *string                     `json:"datacenterName,omitempty"`
+	DNSIntegrationID    *string                     `json:"dnsIntegrationId,omitempty"`
+	GoogleRegionID      *string                     `json:"googleRegionId,omitempty"`
+	ImportExisting      *string                     `json:"importExisting,omitempty"`
+	NetworkServer       *ZoneGcpConfigNetworkServer `json:"networkServer,omitempty"`
+	NetworkServerID     *string                     `json:"networkServer.id,omitempty"`
+	PrivateKey          *string                     `json:"privateKey,omitempty"`
+	PrivateKeyHash      *string                     `json:"privateKeyHash,omitempty"`
+	ProjectID           *string                     `json:"projectId,omitempty"`
+	ReplicationMode     *string                     `json:"replicationMode,omitempty"`
+	SecurityServer      *string                     `json:"securityServer,omitempty"`
+	ServiceRegistryID   *string                     `json:"serviceRegistryId,omitempty"`
 }

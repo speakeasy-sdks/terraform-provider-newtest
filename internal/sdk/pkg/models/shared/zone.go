@@ -71,12 +71,12 @@ func CreateZoneConfigZoneGcpConfig(zoneGcpConfig ZoneGcpConfig) ZoneConfig {
 func (u *ZoneConfig) UnmarshalJSON(data []byte) error {
 	var d *json.Decoder
 
-	zoneVcenterConfig := new(ZoneVcenterConfig)
+	zoneGcpConfig := new(ZoneGcpConfig)
 	d = json.NewDecoder(bytes.NewReader(data))
 	d.DisallowUnknownFields()
-	if err := d.Decode(&zoneVcenterConfig); err == nil {
-		u.ZoneVcenterConfig = zoneVcenterConfig
-		u.Type = ZoneConfigTypeZoneVcenterConfig
+	if err := d.Decode(&zoneGcpConfig); err == nil {
+		u.ZoneGcpConfig = zoneGcpConfig
+		u.Type = ZoneConfigTypeZoneGcpConfig
 		return nil
 	}
 
@@ -98,12 +98,12 @@ func (u *ZoneConfig) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	zoneGcpConfig := new(ZoneGcpConfig)
+	zoneVcenterConfig := new(ZoneVcenterConfig)
 	d = json.NewDecoder(bytes.NewReader(data))
 	d.DisallowUnknownFields()
-	if err := d.Decode(&zoneGcpConfig); err == nil {
-		u.ZoneGcpConfig = zoneGcpConfig
-		u.Type = ZoneConfigTypeZoneGcpConfig
+	if err := d.Decode(&zoneVcenterConfig); err == nil {
+		u.ZoneVcenterConfig = zoneVcenterConfig
+		u.Type = ZoneConfigTypeZoneVcenterConfig
 		return nil
 	}
 
@@ -111,8 +111,8 @@ func (u *ZoneConfig) UnmarshalJSON(data []byte) error {
 }
 
 func (u ZoneConfig) MarshalJSON() ([]byte, error) {
-	if u.ZoneVcenterConfig != nil {
-		return json.Marshal(u.ZoneVcenterConfig)
+	if u.ZoneGcpConfig != nil {
+		return json.Marshal(u.ZoneGcpConfig)
 	}
 
 	if u.ZoneAwsConfig != nil {
@@ -123,8 +123,8 @@ func (u ZoneConfig) MarshalJSON() ([]byte, error) {
 		return json.Marshal(u.ZoneAzureConfig)
 	}
 
-	if u.ZoneGcpConfig != nil {
-		return json.Marshal(u.ZoneGcpConfig)
+	if u.ZoneVcenterConfig != nil {
+		return json.Marshal(u.ZoneVcenterConfig)
 	}
 
 	return nil, nil

@@ -2,7 +2,6 @@
 
 package shared
 
-// TwoHundredSuccess - Successful Response
 type TwoHundredSuccess struct {
 	Success *bool `json:"success,omitempty"`
 }
