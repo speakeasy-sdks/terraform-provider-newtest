@@ -794,7 +794,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			r.Zone.ContainerMode = types.StringNull()
 		}
 		if resp.Zone.CostLastSync != nil {
-			r.Zone.CostLastSync = types.StringValue(resp.Zone.CostLastSync.Format(time.RFC3339))
+			r.Zone.CostLastSync = types.StringValue(resp.Zone.CostLastSync.Format(time.RFC3339Nano))
 		} else {
 			r.Zone.CostLastSync = types.StringNull()
 		}
@@ -809,7 +809,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			r.Zone.CostStatus = types.StringNull()
 		}
 		if resp.Zone.CostStatusDate != nil {
-			r.Zone.CostStatusDate = types.StringValue(resp.Zone.CostStatusDate.Format(time.RFC3339))
+			r.Zone.CostStatusDate = types.StringValue(resp.Zone.CostStatusDate.Format(time.RFC3339Nano))
 		} else {
 			r.Zone.CostStatusDate = types.StringNull()
 		}
@@ -860,7 +860,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			r.Zone.DarkImagePath = types.StringNull()
 		}
 		if resp.Zone.DateCreated != nil {
-			r.Zone.DateCreated = types.StringValue(resp.Zone.DateCreated.Format(time.RFC3339))
+			r.Zone.DateCreated = types.StringValue(resp.Zone.DateCreated.Format(time.RFC3339Nano))
 		} else {
 			r.Zone.DateCreated = types.StringNull()
 		}
@@ -920,7 +920,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			r.Zone.InventoryLevel = types.StringNull()
 		}
 		if resp.Zone.LastSync != nil {
-			r.Zone.LastSync = types.StringValue(resp.Zone.LastSync.Format(time.RFC3339))
+			r.Zone.LastSync = types.StringValue(resp.Zone.LastSync.Format(time.RFC3339Nano))
 		} else {
 			r.Zone.LastSync = types.StringNull()
 		}
@@ -930,7 +930,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			r.Zone.LastSyncDuration = types.Int64Null()
 		}
 		if resp.Zone.LastUpdated != nil {
-			r.Zone.LastUpdated = types.StringValue(resp.Zone.LastUpdated.Format(time.RFC3339))
+			r.Zone.LastUpdated = types.StringValue(resp.Zone.LastUpdated.Format(time.RFC3339Nano))
 		} else {
 			r.Zone.LastUpdated = types.StringNull()
 		}
@@ -981,7 +981,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			}
 		}
 		if resp.Zone.NextRunDate != nil {
-			r.Zone.NextRunDate = types.StringValue(resp.Zone.NextRunDate.Format(time.RFC3339))
+			r.Zone.NextRunDate = types.StringValue(resp.Zone.NextRunDate.Format(time.RFC3339Nano))
 		} else {
 			r.Zone.NextRunDate = types.StringNull()
 		}
@@ -1108,7 +1108,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			r.Zone.Status = types.StringNull()
 		}
 		if resp.Zone.StatusDate != nil {
-			r.Zone.StatusDate = types.StringValue(resp.Zone.StatusDate.Format(time.RFC3339))
+			r.Zone.StatusDate = types.StringValue(resp.Zone.StatusDate.Format(time.RFC3339Nano))
 		} else {
 			r.Zone.StatusDate = types.StringNull()
 		}
