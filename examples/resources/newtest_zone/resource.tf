@@ -1,9 +1,9 @@
 resource "newtest_zone" "my_zone" {
   account = {
-    id   = 6
-    name = "Kelvin Sporer"
+    id   = 8
+    name = "Georgia Herzog"
   }
-  account_id               = 5
+  account_id               = 2
   agent_mode               = "...my_agent_mode..."
   api_proxy                = "...my_api_proxy..."
   auto_recover_power_state = true
@@ -18,7 +18,7 @@ resource "newtest_zone" "my_zone" {
       certificate_provider          = "...my_certificate_provider..."
       cluster                       = "...my_cluster..."
       config_cm_id                  = "...my_config_cm_id..."
-      config_cmdb_discovery         = false
+      config_cmdb_discovery         = true
       config_cmdb_id                = "...my_config_cmdb_id..."
       config_management_id          = "...my_config_management_id..."
       datacenter                    = "...my_datacenter..."
@@ -33,7 +33,7 @@ resource "newtest_zone" "my_zone" {
       import_existing               = "...my_import_existing..."
       kube_url                      = "...my_kube_url..."
       network_server = {
-        id = "9a674e0f-467c-4c87-96ed-151a05dfc2dd"
+        id = "082ffc79-af73-4698-b312-cc8180a7f799"
       }
       network_server_id   = "...my_network_server_id..."
       password            = "...my_password..."
@@ -45,16 +45,16 @@ resource "newtest_zone" "my_zone" {
       security_mode       = "...my_security_mode..."
       security_server     = "...my_security_server..."
       service_registry_id = "...my_service_registry_id..."
-      username            = "Wilford_Krajcik46"
+      username            = "Jaycee.Rowe79"
     }
   }
   console_keymap          = "...my_console_keymap..."
   container_mode          = "...my_container_mode..."
   costing_mode            = "...my_costing_mode..."
-  cost_last_sync          = "2021-06-10T05:07:43.614Z"
-  cost_last_sync_duration = 7
+  cost_last_sync          = "2021-12-03T06:16:20.684Z"
+  cost_last_sync_duration = 6
   cost_status             = "...my_cost_status..."
-  cost_status_date        = "2022-04-12T23:15:28.420Z"
+  cost_status_date        = "2021-11-20T19:35:39.957Z"
   cost_status_message     = "...my_cost_status_message..."
   credential = {
     zone_credential_1 = {
@@ -62,7 +62,7 @@ resource "newtest_zone" "my_zone" {
     }
   }
   dark_image_path = "...my_dark_image_path..."
-  date_created    = "2021-11-02T03:00:47.309Z"
+  date_created    = "2021-03-27T04:02:36.722Z"
   description     = "...my_description..."
   domain_name     = "...my_domain_name..."
   enabled         = false
@@ -70,68 +70,68 @@ resource "newtest_zone" "my_zone" {
   group_id        = 3
   groups = [
     {
-      account_id = 10
-      id         = 8
-      name       = "Jack Johns"
+      account_id = 5
+      id         = 3
+      name       = "Miss Verna Schaefer DDS"
     },
   ]
   guidance_mode      = "...my_guidance_mode..."
-  id                 = 2
+  id                 = 9
   image_path         = "...my_image_path..."
   inventory_level    = "...my_inventory_level..."
-  last_sync          = "2020-10-16T01:47:24.760Z"
-  last_sync_duration = 5
-  last_updated       = "2022-06-07T12:31:06.574Z"
-  linked_account_id  = 1
+  last_sync          = "2022-09-13T01:05:51.979Z"
+  last_sync_duration = 7
+  last_updated       = "2022-10-07T09:00:19.387Z"
+  linked_account_id  = 4
   location           = "...my_location..."
-  name               = "Cathy Mosciski"
+  name               = "Dewey Willms"
   network_domain = {
-    id   = 2
-    name = "Lester Welch"
+    id   = 10
+    name = "Kent Kunze"
   }
   network_server = {
-    id   = 4
-    name = "Sheryl Kertzmann"
+    id   = 8
+    name = "Ted Trantow"
   }
-  next_run_date = "2022-12-10T00:25:28.749Z"
+  next_run_date = "2021-02-23T07:04:21.476Z"
   owner = {
-    id   = 10
-    name = "Shaun Osinski"
+    id   = 1
+    name = "Tasha Bahringer"
   }
   provisioning_proxy = "...my_provisioning_proxy..."
   region_code        = "...my_region_code..."
   scale_priority     = 3
   security_mode      = "...my_security_mode..."
   security_server = {
-    id   = 1
-    name = "Ronnie Mohr"
+    id   = 0
+    name = "Dan Feest"
   }
   server_count    = 6
   service_version = "...my_service_version..."
   stats = {
     server_counts = {
-      all            = 0
-      baremetal      = 4
-      container_host = 6
-      host           = 10
+      all            = 5
+      baremetal      = 5
+      container_host = 5
+      host           = 4
       hypervisor     = 10
-      unmanaged      = 1
-      vm             = 7
+      unmanaged      = 7
+      vm             = 8
     }
   }
   status            = "...my_status..."
-  status_date       = "2022-05-14T04:53:02.888Z"
+  status_date       = "2022-11-10T05:51:56.570Z"
   status_message    = "...my_status_message..."
   storage_mode      = "...my_storage_mode..."
   timezone          = "...my_timezone..."
   user_data_linux   = "...my_user_data_linux..."
   user_data_windows = "...my_user_data_windows..."
-  uuid              = "2fa94677-3925-41aa-92c3-f5ad019da1ff"
+  uuid              = "dc021bc9-ec64-4bbf-a176-511cb0e90ccc"
   visibility        = "...my_visibility..."
   zone_type = {
     code = "...my_code..."
-    id   = 9
-    name = "Miss Irma Wolff"
+    id   = 2
+    name = "Melanie Homenick"
   }
-  zone_type_id = 8
+  zone_type_id = 0
 }
