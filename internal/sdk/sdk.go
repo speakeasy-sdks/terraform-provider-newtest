@@ -138,9 +138,9 @@ func New(opts ...SDKOption) *Newtest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "terraform",
 			OpenAPIDocVersion: "6.1.1",
-			SDKVersion:        "0.8.1",
-			GenVersion:        "2.143.2",
-			UserAgent:         "speakeasy-sdk/terraform 0.8.1 2.143.2 6.1.1 newtest",
+			SDKVersion:        "0.9.0",
+			GenVersion:        "2.144.7",
+			UserAgent:         "speakeasy-sdk/terraform 0.9.0 2.144.7 6.1.1 newtest",
 			ServerDefaults: []map[string]string{
 				{
 					"serverURL": "CHANGEME",
