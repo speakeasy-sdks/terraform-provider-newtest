@@ -71,30 +71,12 @@ func CreateZoneConfigZoneGcpConfig(zoneGcpConfig ZoneGcpConfig) ZoneConfig {
 func (u *ZoneConfig) UnmarshalJSON(data []byte) error {
 	var d *json.Decoder
 
-	zoneGcpConfig := new(ZoneGcpConfig)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&zoneGcpConfig); err == nil {
-		u.ZoneGcpConfig = zoneGcpConfig
-		u.Type = ZoneConfigTypeZoneGcpConfig
-		return nil
-	}
-
 	zoneAwsConfig := new(ZoneAwsConfig)
 	d = json.NewDecoder(bytes.NewReader(data))
 	d.DisallowUnknownFields()
 	if err := d.Decode(&zoneAwsConfig); err == nil {
 		u.ZoneAwsConfig = zoneAwsConfig
 		u.Type = ZoneConfigTypeZoneAwsConfig
-		return nil
-	}
-
-	zoneAzureConfig := new(ZoneAzureConfig)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&zoneAzureConfig); err == nil {
-		u.ZoneAzureConfig = zoneAzureConfig
-		u.Type = ZoneConfigTypeZoneAzureConfig
 		return nil
 	}
 
@@ -107,24 +89,42 @@ func (u *ZoneConfig) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	zoneGcpConfig := new(ZoneGcpConfig)
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&zoneGcpConfig); err == nil {
+		u.ZoneGcpConfig = zoneGcpConfig
+		u.Type = ZoneConfigTypeZoneGcpConfig
+		return nil
+	}
+
+	zoneAzureConfig := new(ZoneAzureConfig)
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&zoneAzureConfig); err == nil {
+		u.ZoneAzureConfig = zoneAzureConfig
+		u.Type = ZoneConfigTypeZoneAzureConfig
+		return nil
+	}
+
 	return errors.New("could not unmarshal into supported union types")
 }
 
 func (u ZoneConfig) MarshalJSON() ([]byte, error) {
-	if u.ZoneGcpConfig != nil {
-		return json.Marshal(u.ZoneGcpConfig)
-	}
-
 	if u.ZoneAwsConfig != nil {
 		return json.Marshal(u.ZoneAwsConfig)
 	}
 
-	if u.ZoneAzureConfig != nil {
-		return json.Marshal(u.ZoneAzureConfig)
-	}
-
 	if u.ZoneVcenterConfig != nil {
 		return json.Marshal(u.ZoneVcenterConfig)
+	}
+
+	if u.ZoneGcpConfig != nil {
+		return json.Marshal(u.ZoneGcpConfig)
+	}
+
+	if u.ZoneAzureConfig != nil {
+		return json.Marshal(u.ZoneAzureConfig)
 	}
 
 	return nil, nil

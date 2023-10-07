@@ -6,22 +6,36 @@ type ZoneVcenterConfigNetworkServer struct {
 	ID *string `json:"id,omitempty"`
 }
 
-type ZoneGcpConfig struct {
-	ApplianceURL        *string                     `json:"applianceUrl,omitempty"`
-	BackupMode          *string                     `json:"backupMode,omitempty"`
-	CertificateProvider *string                     `json:"certificateProvider,omitempty"`
-	ClientEmail         *string                     `json:"clientEmail,omitempty"`
-	ConfigManagementID  *string                     `json:"configManagementId,omitempty"`
-	DatacenterName      *string                     `json:"datacenterName,omitempty"`
-	DNSIntegrationID    *string                     `json:"dnsIntegrationId,omitempty"`
-	GoogleRegionID      *string                     `json:"googleRegionId,omitempty"`
-	ImportExisting      *string                     `json:"importExisting,omitempty"`
-	NetworkServer       *ZoneGcpConfigNetworkServer `json:"networkServer,omitempty"`
-	NetworkServerID     *string                     `json:"networkServer.id,omitempty"`
-	PrivateKey          *string                     `json:"privateKey,omitempty"`
-	PrivateKeyHash      *string                     `json:"privateKeyHash,omitempty"`
-	ProjectID           *string                     `json:"projectId,omitempty"`
-	ReplicationMode     *string                     `json:"replicationMode,omitempty"`
-	SecurityServer      *string                     `json:"securityServer,omitempty"`
-	ServiceRegistryID   *string                     `json:"serviceRegistryId,omitempty"`
+type ZoneAwsConfig struct {
+	UseHostCredentials   *string                     `json:"_useHostCredentials,omitempty"`
+	AccessKey            *string                     `json:"accessKey,omitempty"`
+	ApplianceURL         *string                     `json:"applianceUrl,omitempty"`
+	BackupMode           *string                     `json:"backupMode,omitempty"`
+	CertificateProvider  *string                     `json:"certificateProvider,omitempty"`
+	ConfigCmdbDiscovery  *bool                       `json:"configCmdbDiscovery,omitempty"`
+	ConfigManagementID   *string                     `json:"configManagementId,omitempty"`
+	CostingAccessKey     *string                     `json:"costingAccessKey,omitempty"`
+	CostingBucket        *string                     `json:"costingBucket,omitempty"`
+	CostingBucketName    *string                     `json:"costingBucketName,omitempty"`
+	CostingFolder        *string                     `json:"costingFolder,omitempty"`
+	CostingRegion        *string                     `json:"costingRegion,omitempty"`
+	CostingReport        *string                     `json:"costingReport,omitempty"`
+	CostingReportName    *string                     `json:"costingReportName,omitempty"`
+	CostingSecretKey     *string                     `json:"costingSecretKey,omitempty"`
+	CostingSecretKeyHash *string                     `json:"costingSecretKeyHash,omitempty"`
+	DatacenterName       *string                     `json:"datacenterName,omitempty"`
+	DNSIntegrationID     *string                     `json:"dnsIntegrationId,omitempty"`
+	EbsEncryption        *string                     `json:"ebsEncryption,omitempty"`
+	Endpoint             *string                     `json:"endpoint,omitempty"`
+	ImageStoreID         *string                     `json:"imageStoreId,omitempty"`
+	IsVpc                *string                     `json:"isVpc,omitempty"`
+	NetworkServer        *ZoneAwsConfigNetworkServer `json:"networkServer,omitempty"`
+	NetworkServerID      *string                     `json:"networkServer.id,omitempty"`
+	ReplicationMode      *string                     `json:"replicationMode,omitempty"`
+	SecretKey            *string                     `json:"secretKey,omitempty"`
+	SecretKeyHash        *string                     `json:"secretKeyHash,omitempty"`
+	SecurityServer       *string                     `json:"securityServer,omitempty"`
+	ServiceRegistryID    *string                     `json:"serviceRegistryId,omitempty"`
+	StsAssumeRole        *string                     `json:"stsAssumeRole,omitempty"`
+	Vpc                  *string                     `json:"vpc,omitempty"`
 }
