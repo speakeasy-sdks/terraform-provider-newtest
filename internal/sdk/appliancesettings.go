@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"newtest/internal/sdk/pkg/models/operations"
+	"newtest/internal/sdk/pkg/models/sdkerrors"
 	"newtest/internal/sdk/pkg/models/shared"
 	"newtest/internal/sdk/pkg/utils"
 	"strings"
@@ -70,24 +71,28 @@ func (s *applianceSettings) SetApplianceSettingsMaintenanceMode(ctx context.Cont
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.TwoHundredSuccess
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.TwoHundredSuccess
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.TwoHundredSuccess = out
+			res.TwoHundredSuccess = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.DefaultError
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.DefaultError
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.DefaultError = out
+			res.DefaultError = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

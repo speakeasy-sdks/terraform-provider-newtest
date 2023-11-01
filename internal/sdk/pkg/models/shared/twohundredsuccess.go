@@ -5,3 +5,10 @@ package shared
 type TwoHundredSuccess struct {
 	Success *bool `json:"success,omitempty"`
 }
+
+func (o *TwoHundredSuccess) GetSuccess() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Success
+}

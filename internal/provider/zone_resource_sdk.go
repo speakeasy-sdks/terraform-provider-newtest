@@ -34,7 +34,22 @@ func (r *ZoneResourceModel) ToCreateSDKType() *shared.ZoneCreate {
 	}
 	var credential *shared.ZoneCreateCredential
 	if r.Credential != nil {
-		credential = &shared.ZoneCreateCredential{}
+		id := new(int64)
+		if !r.Credential.ID.IsUnknown() && !r.Credential.ID.IsNull() {
+			*id = r.Credential.ID.ValueInt64()
+		} else {
+			id = nil
+		}
+		typeVar := new(string)
+		if !r.Credential.Type.IsUnknown() && !r.Credential.Type.IsNull() {
+			*typeVar = r.Credential.Type.ValueString()
+		} else {
+			typeVar = nil
+		}
+		credential = &shared.ZoneCreateCredential{
+			ID:   id,
+			Type: typeVar,
+		}
 	}
 	description := new(string)
 	if !r.Description.IsUnknown() && !r.Description.IsNull() {
@@ -81,7 +96,39 @@ func (r *ZoneResourceModel) ToCreateSDKType() *shared.ZoneCreate {
 		visibility = nil
 	}
 	var zoneType shared.ZoneCreateZoneType
-	if r.ZoneType != nil {
+	var zoneCreateZoneType1 *shared.ZoneCreateZoneType1
+	if r.ZoneType.ZoneCreateZoneType1 != nil {
+		id1 := new(int64)
+		if !r.ZoneType.ZoneCreateZoneType1.ID.IsUnknown() && !r.ZoneType.ZoneCreateZoneType1.ID.IsNull() {
+			*id1 = r.ZoneType.ZoneCreateZoneType1.ID.ValueInt64()
+		} else {
+			id1 = nil
+		}
+		zoneCreateZoneType1 = &shared.ZoneCreateZoneType1{
+			ID: id1,
+		}
+	}
+	if zoneCreateZoneType1 != nil {
+		zoneType = shared.ZoneCreateZoneType{
+			ZoneCreateZoneType1: zoneCreateZoneType1,
+		}
+	}
+	var zoneCreateZoneType2 *shared.ZoneCreateZoneType2
+	if r.ZoneType.ZoneCreateZoneType2 != nil {
+		code1 := new(string)
+		if !r.ZoneType.ZoneCreateZoneType2.Code.IsUnknown() && !r.ZoneType.ZoneCreateZoneType2.Code.IsNull() {
+			*code1 = r.ZoneType.ZoneCreateZoneType2.Code.ValueString()
+		} else {
+			code1 = nil
+		}
+		zoneCreateZoneType2 = &shared.ZoneCreateZoneType2{
+			Code: code1,
+		}
+	}
+	if zoneCreateZoneType2 != nil {
+		zoneType = shared.ZoneCreateZoneType{
+			ZoneCreateZoneType2: zoneCreateZoneType2,
+		}
 	}
 	out := shared.ZoneCreate{
 		AccountID:             accountID,
@@ -109,16 +156,10 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 	} else {
 		r.Success = types.BoolNull()
 	}
-	if r.Zone == nil {
-		r.Zone = &Zone{}
-	}
 	if resp.Zone == nil {
 		r.Zone = nil
 	} else {
 		r.Zone = &Zone{}
-		if r.Zone.Account == nil {
-			r.Zone.Account = &ZoneAccount{}
-		}
 		if resp.Zone.Account == nil {
 			r.Zone.Account = nil
 		} else {
@@ -163,187 +204,6 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			r.Zone.Config = nil
 		} else {
 			r.Zone.Config = &ZoneConfig{}
-			if resp.Zone.Config.ZoneVcenterConfig != nil {
-				r.Zone.Config.ZoneVcenterConfig = &ZoneVcenterConfig{}
-				if resp.Zone.Config.ZoneVcenterConfig.EnableNetworkTypeSelection != nil {
-					r.Zone.Config.ZoneVcenterConfig.EnableNetworkTypeSelection = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.EnableNetworkTypeSelection)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.EnableNetworkTypeSelection = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.APIURL != nil {
-					r.Zone.Config.ZoneVcenterConfig.APIURL = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.APIURL)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.APIURL = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.APIVersion != nil {
-					r.Zone.Config.ZoneVcenterConfig.APIVersion = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.APIVersion)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.APIVersion = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.ApplianceURL != nil {
-					r.Zone.Config.ZoneVcenterConfig.ApplianceURL = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ApplianceURL)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.ApplianceURL = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.BackupMode != nil {
-					r.Zone.Config.ZoneVcenterConfig.BackupMode = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.BackupMode)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.BackupMode = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.CertificateProvider != nil {
-					r.Zone.Config.ZoneVcenterConfig.CertificateProvider = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.CertificateProvider)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.CertificateProvider = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.Cluster != nil {
-					r.Zone.Config.ZoneVcenterConfig.Cluster = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.Cluster)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.Cluster = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.ConfigCmID != nil {
-					r.Zone.Config.ZoneVcenterConfig.ConfigCmID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ConfigCmID)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.ConfigCmID = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.ConfigCmdbDiscovery != nil {
-					r.Zone.Config.ZoneVcenterConfig.ConfigCmdbDiscovery = types.BoolValue(*resp.Zone.Config.ZoneVcenterConfig.ConfigCmdbDiscovery)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.ConfigCmdbDiscovery = types.BoolNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.ConfigCmdbID != nil {
-					r.Zone.Config.ZoneVcenterConfig.ConfigCmdbID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ConfigCmdbID)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.ConfigCmdbID = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.ConfigManagementID != nil {
-					r.Zone.Config.ZoneVcenterConfig.ConfigManagementID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ConfigManagementID)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.ConfigManagementID = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.Datacenter != nil {
-					r.Zone.Config.ZoneVcenterConfig.Datacenter = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.Datacenter)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.Datacenter = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.DatacenterID != nil {
-					r.Zone.Config.ZoneVcenterConfig.DatacenterID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.DatacenterID)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.DatacenterID = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.DatacenterName != nil {
-					r.Zone.Config.ZoneVcenterConfig.DatacenterName = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.DatacenterName)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.DatacenterName = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.DiskStorageType != nil {
-					r.Zone.Config.ZoneVcenterConfig.DiskStorageType = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.DiskStorageType)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.DiskStorageType = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.DistributedWorkerID != nil {
-					r.Zone.Config.ZoneVcenterConfig.DistributedWorkerID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.DistributedWorkerID)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.DistributedWorkerID = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.DNSIntegrationID != nil {
-					r.Zone.Config.ZoneVcenterConfig.DNSIntegrationID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.DNSIntegrationID)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.DNSIntegrationID = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.EnableDiskTypeSelection != nil {
-					r.Zone.Config.ZoneVcenterConfig.EnableDiskTypeSelection = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.EnableDiskTypeSelection)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.EnableDiskTypeSelection = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.EnableVnc != nil {
-					r.Zone.Config.ZoneVcenterConfig.EnableVnc = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.EnableVnc)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.EnableVnc = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.HideHostSelection != nil {
-					r.Zone.Config.ZoneVcenterConfig.HideHostSelection = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.HideHostSelection)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.HideHostSelection = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.ImportExisting != nil {
-					r.Zone.Config.ZoneVcenterConfig.ImportExisting = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ImportExisting)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.ImportExisting = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.KubeURL != nil {
-					r.Zone.Config.ZoneVcenterConfig.KubeURL = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.KubeURL)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.KubeURL = types.StringNull()
-				}
-				if r.Zone.Config.ZoneVcenterConfig.NetworkServer == nil {
-					r.Zone.Config.ZoneVcenterConfig.NetworkServer = &ZoneVcenterConfigNetworkServer{}
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.NetworkServer == nil {
-					r.Zone.Config.ZoneVcenterConfig.NetworkServer = nil
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.NetworkServer = &ZoneVcenterConfigNetworkServer{}
-					if resp.Zone.Config.ZoneVcenterConfig.NetworkServer.ID != nil {
-						r.Zone.Config.ZoneVcenterConfig.NetworkServer.ID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.NetworkServer.ID)
-					} else {
-						r.Zone.Config.ZoneVcenterConfig.NetworkServer.ID = types.StringNull()
-					}
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.NetworkServerID != nil {
-					r.Zone.Config.ZoneVcenterConfig.NetworkServerID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.NetworkServerID)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.NetworkServerID = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.Password != nil {
-					r.Zone.Config.ZoneVcenterConfig.Password = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.Password)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.Password = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.PasswordHash != nil {
-					r.Zone.Config.ZoneVcenterConfig.PasswordHash = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.PasswordHash)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.PasswordHash = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.ReplicationMode != nil {
-					r.Zone.Config.ZoneVcenterConfig.ReplicationMode = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ReplicationMode)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.ReplicationMode = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.ResourcePool != nil {
-					r.Zone.Config.ZoneVcenterConfig.ResourcePool = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ResourcePool)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.ResourcePool = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.ResourcePoolID != nil {
-					r.Zone.Config.ZoneVcenterConfig.ResourcePoolID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ResourcePoolID)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.ResourcePoolID = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.RPCMode != nil {
-					r.Zone.Config.ZoneVcenterConfig.RPCMode = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.RPCMode)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.RPCMode = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.SecurityMode != nil {
-					r.Zone.Config.ZoneVcenterConfig.SecurityMode = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.SecurityMode)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.SecurityMode = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.SecurityServer != nil {
-					r.Zone.Config.ZoneVcenterConfig.SecurityServer = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.SecurityServer)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.SecurityServer = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.ServiceRegistryID != nil {
-					r.Zone.Config.ZoneVcenterConfig.ServiceRegistryID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ServiceRegistryID)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.ServiceRegistryID = types.StringNull()
-				}
-				if resp.Zone.Config.ZoneVcenterConfig.Username != nil {
-					r.Zone.Config.ZoneVcenterConfig.Username = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.Username)
-				} else {
-					r.Zone.Config.ZoneVcenterConfig.Username = types.StringNull()
-				}
-			}
 			if resp.Zone.Config.ZoneAwsConfig != nil {
 				r.Zone.Config.ZoneAwsConfig = &ZoneAwsConfig{}
 				if resp.Zone.Config.ZoneAwsConfig.UseHostCredentials != nil {
@@ -456,23 +316,20 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 				} else {
 					r.Zone.Config.ZoneAwsConfig.IsVpc = types.StringNull()
 				}
-				if r.Zone.Config.ZoneAwsConfig.NetworkServer == nil {
-					r.Zone.Config.ZoneAwsConfig.NetworkServer = &ZoneVcenterConfigNetworkServer{}
-				}
 				if resp.Zone.Config.ZoneAwsConfig.NetworkServer == nil {
 					r.Zone.Config.ZoneAwsConfig.NetworkServer = nil
 				} else {
-					r.Zone.Config.ZoneAwsConfig.NetworkServer = &ZoneVcenterConfigNetworkServer{}
+					r.Zone.Config.ZoneAwsConfig.NetworkServer = &ZoneAwsConfigNetworkServer{}
 					if resp.Zone.Config.ZoneAwsConfig.NetworkServer.ID != nil {
 						r.Zone.Config.ZoneAwsConfig.NetworkServer.ID = types.StringValue(*resp.Zone.Config.ZoneAwsConfig.NetworkServer.ID)
 					} else {
 						r.Zone.Config.ZoneAwsConfig.NetworkServer.ID = types.StringNull()
 					}
 				}
-				if resp.Zone.Config.ZoneAwsConfig.NetworkServerID != nil {
-					r.Zone.Config.ZoneAwsConfig.NetworkServerID = types.StringValue(*resp.Zone.Config.ZoneAwsConfig.NetworkServerID)
+				if resp.Zone.Config.ZoneAwsConfig.ID != nil {
+					r.Zone.Config.ZoneAwsConfig.ID = types.StringValue(*resp.Zone.Config.ZoneAwsConfig.ID)
 				} else {
-					r.Zone.Config.ZoneAwsConfig.NetworkServerID = types.StringNull()
+					r.Zone.Config.ZoneAwsConfig.ID = types.StringNull()
 				}
 				if resp.Zone.Config.ZoneAwsConfig.ReplicationMode != nil {
 					r.Zone.Config.ZoneAwsConfig.ReplicationMode = types.StringValue(*resp.Zone.Config.ZoneAwsConfig.ReplicationMode)
@@ -627,23 +484,20 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 				} else {
 					r.Zone.Config.ZoneAzureConfig.InventoryLevel = types.StringNull()
 				}
-				if r.Zone.Config.ZoneAzureConfig.NetworkServer == nil {
-					r.Zone.Config.ZoneAzureConfig.NetworkServer = &ZoneVcenterConfigNetworkServer{}
-				}
 				if resp.Zone.Config.ZoneAzureConfig.NetworkServer == nil {
 					r.Zone.Config.ZoneAzureConfig.NetworkServer = nil
 				} else {
-					r.Zone.Config.ZoneAzureConfig.NetworkServer = &ZoneVcenterConfigNetworkServer{}
+					r.Zone.Config.ZoneAzureConfig.NetworkServer = &ZoneAwsConfigNetworkServer{}
 					if resp.Zone.Config.ZoneAzureConfig.NetworkServer.ID != nil {
 						r.Zone.Config.ZoneAzureConfig.NetworkServer.ID = types.StringValue(*resp.Zone.Config.ZoneAzureConfig.NetworkServer.ID)
 					} else {
 						r.Zone.Config.ZoneAzureConfig.NetworkServer.ID = types.StringNull()
 					}
 				}
-				if resp.Zone.Config.ZoneAzureConfig.NetworkServerID != nil {
-					r.Zone.Config.ZoneAzureConfig.NetworkServerID = types.StringValue(*resp.Zone.Config.ZoneAzureConfig.NetworkServerID)
+				if resp.Zone.Config.ZoneAzureConfig.ID != nil {
+					r.Zone.Config.ZoneAzureConfig.ID = types.StringValue(*resp.Zone.Config.ZoneAzureConfig.ID)
 				} else {
-					r.Zone.Config.ZoneAzureConfig.NetworkServerID = types.StringNull()
+					r.Zone.Config.ZoneAzureConfig.ID = types.StringNull()
 				}
 				if resp.Zone.Config.ZoneAzureConfig.ReplicationMode != nil {
 					r.Zone.Config.ZoneAzureConfig.ReplicationMode = types.StringValue(*resp.Zone.Config.ZoneAzureConfig.ReplicationMode)
@@ -733,23 +587,20 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 				} else {
 					r.Zone.Config.ZoneGcpConfig.ImportExisting = types.StringNull()
 				}
-				if r.Zone.Config.ZoneGcpConfig.NetworkServer == nil {
-					r.Zone.Config.ZoneGcpConfig.NetworkServer = &ZoneVcenterConfigNetworkServer{}
-				}
 				if resp.Zone.Config.ZoneGcpConfig.NetworkServer == nil {
 					r.Zone.Config.ZoneGcpConfig.NetworkServer = nil
 				} else {
-					r.Zone.Config.ZoneGcpConfig.NetworkServer = &ZoneVcenterConfigNetworkServer{}
+					r.Zone.Config.ZoneGcpConfig.NetworkServer = &ZoneAwsConfigNetworkServer{}
 					if resp.Zone.Config.ZoneGcpConfig.NetworkServer.ID != nil {
 						r.Zone.Config.ZoneGcpConfig.NetworkServer.ID = types.StringValue(*resp.Zone.Config.ZoneGcpConfig.NetworkServer.ID)
 					} else {
 						r.Zone.Config.ZoneGcpConfig.NetworkServer.ID = types.StringNull()
 					}
 				}
-				if resp.Zone.Config.ZoneGcpConfig.NetworkServerID != nil {
-					r.Zone.Config.ZoneGcpConfig.NetworkServerID = types.StringValue(*resp.Zone.Config.ZoneGcpConfig.NetworkServerID)
+				if resp.Zone.Config.ZoneGcpConfig.ID != nil {
+					r.Zone.Config.ZoneGcpConfig.ID = types.StringValue(*resp.Zone.Config.ZoneGcpConfig.ID)
 				} else {
-					r.Zone.Config.ZoneGcpConfig.NetworkServerID = types.StringNull()
+					r.Zone.Config.ZoneGcpConfig.ID = types.StringNull()
 				}
 				if resp.Zone.Config.ZoneGcpConfig.PrivateKey != nil {
 					r.Zone.Config.ZoneGcpConfig.PrivateKey = types.StringValue(*resp.Zone.Config.ZoneGcpConfig.PrivateKey)
@@ -782,6 +633,184 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 					r.Zone.Config.ZoneGcpConfig.ServiceRegistryID = types.StringNull()
 				}
 			}
+			if resp.Zone.Config.ZoneVcenterConfig != nil {
+				r.Zone.Config.ZoneVcenterConfig = &ZoneVcenterConfig{}
+				if resp.Zone.Config.ZoneVcenterConfig.EnableNetworkTypeSelection != nil {
+					r.Zone.Config.ZoneVcenterConfig.EnableNetworkTypeSelection = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.EnableNetworkTypeSelection)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.EnableNetworkTypeSelection = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.APIURL != nil {
+					r.Zone.Config.ZoneVcenterConfig.APIURL = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.APIURL)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.APIURL = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.APIVersion != nil {
+					r.Zone.Config.ZoneVcenterConfig.APIVersion = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.APIVersion)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.APIVersion = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.ApplianceURL != nil {
+					r.Zone.Config.ZoneVcenterConfig.ApplianceURL = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ApplianceURL)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.ApplianceURL = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.BackupMode != nil {
+					r.Zone.Config.ZoneVcenterConfig.BackupMode = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.BackupMode)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.BackupMode = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.CertificateProvider != nil {
+					r.Zone.Config.ZoneVcenterConfig.CertificateProvider = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.CertificateProvider)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.CertificateProvider = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.Cluster != nil {
+					r.Zone.Config.ZoneVcenterConfig.Cluster = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.Cluster)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.Cluster = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.ConfigCmdbDiscovery != nil {
+					r.Zone.Config.ZoneVcenterConfig.ConfigCmdbDiscovery = types.BoolValue(*resp.Zone.Config.ZoneVcenterConfig.ConfigCmdbDiscovery)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.ConfigCmdbDiscovery = types.BoolNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.ConfigCmdbID != nil {
+					r.Zone.Config.ZoneVcenterConfig.ConfigCmdbID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ConfigCmdbID)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.ConfigCmdbID = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.ConfigCmID != nil {
+					r.Zone.Config.ZoneVcenterConfig.ConfigCmID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ConfigCmID)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.ConfigCmID = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.ConfigManagementID != nil {
+					r.Zone.Config.ZoneVcenterConfig.ConfigManagementID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ConfigManagementID)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.ConfigManagementID = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.Datacenter != nil {
+					r.Zone.Config.ZoneVcenterConfig.Datacenter = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.Datacenter)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.Datacenter = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.DatacenterID != nil {
+					r.Zone.Config.ZoneVcenterConfig.DatacenterID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.DatacenterID)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.DatacenterID = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.DatacenterName != nil {
+					r.Zone.Config.ZoneVcenterConfig.DatacenterName = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.DatacenterName)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.DatacenterName = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.DiskStorageType != nil {
+					r.Zone.Config.ZoneVcenterConfig.DiskStorageType = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.DiskStorageType)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.DiskStorageType = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.DistributedWorkerID != nil {
+					r.Zone.Config.ZoneVcenterConfig.DistributedWorkerID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.DistributedWorkerID)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.DistributedWorkerID = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.DNSIntegrationID != nil {
+					r.Zone.Config.ZoneVcenterConfig.DNSIntegrationID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.DNSIntegrationID)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.DNSIntegrationID = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.EnableDiskTypeSelection != nil {
+					r.Zone.Config.ZoneVcenterConfig.EnableDiskTypeSelection = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.EnableDiskTypeSelection)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.EnableDiskTypeSelection = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.EnableVnc != nil {
+					r.Zone.Config.ZoneVcenterConfig.EnableVnc = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.EnableVnc)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.EnableVnc = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.HideHostSelection != nil {
+					r.Zone.Config.ZoneVcenterConfig.HideHostSelection = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.HideHostSelection)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.HideHostSelection = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.ImportExisting != nil {
+					r.Zone.Config.ZoneVcenterConfig.ImportExisting = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ImportExisting)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.ImportExisting = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.KubeURL != nil {
+					r.Zone.Config.ZoneVcenterConfig.KubeURL = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.KubeURL)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.KubeURL = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.NetworkServer == nil {
+					r.Zone.Config.ZoneVcenterConfig.NetworkServer = nil
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.NetworkServer = &ZoneAwsConfigNetworkServer{}
+					if resp.Zone.Config.ZoneVcenterConfig.NetworkServer.ID != nil {
+						r.Zone.Config.ZoneVcenterConfig.NetworkServer.ID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.NetworkServer.ID)
+					} else {
+						r.Zone.Config.ZoneVcenterConfig.NetworkServer.ID = types.StringNull()
+					}
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.ID != nil {
+					r.Zone.Config.ZoneVcenterConfig.ID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ID)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.ID = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.Password != nil {
+					r.Zone.Config.ZoneVcenterConfig.Password = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.Password)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.Password = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.PasswordHash != nil {
+					r.Zone.Config.ZoneVcenterConfig.PasswordHash = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.PasswordHash)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.PasswordHash = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.ReplicationMode != nil {
+					r.Zone.Config.ZoneVcenterConfig.ReplicationMode = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ReplicationMode)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.ReplicationMode = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.ResourcePool != nil {
+					r.Zone.Config.ZoneVcenterConfig.ResourcePool = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ResourcePool)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.ResourcePool = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.ResourcePoolID != nil {
+					r.Zone.Config.ZoneVcenterConfig.ResourcePoolID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ResourcePoolID)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.ResourcePoolID = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.RPCMode != nil {
+					r.Zone.Config.ZoneVcenterConfig.RPCMode = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.RPCMode)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.RPCMode = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.SecurityMode != nil {
+					r.Zone.Config.ZoneVcenterConfig.SecurityMode = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.SecurityMode)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.SecurityMode = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.SecurityServer != nil {
+					r.Zone.Config.ZoneVcenterConfig.SecurityServer = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.SecurityServer)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.SecurityServer = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.ServiceRegistryID != nil {
+					r.Zone.Config.ZoneVcenterConfig.ServiceRegistryID = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.ServiceRegistryID)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.ServiceRegistryID = types.StringNull()
+				}
+				if resp.Zone.Config.ZoneVcenterConfig.Username != nil {
+					r.Zone.Config.ZoneVcenterConfig.Username = types.StringValue(*resp.Zone.Config.ZoneVcenterConfig.Username)
+				} else {
+					r.Zone.Config.ZoneVcenterConfig.Username = types.StringNull()
+				}
+			}
 		}
 		if resp.Zone.ConsoleKeymap != nil {
 			r.Zone.ConsoleKeymap = types.StringValue(*resp.Zone.ConsoleKeymap)
@@ -792,6 +821,11 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			r.Zone.ContainerMode = types.StringValue(*resp.Zone.ContainerMode)
 		} else {
 			r.Zone.ContainerMode = types.StringNull()
+		}
+		if resp.Zone.CostingMode != nil {
+			r.Zone.CostingMode = types.StringValue(*resp.Zone.CostingMode)
+		} else {
+			r.Zone.CostingMode = types.StringNull()
 		}
 		if resp.Zone.CostLastSync != nil {
 			r.Zone.CostLastSync = types.StringValue(resp.Zone.CostLastSync.Format(time.RFC3339Nano))
@@ -817,11 +851,6 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			r.Zone.CostStatusMessage = types.StringValue(*resp.Zone.CostStatusMessage)
 		} else {
 			r.Zone.CostStatusMessage = types.StringNull()
-		}
-		if resp.Zone.CostingMode != nil {
-			r.Zone.CostingMode = types.StringValue(*resp.Zone.CostingMode)
-		} else {
-			r.Zone.CostingMode = types.StringNull()
 		}
 		if resp.Zone.Credential == nil {
 			r.Zone.Credential = nil
@@ -944,9 +973,6 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		} else {
 			r.Zone.Name = types.StringNull()
 		}
-		if r.Zone.NetworkDomain == nil {
-			r.Zone.NetworkDomain = &ZoneAccount{}
-		}
 		if resp.Zone.NetworkDomain == nil {
 			r.Zone.NetworkDomain = nil
 		} else {
@@ -961,9 +987,6 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			} else {
 				r.Zone.NetworkDomain.Name = types.StringNull()
 			}
-		}
-		if r.Zone.NetworkServer == nil {
-			r.Zone.NetworkServer = &ZoneAccount{}
 		}
 		if resp.Zone.NetworkServer == nil {
 			r.Zone.NetworkServer = nil
@@ -984,9 +1007,6 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			r.Zone.NextRunDate = types.StringValue(resp.Zone.NextRunDate.Format(time.RFC3339Nano))
 		} else {
 			r.Zone.NextRunDate = types.StringNull()
-		}
-		if r.Zone.Owner == nil {
-			r.Zone.Owner = &ZoneAccount{}
 		}
 		if resp.Zone.Owner == nil {
 			r.Zone.Owner = nil
@@ -1023,9 +1043,6 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		} else {
 			r.Zone.SecurityMode = types.StringNull()
 		}
-		if r.Zone.SecurityServer == nil {
-			r.Zone.SecurityServer = &ZoneAccount{}
-		}
 		if resp.Zone.SecurityServer == nil {
 			r.Zone.SecurityServer = nil
 		} else {
@@ -1051,16 +1068,10 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		} else {
 			r.Zone.ServiceVersion = types.StringNull()
 		}
-		if r.Zone.Stats == nil {
-			r.Zone.Stats = &ZoneStats{}
-		}
 		if resp.Zone.Stats == nil {
 			r.Zone.Stats = nil
 		} else {
 			r.Zone.Stats = &ZoneStats{}
-			if r.Zone.Stats.ServerCounts == nil {
-				r.Zone.Stats.ServerCounts = &ZoneStatsServerCounts{}
-			}
 			if resp.Zone.Stats.ServerCounts == nil {
 				r.Zone.Stats.ServerCounts = nil
 			} else {
@@ -1146,9 +1157,6 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			r.Zone.Visibility = types.StringValue(*resp.Zone.Visibility)
 		} else {
 			r.Zone.Visibility = types.StringNull()
-		}
-		if r.Zone.ZoneType == nil {
-			r.Zone.ZoneType = &ZoneZoneType{}
 		}
 		if resp.Zone.ZoneType == nil {
 			r.Zone.ZoneType = nil

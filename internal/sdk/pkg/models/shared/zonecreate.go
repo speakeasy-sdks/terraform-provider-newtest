@@ -3,10 +3,10 @@
 package shared
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"newtest/internal/sdk/pkg/utils"
 )
 
 // ZoneCreateConfig - Map containing zone configuration settings. See the section on specific zone types for details.
@@ -16,7 +16,32 @@ type ZoneCreateConfig struct {
 // ZoneCreateCredential - Map containing Credential ID. Setting `type` to `local` means use the values set in the local cloud config instead of associating a credential.
 type ZoneCreateCredential struct {
 	ID   *int64  `json:"id,omitempty"`
-	Type *string `json:"type,omitempty"`
+	Type *string `default:"local" json:"type"`
+}
+
+func (z ZoneCreateCredential) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(z, "", false)
+}
+
+func (z *ZoneCreateCredential) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &z, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ZoneCreateCredential) GetID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ZoneCreateCredential) GetType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Type
 }
 
 // ZoneCreateVisibility - private or public
@@ -52,9 +77,23 @@ type ZoneCreateZoneType2 struct {
 	Code *string `json:"code,omitempty"`
 }
 
+func (o *ZoneCreateZoneType2) GetCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Code
+}
+
 // ZoneCreateZoneType1 - Map containing the Cloud (zone) type ID. See the zone-types API to fetch a list of all available Cloud (zone) types and their IDs.
 type ZoneCreateZoneType1 struct {
 	ID *int64 `json:"id,omitempty"`
+}
+
+func (o *ZoneCreateZoneType1) GetID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ID
 }
 
 type ZoneCreateZoneTypeType string
@@ -90,21 +129,16 @@ func CreateZoneCreateZoneTypeZoneCreateZoneType2(zoneCreateZoneType2 ZoneCreateZ
 }
 
 func (u *ZoneCreateZoneType) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	zoneCreateZoneType1 := new(ZoneCreateZoneType1)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&zoneCreateZoneType1); err == nil {
+	if err := utils.UnmarshalJSON(data, &zoneCreateZoneType1, "", true, true); err == nil {
 		u.ZoneCreateZoneType1 = zoneCreateZoneType1
 		u.Type = ZoneCreateZoneTypeTypeZoneCreateZoneType1
 		return nil
 	}
 
 	zoneCreateZoneType2 := new(ZoneCreateZoneType2)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&zoneCreateZoneType2); err == nil {
+	if err := utils.UnmarshalJSON(data, &zoneCreateZoneType2, "", true, true); err == nil {
 		u.ZoneCreateZoneType2 = zoneCreateZoneType2
 		u.Type = ZoneCreateZoneTypeTypeZoneCreateZoneType2
 		return nil
@@ -115,21 +149,21 @@ func (u *ZoneCreateZoneType) UnmarshalJSON(data []byte) error {
 
 func (u ZoneCreateZoneType) MarshalJSON() ([]byte, error) {
 	if u.ZoneCreateZoneType1 != nil {
-		return json.Marshal(u.ZoneCreateZoneType1)
+		return utils.MarshalJSON(u.ZoneCreateZoneType1, "", true)
 	}
 
 	if u.ZoneCreateZoneType2 != nil {
-		return json.Marshal(u.ZoneCreateZoneType2)
+		return utils.MarshalJSON(u.ZoneCreateZoneType2, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type ZoneCreate struct {
 	// Specifies which Tenant this cloud should be assigned to
 	AccountID *int64 `json:"accountId,omitempty"`
 	// Automatically Power on VMs
-	AutoRecoverPowerState *bool `json:"autoRecoverPowerState,omitempty"`
+	AutoRecoverPowerState *bool `default:"false" json:"autoRecoverPowerState"`
 	// Optional code for use with policies
 	Code *string `json:"code,omitempty"`
 	// Map containing zone configuration settings. See the section on specific zone types for details.
@@ -139,7 +173,7 @@ type ZoneCreate struct {
 	// Optional description field if you want to put more info there
 	Description *string `json:"description,omitempty"`
 	// Can be used to disable the cloud
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled *bool `default:"true" json:"enabled"`
 	// Specifies which Server group this cloud should be assigned to
 	GroupID int64 `json:"groupId"`
 	// Linked Account ID (enter commercial ID to get costing for AWS Govcloud)
@@ -149,10 +183,126 @@ type ZoneCreate struct {
 	// A unique name scoped to your account for the cloud
 	Name string `json:"name"`
 	// Scale Priority
-	ScalePriority *int64 `json:"scalePriority,omitempty"`
+	ScalePriority *int64 `default:"1" json:"scalePriority"`
 	// host firewall. `off` or `internal`. a.k.a. "local firewall"
-	SecurityMode *string `json:"securityMode,omitempty"`
+	SecurityMode *string `default:"off" json:"securityMode"`
 	// private or public
-	Visibility *ZoneCreateVisibility `json:"visibility,omitempty"`
+	Visibility *ZoneCreateVisibility `default:"private" json:"visibility"`
 	ZoneType   ZoneCreateZoneType    `json:"zoneType"`
+}
+
+func (z ZoneCreate) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(z, "", false)
+}
+
+func (z *ZoneCreate) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &z, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ZoneCreate) GetAccountID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
+}
+
+func (o *ZoneCreate) GetAutoRecoverPowerState() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AutoRecoverPowerState
+}
+
+func (o *ZoneCreate) GetCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Code
+}
+
+func (o *ZoneCreate) GetConfig() *ZoneCreateConfig {
+	if o == nil {
+		return nil
+	}
+	return o.Config
+}
+
+func (o *ZoneCreate) GetCredential() *ZoneCreateCredential {
+	if o == nil {
+		return nil
+	}
+	return o.Credential
+}
+
+func (o *ZoneCreate) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *ZoneCreate) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *ZoneCreate) GetGroupID() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.GroupID
+}
+
+func (o *ZoneCreate) GetLinkedAccountID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.LinkedAccountID
+}
+
+func (o *ZoneCreate) GetLocation() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Location
+}
+
+func (o *ZoneCreate) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *ZoneCreate) GetScalePriority() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ScalePriority
+}
+
+func (o *ZoneCreate) GetSecurityMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SecurityMode
+}
+
+func (o *ZoneCreate) GetVisibility() *ZoneCreateVisibility {
+	if o == nil {
+		return nil
+	}
+	return o.Visibility
+}
+
+func (o *ZoneCreate) GetZoneType() ZoneCreateZoneType {
+	if o == nil {
+		return ZoneCreateZoneType{}
+	}
+	return o.ZoneType
 }

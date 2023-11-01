@@ -6,39 +6,260 @@ type ZoneAwsConfigNetworkServer struct {
 	ID *string `json:"id,omitempty"`
 }
 
-type ZoneVcenterConfig struct {
-	EnableNetworkTypeSelection *string                         `json:"_enableNetworkTypeSelection,omitempty"`
-	APIURL                     *string                         `json:"apiUrl,omitempty"`
-	APIVersion                 *string                         `json:"apiVersion,omitempty"`
-	ApplianceURL               *string                         `json:"applianceUrl,omitempty"`
-	BackupMode                 *string                         `json:"backupMode,omitempty"`
-	CertificateProvider        *string                         `json:"certificateProvider,omitempty"`
-	Cluster                    *string                         `json:"cluster,omitempty"`
-	ConfigCmID                 *string                         `json:"configCmId,omitempty"`
-	ConfigCmdbDiscovery        *bool                           `json:"configCmdbDiscovery,omitempty"`
-	ConfigCmdbID               *string                         `json:"configCmdbId,omitempty"`
-	ConfigManagementID         *string                         `json:"configManagementId,omitempty"`
-	Datacenter                 *string                         `json:"datacenter,omitempty"`
-	DatacenterID               *string                         `json:"datacenterId,omitempty"`
-	DatacenterName             *string                         `json:"datacenterName,omitempty"`
-	DiskStorageType            *string                         `json:"diskStorageType,omitempty"`
-	DistributedWorkerID        *string                         `json:"distributedWorkerId,omitempty"`
-	DNSIntegrationID           *string                         `json:"dnsIntegrationId,omitempty"`
-	EnableDiskTypeSelection    *string                         `json:"enableDiskTypeSelection,omitempty"`
-	EnableVnc                  *string                         `json:"enableVnc,omitempty"`
-	HideHostSelection          *string                         `json:"hideHostSelection,omitempty"`
-	ImportExisting             *string                         `json:"importExisting,omitempty"`
-	KubeURL                    *string                         `json:"kubeUrl,omitempty"`
-	NetworkServer              *ZoneVcenterConfigNetworkServer `json:"networkServer,omitempty"`
-	NetworkServerID            *string                         `json:"networkServer.id,omitempty"`
-	Password                   *string                         `json:"password,omitempty"`
-	PasswordHash               *string                         `json:"passwordHash,omitempty"`
-	ReplicationMode            *string                         `json:"replicationMode,omitempty"`
-	ResourcePool               *string                         `json:"resourcePool,omitempty"`
-	ResourcePoolID             *string                         `json:"resourcePoolId,omitempty"`
-	RPCMode                    *string                         `json:"rpcMode,omitempty"`
-	SecurityMode               *string                         `json:"securityMode,omitempty"`
-	SecurityServer             *string                         `json:"securityServer,omitempty"`
-	ServiceRegistryID          *string                         `json:"serviceRegistryId,omitempty"`
-	Username                   *string                         `json:"username,omitempty"`
+func (o *ZoneAwsConfigNetworkServer) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+type ZoneAwsConfig struct {
+	UseHostCredentials   *string                     `json:"_useHostCredentials,omitempty"`
+	AccessKey            *string                     `json:"accessKey,omitempty"`
+	ApplianceURL         *string                     `json:"applianceUrl,omitempty"`
+	BackupMode           *string                     `json:"backupMode,omitempty"`
+	CertificateProvider  *string                     `json:"certificateProvider,omitempty"`
+	ConfigCmdbDiscovery  *bool                       `json:"configCmdbDiscovery,omitempty"`
+	ConfigManagementID   *string                     `json:"configManagementId,omitempty"`
+	CostingAccessKey     *string                     `json:"costingAccessKey,omitempty"`
+	CostingBucket        *string                     `json:"costingBucket,omitempty"`
+	CostingBucketName    *string                     `json:"costingBucketName,omitempty"`
+	CostingFolder        *string                     `json:"costingFolder,omitempty"`
+	CostingRegion        *string                     `json:"costingRegion,omitempty"`
+	CostingReport        *string                     `json:"costingReport,omitempty"`
+	CostingReportName    *string                     `json:"costingReportName,omitempty"`
+	CostingSecretKey     *string                     `json:"costingSecretKey,omitempty"`
+	CostingSecretKeyHash *string                     `json:"costingSecretKeyHash,omitempty"`
+	DatacenterName       *string                     `json:"datacenterName,omitempty"`
+	DNSIntegrationID     *string                     `json:"dnsIntegrationId,omitempty"`
+	EbsEncryption        *string                     `json:"ebsEncryption,omitempty"`
+	Endpoint             *string                     `json:"endpoint,omitempty"`
+	ImageStoreID         *string                     `json:"imageStoreId,omitempty"`
+	IsVpc                *string                     `json:"isVpc,omitempty"`
+	NetworkServer        *ZoneAwsConfigNetworkServer `json:"networkServer,omitempty"`
+	ID                   *string                     `json:"networkServer.id,omitempty"`
+	ReplicationMode      *string                     `json:"replicationMode,omitempty"`
+	SecretKey            *string                     `json:"secretKey,omitempty"`
+	SecretKeyHash        *string                     `json:"secretKeyHash,omitempty"`
+	SecurityServer       *string                     `json:"securityServer,omitempty"`
+	ServiceRegistryID    *string                     `json:"serviceRegistryId,omitempty"`
+	StsAssumeRole        *string                     `json:"stsAssumeRole,omitempty"`
+	Vpc                  *string                     `json:"vpc,omitempty"`
+}
+
+func (o *ZoneAwsConfig) GetUseHostCredentials() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UseHostCredentials
+}
+
+func (o *ZoneAwsConfig) GetAccessKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccessKey
+}
+
+func (o *ZoneAwsConfig) GetApplianceURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ApplianceURL
+}
+
+func (o *ZoneAwsConfig) GetBackupMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BackupMode
+}
+
+func (o *ZoneAwsConfig) GetCertificateProvider() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CertificateProvider
+}
+
+func (o *ZoneAwsConfig) GetConfigCmdbDiscovery() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigCmdbDiscovery
+}
+
+func (o *ZoneAwsConfig) GetConfigManagementID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigManagementID
+}
+
+func (o *ZoneAwsConfig) GetCostingAccessKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CostingAccessKey
+}
+
+func (o *ZoneAwsConfig) GetCostingBucket() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CostingBucket
+}
+
+func (o *ZoneAwsConfig) GetCostingBucketName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CostingBucketName
+}
+
+func (o *ZoneAwsConfig) GetCostingFolder() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CostingFolder
+}
+
+func (o *ZoneAwsConfig) GetCostingRegion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CostingRegion
+}
+
+func (o *ZoneAwsConfig) GetCostingReport() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CostingReport
+}
+
+func (o *ZoneAwsConfig) GetCostingReportName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CostingReportName
+}
+
+func (o *ZoneAwsConfig) GetCostingSecretKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CostingSecretKey
+}
+
+func (o *ZoneAwsConfig) GetCostingSecretKeyHash() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CostingSecretKeyHash
+}
+
+func (o *ZoneAwsConfig) GetDatacenterName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DatacenterName
+}
+
+func (o *ZoneAwsConfig) GetDNSIntegrationID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DNSIntegrationID
+}
+
+func (o *ZoneAwsConfig) GetEbsEncryption() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EbsEncryption
+}
+
+func (o *ZoneAwsConfig) GetEndpoint() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Endpoint
+}
+
+func (o *ZoneAwsConfig) GetImageStoreID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ImageStoreID
+}
+
+func (o *ZoneAwsConfig) GetIsVpc() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IsVpc
+}
+
+func (o *ZoneAwsConfig) GetNetworkServer() *ZoneAwsConfigNetworkServer {
+	if o == nil {
+		return nil
+	}
+	return o.NetworkServer
+}
+
+func (o *ZoneAwsConfig) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ZoneAwsConfig) GetReplicationMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ReplicationMode
+}
+
+func (o *ZoneAwsConfig) GetSecretKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SecretKey
+}
+
+func (o *ZoneAwsConfig) GetSecretKeyHash() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SecretKeyHash
+}
+
+func (o *ZoneAwsConfig) GetSecurityServer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SecurityServer
+}
+
+func (o *ZoneAwsConfig) GetServiceRegistryID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ServiceRegistryID
+}
+
+func (o *ZoneAwsConfig) GetStsAssumeRole() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StsAssumeRole
+}
+
+func (o *ZoneAwsConfig) GetVpc() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Vpc
 }

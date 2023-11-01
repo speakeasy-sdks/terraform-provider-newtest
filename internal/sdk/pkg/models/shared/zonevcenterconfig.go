@@ -6,36 +6,284 @@ type ZoneVcenterConfigNetworkServer struct {
 	ID *string `json:"id,omitempty"`
 }
 
-type ZoneAwsConfig struct {
-	UseHostCredentials   *string                     `json:"_useHostCredentials,omitempty"`
-	AccessKey            *string                     `json:"accessKey,omitempty"`
-	ApplianceURL         *string                     `json:"applianceUrl,omitempty"`
-	BackupMode           *string                     `json:"backupMode,omitempty"`
-	CertificateProvider  *string                     `json:"certificateProvider,omitempty"`
-	ConfigCmdbDiscovery  *bool                       `json:"configCmdbDiscovery,omitempty"`
-	ConfigManagementID   *string                     `json:"configManagementId,omitempty"`
-	CostingAccessKey     *string                     `json:"costingAccessKey,omitempty"`
-	CostingBucket        *string                     `json:"costingBucket,omitempty"`
-	CostingBucketName    *string                     `json:"costingBucketName,omitempty"`
-	CostingFolder        *string                     `json:"costingFolder,omitempty"`
-	CostingRegion        *string                     `json:"costingRegion,omitempty"`
-	CostingReport        *string                     `json:"costingReport,omitempty"`
-	CostingReportName    *string                     `json:"costingReportName,omitempty"`
-	CostingSecretKey     *string                     `json:"costingSecretKey,omitempty"`
-	CostingSecretKeyHash *string                     `json:"costingSecretKeyHash,omitempty"`
-	DatacenterName       *string                     `json:"datacenterName,omitempty"`
-	DNSIntegrationID     *string                     `json:"dnsIntegrationId,omitempty"`
-	EbsEncryption        *string                     `json:"ebsEncryption,omitempty"`
-	Endpoint             *string                     `json:"endpoint,omitempty"`
-	ImageStoreID         *string                     `json:"imageStoreId,omitempty"`
-	IsVpc                *string                     `json:"isVpc,omitempty"`
-	NetworkServer        *ZoneAwsConfigNetworkServer `json:"networkServer,omitempty"`
-	NetworkServerID      *string                     `json:"networkServer.id,omitempty"`
-	ReplicationMode      *string                     `json:"replicationMode,omitempty"`
-	SecretKey            *string                     `json:"secretKey,omitempty"`
-	SecretKeyHash        *string                     `json:"secretKeyHash,omitempty"`
-	SecurityServer       *string                     `json:"securityServer,omitempty"`
-	ServiceRegistryID    *string                     `json:"serviceRegistryId,omitempty"`
-	StsAssumeRole        *string                     `json:"stsAssumeRole,omitempty"`
-	Vpc                  *string                     `json:"vpc,omitempty"`
+func (o *ZoneVcenterConfigNetworkServer) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+type ZoneVcenterConfig struct {
+	EnableNetworkTypeSelection *string                         `json:"_enableNetworkTypeSelection,omitempty"`
+	APIURL                     *string                         `json:"apiUrl,omitempty"`
+	APIVersion                 *string                         `json:"apiVersion,omitempty"`
+	ApplianceURL               *string                         `json:"applianceUrl,omitempty"`
+	BackupMode                 *string                         `json:"backupMode,omitempty"`
+	CertificateProvider        *string                         `json:"certificateProvider,omitempty"`
+	Cluster                    *string                         `json:"cluster,omitempty"`
+	ConfigCmID                 *string                         `json:"configCmId,omitempty"`
+	ConfigCmdbDiscovery        *bool                           `json:"configCmdbDiscovery,omitempty"`
+	ConfigCmdbID               *string                         `json:"configCmdbId,omitempty"`
+	ConfigManagementID         *string                         `json:"configManagementId,omitempty"`
+	Datacenter                 *string                         `json:"datacenter,omitempty"`
+	DatacenterID               *string                         `json:"datacenterId,omitempty"`
+	DatacenterName             *string                         `json:"datacenterName,omitempty"`
+	DiskStorageType            *string                         `json:"diskStorageType,omitempty"`
+	DistributedWorkerID        *string                         `json:"distributedWorkerId,omitempty"`
+	DNSIntegrationID           *string                         `json:"dnsIntegrationId,omitempty"`
+	EnableDiskTypeSelection    *string                         `json:"enableDiskTypeSelection,omitempty"`
+	EnableVnc                  *string                         `json:"enableVnc,omitempty"`
+	HideHostSelection          *string                         `json:"hideHostSelection,omitempty"`
+	ImportExisting             *string                         `json:"importExisting,omitempty"`
+	KubeURL                    *string                         `json:"kubeUrl,omitempty"`
+	NetworkServer              *ZoneVcenterConfigNetworkServer `json:"networkServer,omitempty"`
+	ID                         *string                         `json:"networkServer.id,omitempty"`
+	Password                   *string                         `json:"password,omitempty"`
+	PasswordHash               *string                         `json:"passwordHash,omitempty"`
+	ReplicationMode            *string                         `json:"replicationMode,omitempty"`
+	ResourcePool               *string                         `json:"resourcePool,omitempty"`
+	ResourcePoolID             *string                         `json:"resourcePoolId,omitempty"`
+	RPCMode                    *string                         `json:"rpcMode,omitempty"`
+	SecurityMode               *string                         `json:"securityMode,omitempty"`
+	SecurityServer             *string                         `json:"securityServer,omitempty"`
+	ServiceRegistryID          *string                         `json:"serviceRegistryId,omitempty"`
+	Username                   *string                         `json:"username,omitempty"`
+}
+
+func (o *ZoneVcenterConfig) GetEnableNetworkTypeSelection() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EnableNetworkTypeSelection
+}
+
+func (o *ZoneVcenterConfig) GetAPIURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.APIURL
+}
+
+func (o *ZoneVcenterConfig) GetAPIVersion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.APIVersion
+}
+
+func (o *ZoneVcenterConfig) GetApplianceURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ApplianceURL
+}
+
+func (o *ZoneVcenterConfig) GetBackupMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BackupMode
+}
+
+func (o *ZoneVcenterConfig) GetCertificateProvider() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CertificateProvider
+}
+
+func (o *ZoneVcenterConfig) GetCluster() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Cluster
+}
+
+func (o *ZoneVcenterConfig) GetConfigCmID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigCmID
+}
+
+func (o *ZoneVcenterConfig) GetConfigCmdbDiscovery() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigCmdbDiscovery
+}
+
+func (o *ZoneVcenterConfig) GetConfigCmdbID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigCmdbID
+}
+
+func (o *ZoneVcenterConfig) GetConfigManagementID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigManagementID
+}
+
+func (o *ZoneVcenterConfig) GetDatacenter() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Datacenter
+}
+
+func (o *ZoneVcenterConfig) GetDatacenterID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DatacenterID
+}
+
+func (o *ZoneVcenterConfig) GetDatacenterName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DatacenterName
+}
+
+func (o *ZoneVcenterConfig) GetDiskStorageType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DiskStorageType
+}
+
+func (o *ZoneVcenterConfig) GetDistributedWorkerID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DistributedWorkerID
+}
+
+func (o *ZoneVcenterConfig) GetDNSIntegrationID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DNSIntegrationID
+}
+
+func (o *ZoneVcenterConfig) GetEnableDiskTypeSelection() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EnableDiskTypeSelection
+}
+
+func (o *ZoneVcenterConfig) GetEnableVnc() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EnableVnc
+}
+
+func (o *ZoneVcenterConfig) GetHideHostSelection() *string {
+	if o == nil {
+		return nil
+	}
+	return o.HideHostSelection
+}
+
+func (o *ZoneVcenterConfig) GetImportExisting() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ImportExisting
+}
+
+func (o *ZoneVcenterConfig) GetKubeURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.KubeURL
+}
+
+func (o *ZoneVcenterConfig) GetNetworkServer() *ZoneVcenterConfigNetworkServer {
+	if o == nil {
+		return nil
+	}
+	return o.NetworkServer
+}
+
+func (o *ZoneVcenterConfig) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ZoneVcenterConfig) GetPassword() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Password
+}
+
+func (o *ZoneVcenterConfig) GetPasswordHash() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PasswordHash
+}
+
+func (o *ZoneVcenterConfig) GetReplicationMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ReplicationMode
+}
+
+func (o *ZoneVcenterConfig) GetResourcePool() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ResourcePool
+}
+
+func (o *ZoneVcenterConfig) GetResourcePoolID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ResourcePoolID
+}
+
+func (o *ZoneVcenterConfig) GetRPCMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RPCMode
+}
+
+func (o *ZoneVcenterConfig) GetSecurityMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SecurityMode
+}
+
+func (o *ZoneVcenterConfig) GetSecurityServer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SecurityServer
+}
+
+func (o *ZoneVcenterConfig) GetServiceRegistryID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ServiceRegistryID
+}
+
+func (o *ZoneVcenterConfig) GetUsername() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Username
 }

@@ -11,10 +11,31 @@ type AddCloudsRequestBody struct {
 	Zone shared.ZoneCreate `json:"zone"`
 }
 
+func (o *AddCloudsRequestBody) GetZone() shared.ZoneCreate {
+	if o == nil {
+		return shared.ZoneCreate{}
+	}
+	return o.Zone
+}
+
 // AddClouds200ApplicationJSON - Successful Request
 type AddClouds200ApplicationJSON struct {
 	Success *bool        `json:"success,omitempty"`
 	Zone    *shared.Zone `json:"zone,omitempty"`
+}
+
+func (o *AddClouds200ApplicationJSON) GetSuccess() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Success
+}
+
+func (o *AddClouds200ApplicationJSON) GetZone() *shared.Zone {
+	if o == nil {
+		return nil
+	}
+	return o.Zone
 }
 
 type AddCloudsResponse struct {
@@ -28,4 +49,39 @@ type AddCloudsResponse struct {
 	AddClouds200ApplicationJSONObject *AddClouds200ApplicationJSON
 	// Error Codes
 	DefaultError *shared.DefaultError
+}
+
+func (o *AddCloudsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *AddCloudsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *AddCloudsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *AddCloudsResponse) GetAddClouds200ApplicationJSONObject() *AddClouds200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.AddClouds200ApplicationJSONObject
+}
+
+func (o *AddCloudsResponse) GetDefaultError() *shared.DefaultError {
+	if o == nil {
+		return nil
+	}
+	return o.DefaultError
 }

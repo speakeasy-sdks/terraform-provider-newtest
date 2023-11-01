@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"newtest/internal/sdk/pkg/models/operations"
+	"newtest/internal/sdk/pkg/models/sdkerrors"
 	"newtest/internal/sdk/pkg/models/shared"
 	"newtest/internal/sdk/pkg/utils"
 	"strings"
@@ -27,15 +28,14 @@ func newClouds(sdkConfig sdkConfiguration) *clouds {
 
 // AddClouds - Creates a Cloud
 // Creates a cloud.
-func (s *clouds) AddClouds(ctx context.Context, request operations.AddCloudsRequestBody) (*operations.AddCloudsResponse, error) {
+func (s *clouds) AddClouds(ctx context.Context, request *operations.AddCloudsRequestBody) (*operations.AddCloudsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/api/zones"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
-
 	debugBody := bytes.NewBuffer([]byte{})
 	debugReader := io.TeeReader(bodyReader, debugBody)
 
@@ -77,24 +77,28 @@ func (s *clouds) AddClouds(ctx context.Context, request operations.AddCloudsRequ
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.AddClouds200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out operations.AddClouds200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.AddClouds200ApplicationJSONObject = out
+			res.AddClouds200ApplicationJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.DefaultError
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
-				return res, err
+			var out shared.DefaultError
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
 			}
 
-			res.DefaultError = out
+			res.DefaultError = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

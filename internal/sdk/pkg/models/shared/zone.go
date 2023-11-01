@@ -3,15 +3,28 @@
 package shared
 
 import (
-	"bytes"
-	"encoding/json"
 	"errors"
+	"newtest/internal/sdk/pkg/utils"
 	"time"
 )
 
 type ZoneAccount struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
+}
+
+func (o *ZoneAccount) GetID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ZoneAccount) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
 }
 
 type ZoneConfigType string
@@ -69,41 +82,32 @@ func CreateZoneConfigZoneGcpConfig(zoneGcpConfig ZoneGcpConfig) ZoneConfig {
 }
 
 func (u *ZoneConfig) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
-
-	zoneAwsConfig := new(ZoneAwsConfig)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&zoneAwsConfig); err == nil {
-		u.ZoneAwsConfig = zoneAwsConfig
-		u.Type = ZoneConfigTypeZoneAwsConfig
-		return nil
-	}
-
-	zoneVcenterConfig := new(ZoneVcenterConfig)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&zoneVcenterConfig); err == nil {
-		u.ZoneVcenterConfig = zoneVcenterConfig
-		u.Type = ZoneConfigTypeZoneVcenterConfig
-		return nil
-	}
 
 	zoneGcpConfig := new(ZoneGcpConfig)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&zoneGcpConfig); err == nil {
+	if err := utils.UnmarshalJSON(data, &zoneGcpConfig, "", true, true); err == nil {
 		u.ZoneGcpConfig = zoneGcpConfig
 		u.Type = ZoneConfigTypeZoneGcpConfig
 		return nil
 	}
 
+	zoneAwsConfig := new(ZoneAwsConfig)
+	if err := utils.UnmarshalJSON(data, &zoneAwsConfig, "", true, true); err == nil {
+		u.ZoneAwsConfig = zoneAwsConfig
+		u.Type = ZoneConfigTypeZoneAwsConfig
+		return nil
+	}
+
 	zoneAzureConfig := new(ZoneAzureConfig)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&zoneAzureConfig); err == nil {
+	if err := utils.UnmarshalJSON(data, &zoneAzureConfig, "", true, true); err == nil {
 		u.ZoneAzureConfig = zoneAzureConfig
 		u.Type = ZoneConfigTypeZoneAzureConfig
+		return nil
+	}
+
+	zoneVcenterConfig := new(ZoneVcenterConfig)
+	if err := utils.UnmarshalJSON(data, &zoneVcenterConfig, "", true, true); err == nil {
+		u.ZoneVcenterConfig = zoneVcenterConfig
+		u.Type = ZoneConfigTypeZoneVcenterConfig
 		return nil
 	}
 
@@ -111,23 +115,23 @@ func (u *ZoneConfig) UnmarshalJSON(data []byte) error {
 }
 
 func (u ZoneConfig) MarshalJSON() ([]byte, error) {
-	if u.ZoneAwsConfig != nil {
-		return json.Marshal(u.ZoneAwsConfig)
-	}
-
 	if u.ZoneVcenterConfig != nil {
-		return json.Marshal(u.ZoneVcenterConfig)
+		return utils.MarshalJSON(u.ZoneVcenterConfig, "", true)
 	}
 
-	if u.ZoneGcpConfig != nil {
-		return json.Marshal(u.ZoneGcpConfig)
+	if u.ZoneAwsConfig != nil {
+		return utils.MarshalJSON(u.ZoneAwsConfig, "", true)
 	}
 
 	if u.ZoneAzureConfig != nil {
-		return json.Marshal(u.ZoneAzureConfig)
+		return utils.MarshalJSON(u.ZoneAzureConfig, "", true)
 	}
 
-	return nil, nil
+	if u.ZoneGcpConfig != nil {
+		return utils.MarshalJSON(u.ZoneGcpConfig, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type ZoneCredential2 struct {
@@ -136,8 +140,36 @@ type ZoneCredential2 struct {
 	Type *string `json:"type,omitempty"`
 }
 
+func (o *ZoneCredential2) GetID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ZoneCredential2) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *ZoneCredential2) GetType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Type
+}
+
 type ZoneCredential1 struct {
 	Type *string `json:"type,omitempty"`
+}
+
+func (o *ZoneCredential1) GetType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Type
 }
 
 type ZoneCredentialType string
@@ -173,21 +205,16 @@ func CreateZoneCredentialZoneCredential2(zoneCredential2 ZoneCredential2) ZoneCr
 }
 
 func (u *ZoneCredential) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	zoneCredential1 := new(ZoneCredential1)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&zoneCredential1); err == nil {
+	if err := utils.UnmarshalJSON(data, &zoneCredential1, "", true, true); err == nil {
 		u.ZoneCredential1 = zoneCredential1
 		u.Type = ZoneCredentialTypeZoneCredential1
 		return nil
 	}
 
 	zoneCredential2 := new(ZoneCredential2)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&zoneCredential2); err == nil {
+	if err := utils.UnmarshalJSON(data, &zoneCredential2, "", true, true); err == nil {
 		u.ZoneCredential2 = zoneCredential2
 		u.Type = ZoneCredentialTypeZoneCredential2
 		return nil
@@ -198,14 +225,14 @@ func (u *ZoneCredential) UnmarshalJSON(data []byte) error {
 
 func (u ZoneCredential) MarshalJSON() ([]byte, error) {
 	if u.ZoneCredential1 != nil {
-		return json.Marshal(u.ZoneCredential1)
+		return utils.MarshalJSON(u.ZoneCredential1, "", true)
 	}
 
 	if u.ZoneCredential2 != nil {
-		return json.Marshal(u.ZoneCredential2)
+		return utils.MarshalJSON(u.ZoneCredential2, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type ZoneGroups struct {
@@ -214,9 +241,44 @@ type ZoneGroups struct {
 	Name      *string `json:"name,omitempty"`
 }
 
+func (o *ZoneGroups) GetAccountID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
+}
+
+func (o *ZoneGroups) GetID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ZoneGroups) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
 type ZoneNetworkDomain struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
+}
+
+func (o *ZoneNetworkDomain) GetID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ZoneNetworkDomain) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
 }
 
 type ZoneNetworkServer struct {
@@ -224,14 +286,56 @@ type ZoneNetworkServer struct {
 	Name *string `json:"name,omitempty"`
 }
 
+func (o *ZoneNetworkServer) GetID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ZoneNetworkServer) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
 type ZoneOwner struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
+func (o *ZoneOwner) GetID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ZoneOwner) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
 type ZoneSecurityServer struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
+}
+
+func (o *ZoneSecurityServer) GetID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ZoneSecurityServer) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
 }
 
 type ZoneStatsServerCounts struct {
@@ -244,14 +348,91 @@ type ZoneStatsServerCounts struct {
 	VM            *int64 `json:"vm,omitempty"`
 }
 
+func (o *ZoneStatsServerCounts) GetAll() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.All
+}
+
+func (o *ZoneStatsServerCounts) GetBaremetal() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Baremetal
+}
+
+func (o *ZoneStatsServerCounts) GetContainerHost() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ContainerHost
+}
+
+func (o *ZoneStatsServerCounts) GetHost() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Host
+}
+
+func (o *ZoneStatsServerCounts) GetHypervisor() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Hypervisor
+}
+
+func (o *ZoneStatsServerCounts) GetUnmanaged() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Unmanaged
+}
+
+func (o *ZoneStatsServerCounts) GetVM() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.VM
+}
+
 type ZoneStats struct {
 	ServerCounts *ZoneStatsServerCounts `json:"serverCounts,omitempty"`
+}
+
+func (o *ZoneStats) GetServerCounts() *ZoneStatsServerCounts {
+	if o == nil {
+		return nil
+	}
+	return o.ServerCounts
 }
 
 type ZoneZoneType struct {
 	Code *string `json:"code,omitempty"`
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
+}
+
+func (o *ZoneZoneType) GetCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Code
+}
+
+func (o *ZoneZoneType) GetID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ZoneZoneType) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
 }
 
 type Zone struct {
@@ -311,4 +492,393 @@ type Zone struct {
 	Visibility        *string             `json:"visibility,omitempty"`
 	ZoneType          *ZoneZoneType       `json:"zoneType,omitempty"`
 	ZoneTypeID        *int64              `json:"zoneTypeId,omitempty"`
+}
+
+func (z Zone) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(z, "", false)
+}
+
+func (z *Zone) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &z, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Zone) GetAccount() *ZoneAccount {
+	if o == nil {
+		return nil
+	}
+	return o.Account
+}
+
+func (o *Zone) GetAccountID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
+}
+
+func (o *Zone) GetAgentMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AgentMode
+}
+
+func (o *Zone) GetAPIProxy() *string {
+	if o == nil {
+		return nil
+	}
+	return o.APIProxy
+}
+
+func (o *Zone) GetAutoRecoverPowerState() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AutoRecoverPowerState
+}
+
+func (o *Zone) GetCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Code
+}
+
+func (o *Zone) GetConfig() *ZoneConfig {
+	if o == nil {
+		return nil
+	}
+	return o.Config
+}
+
+func (o *Zone) GetConsoleKeymap() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ConsoleKeymap
+}
+
+func (o *Zone) GetContainerMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ContainerMode
+}
+
+func (o *Zone) GetCostLastSync() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CostLastSync
+}
+
+func (o *Zone) GetCostLastSyncDuration() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.CostLastSyncDuration
+}
+
+func (o *Zone) GetCostStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CostStatus
+}
+
+func (o *Zone) GetCostStatusDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CostStatusDate
+}
+
+func (o *Zone) GetCostStatusMessage() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CostStatusMessage
+}
+
+func (o *Zone) GetCostingMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CostingMode
+}
+
+func (o *Zone) GetCredential() *ZoneCredential {
+	if o == nil {
+		return nil
+	}
+	return o.Credential
+}
+
+func (o *Zone) GetDarkImagePath() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DarkImagePath
+}
+
+func (o *Zone) GetDateCreated() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.DateCreated
+}
+
+func (o *Zone) GetDomainName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DomainName
+}
+
+func (o *Zone) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
+func (o *Zone) GetExternalID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExternalID
+}
+
+func (o *Zone) GetGroups() []ZoneGroups {
+	if o == nil {
+		return nil
+	}
+	return o.Groups
+}
+
+func (o *Zone) GetGuidanceMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GuidanceMode
+}
+
+func (o *Zone) GetID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *Zone) GetImagePath() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ImagePath
+}
+
+func (o *Zone) GetInventoryLevel() *string {
+	if o == nil {
+		return nil
+	}
+	return o.InventoryLevel
+}
+
+func (o *Zone) GetLastSync() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.LastSync
+}
+
+func (o *Zone) GetLastSyncDuration() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.LastSyncDuration
+}
+
+func (o *Zone) GetLastUpdated() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.LastUpdated
+}
+
+func (o *Zone) GetLocation() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Location
+}
+
+func (o *Zone) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *Zone) GetNetworkDomain() *ZoneNetworkDomain {
+	if o == nil {
+		return nil
+	}
+	return o.NetworkDomain
+}
+
+func (o *Zone) GetNetworkServer() *ZoneNetworkServer {
+	if o == nil {
+		return nil
+	}
+	return o.NetworkServer
+}
+
+func (o *Zone) GetNextRunDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.NextRunDate
+}
+
+func (o *Zone) GetOwner() *ZoneOwner {
+	if o == nil {
+		return nil
+	}
+	return o.Owner
+}
+
+func (o *Zone) GetProvisioningProxy() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ProvisioningProxy
+}
+
+func (o *Zone) GetRegionCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RegionCode
+}
+
+func (o *Zone) GetScalePriority() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ScalePriority
+}
+
+func (o *Zone) GetSecurityMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SecurityMode
+}
+
+func (o *Zone) GetSecurityServer() *ZoneSecurityServer {
+	if o == nil {
+		return nil
+	}
+	return o.SecurityServer
+}
+
+func (o *Zone) GetServerCount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ServerCount
+}
+
+func (o *Zone) GetServiceVersion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ServiceVersion
+}
+
+func (o *Zone) GetStats() *ZoneStats {
+	if o == nil {
+		return nil
+	}
+	return o.Stats
+}
+
+func (o *Zone) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *Zone) GetStatusDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.StatusDate
+}
+
+func (o *Zone) GetStatusMessage() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StatusMessage
+}
+
+func (o *Zone) GetStorageMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StorageMode
+}
+
+func (o *Zone) GetTimezone() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Timezone
+}
+
+func (o *Zone) GetUserDataLinux() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserDataLinux
+}
+
+func (o *Zone) GetUserDataWindows() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserDataWindows
+}
+
+func (o *Zone) GetUUID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UUID
+}
+
+func (o *Zone) GetVisibility() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Visibility
+}
+
+func (o *Zone) GetZoneType() *ZoneZoneType {
+	if o == nil {
+		return nil
+	}
+	return o.ZoneType
+}
+
+func (o *Zone) GetZoneTypeID() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ZoneTypeID
 }

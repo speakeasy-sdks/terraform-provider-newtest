@@ -6,38 +6,148 @@ type ZoneGcpConfigNetworkServer struct {
 	ID *string `json:"id,omitempty"`
 }
 
-type ZoneAzureConfig struct {
-	AccountType         *string                       `json:"accountType,omitempty"`
-	ApplianceURL        *string                       `json:"applianceUrl,omitempty"`
-	AzureCostingMode    *string                       `json:"azureCostingMode,omitempty"`
-	BackupMode          *string                       `json:"backupMode,omitempty"`
-	CertificateProvider *string                       `json:"certificateProvider,omitempty"`
-	ClientID            *string                       `json:"clientId,omitempty"`
-	ClientSecret        *string                       `json:"clientSecret,omitempty"`
-	ClientSecretHash    *string                       `json:"clientSecretHash,omitempty"`
-	CloudType           *string                       `json:"cloudType,omitempty"`
-	ConfigCmdbDiscovery *bool                         `json:"configCmdbDiscovery,omitempty"`
-	ConfigCmdbID        *string                       `json:"configCmdbId,omitempty"`
-	ConfigManagementID  *string                       `json:"configManagementId,omitempty"`
-	CspClientID         *string                       `json:"cspClientId,omitempty"`
-	CspClientSecret     *string                       `json:"cspClientSecret,omitempty"`
-	CspClientSecretHash *string                       `json:"cspClientSecretHash,omitempty"`
-	CspCustomer         *string                       `json:"cspCustomer,omitempty"`
-	CspTenantID         *string                       `json:"cspTenantId,omitempty"`
-	DatacenterName      *string                       `json:"datacenterName,omitempty"`
-	DiskEncryption      *string                       `json:"diskEncryption,omitempty"`
-	DNSIntegrationID    *string                       `json:"dnsIntegrationId,omitempty"`
-	EncryptionSet       *string                       `json:"encryptionSet,omitempty"`
-	ImportExisting      *string                       `json:"importExisting,omitempty"`
-	InventoryLevel      *string                       `json:"inventoryLevel,omitempty"`
-	NetworkServer       *ZoneAzureConfigNetworkServer `json:"networkServer,omitempty"`
-	NetworkServerID     *string                       `json:"networkServer.id,omitempty"`
-	ReplicationMode     *string                       `json:"replicationMode,omitempty"`
-	ResourceGroup       *string                       `json:"resourceGroup,omitempty"`
-	RPCMode             *string                       `json:"rpcMode,omitempty"`
-	SecurityMode        *string                       `json:"securityMode,omitempty"`
-	SecurityServer      *string                       `json:"securityServer,omitempty"`
-	ServiceRegistryID   *string                       `json:"serviceRegistryId,omitempty"`
-	SubscriberID        *string                       `json:"subscriberId,omitempty"`
-	TenantID            *string                       `json:"tenantId,omitempty"`
+func (o *ZoneGcpConfigNetworkServer) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+type ZoneGcpConfig struct {
+	ApplianceURL        *string                     `json:"applianceUrl,omitempty"`
+	BackupMode          *string                     `json:"backupMode,omitempty"`
+	CertificateProvider *string                     `json:"certificateProvider,omitempty"`
+	ClientEmail         *string                     `json:"clientEmail,omitempty"`
+	ConfigManagementID  *string                     `json:"configManagementId,omitempty"`
+	DatacenterName      *string                     `json:"datacenterName,omitempty"`
+	DNSIntegrationID    *string                     `json:"dnsIntegrationId,omitempty"`
+	GoogleRegionID      *string                     `json:"googleRegionId,omitempty"`
+	ImportExisting      *string                     `json:"importExisting,omitempty"`
+	NetworkServer       *ZoneGcpConfigNetworkServer `json:"networkServer,omitempty"`
+	ID                  *string                     `json:"networkServer.id,omitempty"`
+	PrivateKey          *string                     `json:"privateKey,omitempty"`
+	PrivateKeyHash      *string                     `json:"privateKeyHash,omitempty"`
+	ProjectID           *string                     `json:"projectId,omitempty"`
+	ReplicationMode     *string                     `json:"replicationMode,omitempty"`
+	SecurityServer      *string                     `json:"securityServer,omitempty"`
+	ServiceRegistryID   *string                     `json:"serviceRegistryId,omitempty"`
+}
+
+func (o *ZoneGcpConfig) GetApplianceURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ApplianceURL
+}
+
+func (o *ZoneGcpConfig) GetBackupMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BackupMode
+}
+
+func (o *ZoneGcpConfig) GetCertificateProvider() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CertificateProvider
+}
+
+func (o *ZoneGcpConfig) GetClientEmail() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientEmail
+}
+
+func (o *ZoneGcpConfig) GetConfigManagementID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ConfigManagementID
+}
+
+func (o *ZoneGcpConfig) GetDatacenterName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DatacenterName
+}
+
+func (o *ZoneGcpConfig) GetDNSIntegrationID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DNSIntegrationID
+}
+
+func (o *ZoneGcpConfig) GetGoogleRegionID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GoogleRegionID
+}
+
+func (o *ZoneGcpConfig) GetImportExisting() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ImportExisting
+}
+
+func (o *ZoneGcpConfig) GetNetworkServer() *ZoneGcpConfigNetworkServer {
+	if o == nil {
+		return nil
+	}
+	return o.NetworkServer
+}
+
+func (o *ZoneGcpConfig) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *ZoneGcpConfig) GetPrivateKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PrivateKey
+}
+
+func (o *ZoneGcpConfig) GetPrivateKeyHash() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PrivateKeyHash
+}
+
+func (o *ZoneGcpConfig) GetProjectID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ProjectID
+}
+
+func (o *ZoneGcpConfig) GetReplicationMode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ReplicationMode
+}
+
+func (o *ZoneGcpConfig) GetSecurityServer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SecurityServer
+}
+
+func (o *ZoneGcpConfig) GetServiceRegistryID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ServiceRegistryID
 }

@@ -3,8 +3,8 @@
 package provider
 
 type ZoneConfig struct {
-	ZoneVcenterConfig *ZoneVcenterConfig `tfsdk:"zone_vcenter_config"`
 	ZoneAwsConfig     *ZoneAwsConfig     `tfsdk:"zone_aws_config"`
 	ZoneAzureConfig   *ZoneAzureConfig   `tfsdk:"zone_azure_config"`
 	ZoneGcpConfig     *ZoneGcpConfig     `tfsdk:"zone_gcp_config"`
+	ZoneVcenterConfig *ZoneVcenterConfig `tfsdk:"zone_vcenter_config"`
 }

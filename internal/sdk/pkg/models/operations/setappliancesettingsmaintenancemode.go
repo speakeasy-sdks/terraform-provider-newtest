@@ -12,6 +12,13 @@ type SetApplianceSettingsMaintenanceModeRequest struct {
 	Enabled *bool `queryParam:"style=form,explode=true,name=enabled"`
 }
 
+func (o *SetApplianceSettingsMaintenanceModeRequest) GetEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Enabled
+}
+
 type SetApplianceSettingsMaintenanceModeResponse struct {
 	// Successful Response
 	TwoHundredSuccess *shared.TwoHundredSuccess
@@ -23,4 +30,39 @@ type SetApplianceSettingsMaintenanceModeResponse struct {
 	RawResponse *http.Response
 	// Error Codes
 	DefaultError *shared.DefaultError
+}
+
+func (o *SetApplianceSettingsMaintenanceModeResponse) GetTwoHundredSuccess() *shared.TwoHundredSuccess {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredSuccess
+}
+
+func (o *SetApplianceSettingsMaintenanceModeResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *SetApplianceSettingsMaintenanceModeResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *SetApplianceSettingsMaintenanceModeResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *SetApplianceSettingsMaintenanceModeResponse) GetDefaultError() *shared.DefaultError {
+	if o == nil {
+		return nil
+	}
+	return o.DefaultError
 }

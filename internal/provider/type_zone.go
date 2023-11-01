@@ -14,12 +14,12 @@ type Zone struct {
 	Config                *ZoneConfig     `tfsdk:"config"`
 	ConsoleKeymap         types.String    `tfsdk:"console_keymap"`
 	ContainerMode         types.String    `tfsdk:"container_mode"`
+	CostingMode           types.String    `tfsdk:"costing_mode"`
 	CostLastSync          types.String    `tfsdk:"cost_last_sync"`
 	CostLastSyncDuration  types.Int64     `tfsdk:"cost_last_sync_duration"`
 	CostStatus            types.String    `tfsdk:"cost_status"`
 	CostStatusDate        types.String    `tfsdk:"cost_status_date"`
 	CostStatusMessage     types.String    `tfsdk:"cost_status_message"`
-	CostingMode           types.String    `tfsdk:"costing_mode"`
 	Credential            *ZoneCredential `tfsdk:"credential"`
 	DarkImagePath         types.String    `tfsdk:"dark_image_path"`
 	DateCreated           types.String    `tfsdk:"date_created"`

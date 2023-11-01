@@ -5,3 +5,10 @@ package shared
 type DefaultError struct {
 	Msg *string `json:"msg,omitempty"`
 }
+
+func (o *DefaultError) GetMsg() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Msg
+}

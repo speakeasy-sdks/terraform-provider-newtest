@@ -3,6 +3,7 @@
 package sdk
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"newtest/internal/sdk/pkg/models/shared"
@@ -42,7 +43,7 @@ func Float64(f float64) *float64 { return &f }
 type sdkConfiguration struct {
 	DefaultClient     HTTPClient
 	SecurityClient    HTTPClient
-	Security          *shared.Security
+	Security          func(context.Context) (interface{}, error)
 	ServerURL         string
 	ServerIndex       int
 	ServerDefaults    []map[string]string
@@ -51,6 +52,7 @@ type sdkConfiguration struct {
 	SDKVersion        string
 	GenVersion        string
 	UserAgent         string
+	RetryConfig       *utils.RetryConfig
 }
 
 func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
@@ -64,11 +66,12 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 // Newtest - Morpheus API: Morpheus is a powerful cloud management tool that provides provisioning, monitoring, logging, backups, and application deployment strategies.
 //
 // This document describes the Morpheus API protocol and the available endpoints. Sections are organized in the same manner as they appear in the Morpheus UI.
+//
 // https://docs.morpheusdata.com
 type Newtest struct {
-	// ApplianceSettings - Manage Appliance Settings
+	// Manage Appliance Settings
 	ApplianceSettings *applianceSettings
-	// Clouds - Manage Clouds
+	// Manage Clouds
 	Clouds *clouds
 
 	sdkConfiguration sdkConfiguration
@@ -105,7 +108,7 @@ func WithServerIndex(serverIndex int) SDKOption {
 	}
 }
 
-// WithGlobalServerURL allows setting the $name variable for url substitution
+// WithGlobalServerURL allows setting the serverURL variable for url substitution
 func WithGlobalServerURL(serverURL string) SDKOption {
 	return func(sdk *Newtest) {
 		for idx := range sdk.sdkConfiguration.ServerDefaults {
@@ -125,10 +128,31 @@ func WithClient(client HTTPClient) SDKOption {
 	}
 }
 
+func withSecurity(security interface{}) func(context.Context) (interface{}, error) {
+	return func(context.Context) (interface{}, error) {
+		return &security, nil
+	}
+}
+
 // WithSecurity configures the SDK to use the provided security details
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *Newtest) {
-		sdk.sdkConfiguration.Security = &security
+		sdk.sdkConfiguration.Security = withSecurity(security)
+	}
+}
+
+// WithSecuritySource configures the SDK to invoke the Security Source function on each method call to determine authentication
+func WithSecuritySource(security func(context.Context) (shared.Security, error)) SDKOption {
+	return func(sdk *Newtest) {
+		sdk.sdkConfiguration.Security = func(ctx context.Context) (interface{}, error) {
+			return security(ctx)
+		}
+	}
+}
+
+func WithRetryConfig(retryConfig utils.RetryConfig) SDKOption {
+	return func(sdk *Newtest) {
+		sdk.sdkConfiguration.RetryConfig = &retryConfig
 	}
 }
 
@@ -136,11 +160,11 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *Newtest {
 	sdk := &Newtest{
 		sdkConfiguration: sdkConfiguration{
-			Language:          "terraform",
+			Language:          "go",
 			OpenAPIDocVersion: "6.1.1",
-			SDKVersion:        "0.9.1",
-			GenVersion:        "2.150.0",
-			UserAgent:         "speakeasy-sdk/terraform 0.9.1 2.150.0 6.1.1 newtest",
+			SDKVersion:        "0.10.0",
+			GenVersion:        "2.173.0",
+			UserAgent:         "speakeasy-sdk/go 0.10.0 2.173.0 6.1.1 newtest",
 			ServerDefaults: []map[string]string{
 				{
 					"serverURL": "CHANGEME",
