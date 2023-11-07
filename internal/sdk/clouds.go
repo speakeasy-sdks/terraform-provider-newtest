@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// clouds - Manage Clouds
-type clouds struct {
+// Manage Clouds
+type Clouds struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newClouds(sdkConfig sdkConfiguration) *clouds {
-	return &clouds{
+func newClouds(sdkConfig sdkConfiguration) *Clouds {
+	return &Clouds{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // AddClouds - Creates a Cloud
 // Creates a cloud.
-func (s *clouds) AddClouds(ctx context.Context, request *operations.AddCloudsRequestBody) (*operations.AddCloudsResponse, error) {
+func (s *Clouds) AddClouds(ctx context.Context, request *operations.AddCloudsRequestBody) (*operations.AddCloudsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/api/zones"
 
@@ -77,12 +77,12 @@ func (s *clouds) AddClouds(ctx context.Context, request *operations.AddCloudsReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.AddClouds200ApplicationJSON
+			var out operations.AddCloudsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.AddClouds200ApplicationJSONObject = &out
+			res.Object = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

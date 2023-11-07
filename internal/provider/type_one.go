@@ -4,6 +4,6 @@ package provider
 
 import "github.com/hashicorp/terraform-plugin-framework/types"
 
-type ZoneCredential1 struct {
+type One struct {
 	Type types.String `tfsdk:"type"`
 }

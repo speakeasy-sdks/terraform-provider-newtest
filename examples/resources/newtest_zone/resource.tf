@@ -17,7 +17,7 @@ resource "newtest_zone" "my_zone" {
   security_mode     = "...my_security_mode..."
   visibility        = "public"
   zone_type = {
-    zone_create_zone_type_1 = {
+    zone_create_1 = {
       id = 12
     }
   }

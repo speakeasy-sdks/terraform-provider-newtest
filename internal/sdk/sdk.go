@@ -70,9 +70,9 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 // https://docs.morpheusdata.com
 type Newtest struct {
 	// Manage Appliance Settings
-	ApplianceSettings *applianceSettings
+	ApplianceSettings *ApplianceSettings
 	// Manage Clouds
-	Clouds *clouds
+	Clouds *Clouds
 
 	sdkConfiguration sdkConfiguration
 }
@@ -162,9 +162,9 @@ func New(opts ...SDKOption) *Newtest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "6.1.1",
-			SDKVersion:        "0.10.0",
-			GenVersion:        "2.173.0",
-			UserAgent:         "speakeasy-sdk/go 0.10.0 2.173.0 6.1.1 newtest",
+			SDKVersion:        "0.11.0",
+			GenVersion:        "2.181.1",
+			UserAgent:         "speakeasy-sdk/go 0.11.0 2.181.1 6.1.1 newtest",
 			ServerDefaults: []map[string]string{
 				{
 					"serverURL": "CHANGEME",

@@ -4,7 +4,7 @@ package provider
 
 import "github.com/hashicorp/terraform-plugin-framework/types"
 
-type ZoneStatsServerCounts struct {
+type ServerCounts struct {
 	All           types.Int64 `tfsdk:"all"`
 	Baremetal     types.Int64 `tfsdk:"baremetal"`
 	ContainerHost types.Int64 `tfsdk:"container_host"`

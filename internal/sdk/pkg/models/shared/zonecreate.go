@@ -44,19 +44,19 @@ func (o *ZoneCreateCredential) GetType() *string {
 	return o.Type
 }
 
-// ZoneCreateVisibility - private or public
-type ZoneCreateVisibility string
+// Visibility - private or public
+type Visibility string
 
 const (
-	ZoneCreateVisibilityPrivate ZoneCreateVisibility = "private"
-	ZoneCreateVisibilityPublic  ZoneCreateVisibility = "public"
+	VisibilityPrivate Visibility = "private"
+	VisibilityPublic  Visibility = "public"
 )
 
-func (e ZoneCreateVisibility) ToPointer() *ZoneCreateVisibility {
+func (e Visibility) ToPointer() *Visibility {
 	return &e
 }
 
-func (e *ZoneCreateVisibility) UnmarshalJSON(data []byte) error {
+func (e *Visibility) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -65,31 +65,31 @@ func (e *ZoneCreateVisibility) UnmarshalJSON(data []byte) error {
 	case "private":
 		fallthrough
 	case "public":
-		*e = ZoneCreateVisibility(v)
+		*e = Visibility(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ZoneCreateVisibility: %v", v)
+		return fmt.Errorf("invalid value for Visibility: %v", v)
 	}
 }
 
-// ZoneCreateZoneType2 - Map containing the Cloud (zone) code name. See the zone-types API to fetch a list of all available Cloud (zone) types and their codes.
-type ZoneCreateZoneType2 struct {
+// ZoneCreate2 - Map containing the Cloud (zone) code name. See the zone-types API to fetch a list of all available Cloud (zone) types and their codes.
+type ZoneCreate2 struct {
 	Code *string `json:"code,omitempty"`
 }
 
-func (o *ZoneCreateZoneType2) GetCode() *string {
+func (o *ZoneCreate2) GetCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Code
 }
 
-// ZoneCreateZoneType1 - Map containing the Cloud (zone) type ID. See the zone-types API to fetch a list of all available Cloud (zone) types and their IDs.
-type ZoneCreateZoneType1 struct {
+// ZoneCreate1 - Map containing the Cloud (zone) type ID. See the zone-types API to fetch a list of all available Cloud (zone) types and their IDs.
+type ZoneCreate1 struct {
 	ID *int64 `json:"id,omitempty"`
 }
 
-func (o *ZoneCreateZoneType1) GetID() *int64 {
+func (o *ZoneCreate1) GetID() *int64 {
 	if o == nil {
 		return nil
 	}
@@ -99,48 +99,48 @@ func (o *ZoneCreateZoneType1) GetID() *int64 {
 type ZoneCreateZoneTypeType string
 
 const (
-	ZoneCreateZoneTypeTypeZoneCreateZoneType1 ZoneCreateZoneTypeType = "zoneCreate_zoneType_1"
-	ZoneCreateZoneTypeTypeZoneCreateZoneType2 ZoneCreateZoneTypeType = "zoneCreate_zoneType_2"
+	ZoneCreateZoneTypeTypeZoneCreate1 ZoneCreateZoneTypeType = "zoneCreate_1"
+	ZoneCreateZoneTypeTypeZoneCreate2 ZoneCreateZoneTypeType = "zoneCreate_2"
 )
 
 type ZoneCreateZoneType struct {
-	ZoneCreateZoneType1 *ZoneCreateZoneType1
-	ZoneCreateZoneType2 *ZoneCreateZoneType2
+	ZoneCreate1 *ZoneCreate1
+	ZoneCreate2 *ZoneCreate2
 
 	Type ZoneCreateZoneTypeType
 }
 
-func CreateZoneCreateZoneTypeZoneCreateZoneType1(zoneCreateZoneType1 ZoneCreateZoneType1) ZoneCreateZoneType {
-	typ := ZoneCreateZoneTypeTypeZoneCreateZoneType1
+func CreateZoneCreateZoneTypeZoneCreate1(zoneCreate1 ZoneCreate1) ZoneCreateZoneType {
+	typ := ZoneCreateZoneTypeTypeZoneCreate1
 
 	return ZoneCreateZoneType{
-		ZoneCreateZoneType1: &zoneCreateZoneType1,
-		Type:                typ,
+		ZoneCreate1: &zoneCreate1,
+		Type:        typ,
 	}
 }
 
-func CreateZoneCreateZoneTypeZoneCreateZoneType2(zoneCreateZoneType2 ZoneCreateZoneType2) ZoneCreateZoneType {
-	typ := ZoneCreateZoneTypeTypeZoneCreateZoneType2
+func CreateZoneCreateZoneTypeZoneCreate2(zoneCreate2 ZoneCreate2) ZoneCreateZoneType {
+	typ := ZoneCreateZoneTypeTypeZoneCreate2
 
 	return ZoneCreateZoneType{
-		ZoneCreateZoneType2: &zoneCreateZoneType2,
-		Type:                typ,
+		ZoneCreate2: &zoneCreate2,
+		Type:        typ,
 	}
 }
 
 func (u *ZoneCreateZoneType) UnmarshalJSON(data []byte) error {
 
-	zoneCreateZoneType1 := new(ZoneCreateZoneType1)
-	if err := utils.UnmarshalJSON(data, &zoneCreateZoneType1, "", true, true); err == nil {
-		u.ZoneCreateZoneType1 = zoneCreateZoneType1
-		u.Type = ZoneCreateZoneTypeTypeZoneCreateZoneType1
+	zoneCreate1 := new(ZoneCreate1)
+	if err := utils.UnmarshalJSON(data, &zoneCreate1, "", true, true); err == nil {
+		u.ZoneCreate1 = zoneCreate1
+		u.Type = ZoneCreateZoneTypeTypeZoneCreate1
 		return nil
 	}
 
-	zoneCreateZoneType2 := new(ZoneCreateZoneType2)
-	if err := utils.UnmarshalJSON(data, &zoneCreateZoneType2, "", true, true); err == nil {
-		u.ZoneCreateZoneType2 = zoneCreateZoneType2
-		u.Type = ZoneCreateZoneTypeTypeZoneCreateZoneType2
+	zoneCreate2 := new(ZoneCreate2)
+	if err := utils.UnmarshalJSON(data, &zoneCreate2, "", true, true); err == nil {
+		u.ZoneCreate2 = zoneCreate2
+		u.Type = ZoneCreateZoneTypeTypeZoneCreate2
 		return nil
 	}
 
@@ -148,12 +148,12 @@ func (u *ZoneCreateZoneType) UnmarshalJSON(data []byte) error {
 }
 
 func (u ZoneCreateZoneType) MarshalJSON() ([]byte, error) {
-	if u.ZoneCreateZoneType1 != nil {
-		return utils.MarshalJSON(u.ZoneCreateZoneType1, "", true)
+	if u.ZoneCreate1 != nil {
+		return utils.MarshalJSON(u.ZoneCreate1, "", true)
 	}
 
-	if u.ZoneCreateZoneType2 != nil {
-		return utils.MarshalJSON(u.ZoneCreateZoneType2, "", true)
+	if u.ZoneCreate2 != nil {
+		return utils.MarshalJSON(u.ZoneCreate2, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
@@ -187,8 +187,8 @@ type ZoneCreate struct {
 	// host firewall. `off` or `internal`. a.k.a. "local firewall"
 	SecurityMode *string `default:"off" json:"securityMode"`
 	// private or public
-	Visibility *ZoneCreateVisibility `default:"private" json:"visibility"`
-	ZoneType   ZoneCreateZoneType    `json:"zoneType"`
+	Visibility *Visibility        `default:"private" json:"visibility"`
+	ZoneType   ZoneCreateZoneType `json:"zoneType"`
 }
 
 func (z ZoneCreate) MarshalJSON() ([]byte, error) {
@@ -293,7 +293,7 @@ func (o *ZoneCreate) GetSecurityMode() *string {
 	return o.SecurityMode
 }
 
-func (o *ZoneCreate) GetVisibility() *ZoneCreateVisibility {
+func (o *ZoneCreate) GetVisibility() *Visibility {
 	if o == nil {
 		return nil
 	}

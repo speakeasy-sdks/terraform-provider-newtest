@@ -2,6 +2,7 @@
 
 package provider
 
-type ZoneStats struct {
-	ServerCounts *ZoneStatsServerCounts `tfsdk:"server_counts"`
+type Credential struct {
+	One *One `tfsdk:"one"`
+	Two *Two `tfsdk:"two"`
 }

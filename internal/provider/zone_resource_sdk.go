@@ -89,45 +89,45 @@ func (r *ZoneResourceModel) ToCreateSDKType() *shared.ZoneCreate {
 	} else {
 		securityMode = nil
 	}
-	visibility := new(shared.ZoneCreateVisibility)
+	visibility := new(shared.Visibility)
 	if !r.Visibility.IsUnknown() && !r.Visibility.IsNull() {
-		*visibility = shared.ZoneCreateVisibility(r.Visibility.ValueString())
+		*visibility = shared.Visibility(r.Visibility.ValueString())
 	} else {
 		visibility = nil
 	}
 	var zoneType shared.ZoneCreateZoneType
-	var zoneCreateZoneType1 *shared.ZoneCreateZoneType1
-	if r.ZoneType.ZoneCreateZoneType1 != nil {
+	var zoneCreate1 *shared.ZoneCreate1
+	if r.ZoneType.ZoneCreate1 != nil {
 		id1 := new(int64)
-		if !r.ZoneType.ZoneCreateZoneType1.ID.IsUnknown() && !r.ZoneType.ZoneCreateZoneType1.ID.IsNull() {
-			*id1 = r.ZoneType.ZoneCreateZoneType1.ID.ValueInt64()
+		if !r.ZoneType.ZoneCreate1.ID.IsUnknown() && !r.ZoneType.ZoneCreate1.ID.IsNull() {
+			*id1 = r.ZoneType.ZoneCreate1.ID.ValueInt64()
 		} else {
 			id1 = nil
 		}
-		zoneCreateZoneType1 = &shared.ZoneCreateZoneType1{
+		zoneCreate1 = &shared.ZoneCreate1{
 			ID: id1,
 		}
 	}
-	if zoneCreateZoneType1 != nil {
+	if zoneCreate1 != nil {
 		zoneType = shared.ZoneCreateZoneType{
-			ZoneCreateZoneType1: zoneCreateZoneType1,
+			ZoneCreate1: zoneCreate1,
 		}
 	}
-	var zoneCreateZoneType2 *shared.ZoneCreateZoneType2
-	if r.ZoneType.ZoneCreateZoneType2 != nil {
+	var zoneCreate2 *shared.ZoneCreate2
+	if r.ZoneType.ZoneCreate2 != nil {
 		code1 := new(string)
-		if !r.ZoneType.ZoneCreateZoneType2.Code.IsUnknown() && !r.ZoneType.ZoneCreateZoneType2.Code.IsNull() {
-			*code1 = r.ZoneType.ZoneCreateZoneType2.Code.ValueString()
+		if !r.ZoneType.ZoneCreate2.Code.IsUnknown() && !r.ZoneType.ZoneCreate2.Code.IsNull() {
+			*code1 = r.ZoneType.ZoneCreate2.Code.ValueString()
 		} else {
 			code1 = nil
 		}
-		zoneCreateZoneType2 = &shared.ZoneCreateZoneType2{
+		zoneCreate2 = &shared.ZoneCreate2{
 			Code: code1,
 		}
 	}
-	if zoneCreateZoneType2 != nil {
+	if zoneCreate2 != nil {
 		zoneType = shared.ZoneCreateZoneType{
-			ZoneCreateZoneType2: zoneCreateZoneType2,
+			ZoneCreate2: zoneCreate2,
 		}
 	}
 	out := shared.ZoneCreate{
@@ -150,7 +150,7 @@ func (r *ZoneResourceModel) ToCreateSDKType() *shared.ZoneCreate {
 	return &out
 }
 
-func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds200ApplicationJSON) {
+func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddCloudsResponseBody) {
 	if resp.Success != nil {
 		r.Success = types.BoolValue(*resp.Success)
 	} else {
@@ -163,7 +163,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		if resp.Zone.Account == nil {
 			r.Zone.Account = nil
 		} else {
-			r.Zone.Account = &ZoneAccount{}
+			r.Zone.Account = &Account{}
 			if resp.Zone.Account.ID != nil {
 				r.Zone.Account.ID = types.Int64Value(*resp.Zone.Account.ID)
 			} else {
@@ -203,7 +203,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		if resp.Zone.Config == nil {
 			r.Zone.Config = nil
 		} else {
-			r.Zone.Config = &ZoneConfig{}
+			r.Zone.Config = &Config{}
 			if resp.Zone.Config.ZoneAwsConfig != nil {
 				r.Zone.Config.ZoneAwsConfig = &ZoneAwsConfig{}
 				if resp.Zone.Config.ZoneAwsConfig.UseHostCredentials != nil {
@@ -855,31 +855,31 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		if resp.Zone.Credential == nil {
 			r.Zone.Credential = nil
 		} else {
-			r.Zone.Credential = &ZoneCredential{}
-			if resp.Zone.Credential.ZoneCredential1 != nil {
-				r.Zone.Credential.ZoneCredential1 = &ZoneCredential1{}
-				if resp.Zone.Credential.ZoneCredential1.Type != nil {
-					r.Zone.Credential.ZoneCredential1.Type = types.StringValue(*resp.Zone.Credential.ZoneCredential1.Type)
+			r.Zone.Credential = &Credential{}
+			if resp.Zone.Credential.One != nil {
+				r.Zone.Credential.One = &One{}
+				if resp.Zone.Credential.One.Type != nil {
+					r.Zone.Credential.One.Type = types.StringValue(*resp.Zone.Credential.One.Type)
 				} else {
-					r.Zone.Credential.ZoneCredential1.Type = types.StringNull()
+					r.Zone.Credential.One.Type = types.StringNull()
 				}
 			}
-			if resp.Zone.Credential.ZoneCredential2 != nil {
-				r.Zone.Credential.ZoneCredential2 = &ZoneCredential2{}
-				if resp.Zone.Credential.ZoneCredential2.ID != nil {
-					r.Zone.Credential.ZoneCredential2.ID = types.Int64Value(*resp.Zone.Credential.ZoneCredential2.ID)
+			if resp.Zone.Credential.Two != nil {
+				r.Zone.Credential.Two = &Two{}
+				if resp.Zone.Credential.Two.ID != nil {
+					r.Zone.Credential.Two.ID = types.Int64Value(*resp.Zone.Credential.Two.ID)
 				} else {
-					r.Zone.Credential.ZoneCredential2.ID = types.Int64Null()
+					r.Zone.Credential.Two.ID = types.Int64Null()
 				}
-				if resp.Zone.Credential.ZoneCredential2.Name != nil {
-					r.Zone.Credential.ZoneCredential2.Name = types.StringValue(*resp.Zone.Credential.ZoneCredential2.Name)
+				if resp.Zone.Credential.Two.Name != nil {
+					r.Zone.Credential.Two.Name = types.StringValue(*resp.Zone.Credential.Two.Name)
 				} else {
-					r.Zone.Credential.ZoneCredential2.Name = types.StringNull()
+					r.Zone.Credential.Two.Name = types.StringNull()
 				}
-				if resp.Zone.Credential.ZoneCredential2.Type != nil {
-					r.Zone.Credential.ZoneCredential2.Type = types.StringValue(*resp.Zone.Credential.ZoneCredential2.Type)
+				if resp.Zone.Credential.Two.Type != nil {
+					r.Zone.Credential.Two.Type = types.StringValue(*resp.Zone.Credential.Two.Type)
 				} else {
-					r.Zone.Credential.ZoneCredential2.Type = types.StringNull()
+					r.Zone.Credential.Two.Type = types.StringNull()
 				}
 			}
 		}
@@ -910,7 +910,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		}
 		r.Zone.Groups = nil
 		for _, groupsItem := range resp.Zone.Groups {
-			var groups1 ZoneGroups
+			var groups1 Groups
 			if groupsItem.AccountID != nil {
 				groups1.AccountID = types.Int64Value(*groupsItem.AccountID)
 			} else {
@@ -976,7 +976,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		if resp.Zone.NetworkDomain == nil {
 			r.Zone.NetworkDomain = nil
 		} else {
-			r.Zone.NetworkDomain = &ZoneAccount{}
+			r.Zone.NetworkDomain = &Account{}
 			if resp.Zone.NetworkDomain.ID != nil {
 				r.Zone.NetworkDomain.ID = types.Int64Value(*resp.Zone.NetworkDomain.ID)
 			} else {
@@ -991,7 +991,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		if resp.Zone.NetworkServer == nil {
 			r.Zone.NetworkServer = nil
 		} else {
-			r.Zone.NetworkServer = &ZoneAccount{}
+			r.Zone.NetworkServer = &Account{}
 			if resp.Zone.NetworkServer.ID != nil {
 				r.Zone.NetworkServer.ID = types.Int64Value(*resp.Zone.NetworkServer.ID)
 			} else {
@@ -1011,7 +1011,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		if resp.Zone.Owner == nil {
 			r.Zone.Owner = nil
 		} else {
-			r.Zone.Owner = &ZoneAccount{}
+			r.Zone.Owner = &Account{}
 			if resp.Zone.Owner.ID != nil {
 				r.Zone.Owner.ID = types.Int64Value(*resp.Zone.Owner.ID)
 			} else {
@@ -1046,7 +1046,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		if resp.Zone.SecurityServer == nil {
 			r.Zone.SecurityServer = nil
 		} else {
-			r.Zone.SecurityServer = &ZoneAccount{}
+			r.Zone.SecurityServer = &Account{}
 			if resp.Zone.SecurityServer.ID != nil {
 				r.Zone.SecurityServer.ID = types.Int64Value(*resp.Zone.SecurityServer.ID)
 			} else {
@@ -1071,11 +1071,11 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		if resp.Zone.Stats == nil {
 			r.Zone.Stats = nil
 		} else {
-			r.Zone.Stats = &ZoneStats{}
+			r.Zone.Stats = &Stats{}
 			if resp.Zone.Stats.ServerCounts == nil {
 				r.Zone.Stats.ServerCounts = nil
 			} else {
-				r.Zone.Stats.ServerCounts = &ZoneStatsServerCounts{}
+				r.Zone.Stats.ServerCounts = &ServerCounts{}
 				if resp.Zone.Stats.ServerCounts.All != nil {
 					r.Zone.Stats.ServerCounts.All = types.Int64Value(*resp.Zone.Stats.ServerCounts.All)
 				} else {
@@ -1161,7 +1161,7 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		if resp.Zone.ZoneType == nil {
 			r.Zone.ZoneType = nil
 		} else {
-			r.Zone.ZoneType = &ZoneZoneType{}
+			r.Zone.ZoneType = &ZoneType{}
 			if resp.Zone.ZoneType.Code != nil {
 				r.Zone.ZoneType.Code = types.StringValue(*resp.Zone.ZoneType.Code)
 			} else {

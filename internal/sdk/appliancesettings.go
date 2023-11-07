@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// applianceSettings - Manage Appliance Settings
-type applianceSettings struct {
+// ApplianceSettings - Manage Appliance Settings
+type ApplianceSettings struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newApplianceSettings(sdkConfig sdkConfiguration) *applianceSettings {
-	return &applianceSettings{
+func newApplianceSettings(sdkConfig sdkConfiguration) *ApplianceSettings {
+	return &ApplianceSettings{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // SetApplianceSettingsMaintenanceMode - Toggle Maintenance Mode
 // This endpoint allows toggling the appliance maintenance mode.
-func (s *applianceSettings) SetApplianceSettingsMaintenanceMode(ctx context.Context, request operations.SetApplianceSettingsMaintenanceModeRequest) (*operations.SetApplianceSettingsMaintenanceModeResponse, error) {
+func (s *ApplianceSettings) SetApplianceSettingsMaintenanceMode(ctx context.Context, request operations.SetApplianceSettingsMaintenanceModeRequest) (*operations.SetApplianceSettingsMaintenanceModeResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/api/appliance-settings/maintenance"
 

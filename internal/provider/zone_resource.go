@@ -648,7 +648,7 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					"credential": schema.SingleNestedAttribute{
 						Computed: true,
 						Attributes: map[string]schema.Attribute{
-							"zone_credential_1": schema.SingleNestedAttribute{
+							"one": schema.SingleNestedAttribute{
 								Computed: true,
 								Attributes: map[string]schema.Attribute{
 									"type": schema.StringAttribute{
@@ -656,7 +656,7 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 									},
 								},
 							},
-							"zone_credential_2": schema.SingleNestedAttribute{
+							"two": schema.SingleNestedAttribute{
 								Computed: true,
 								Attributes: map[string]schema.Attribute{
 									"id": schema.Int64Attribute{
@@ -898,7 +898,7 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				},
 				Required: true,
 				Attributes: map[string]schema.Attribute{
-					"zone_create_zone_type_1": schema.SingleNestedAttribute{
+					"zone_create_1": schema.SingleNestedAttribute{
 						PlanModifiers: []planmodifier.Object{
 							objectplanmodifier.RequiresReplace(),
 						},
@@ -913,7 +913,7 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 						},
 						Description: `Map containing the Cloud (zone) type ID. See the zone-types API to fetch a list of all available Cloud (zone) types and their IDs.`,
 					},
-					"zone_create_zone_type_2": schema.SingleNestedAttribute{
+					"zone_create_2": schema.SingleNestedAttribute{
 						PlanModifiers: []planmodifier.Object{
 							objectplanmodifier.RequiresReplace(),
 						},
@@ -996,11 +996,11 @@ func (r *ZoneResource) Create(ctx context.Context, req resource.CreateRequest, r
 		resp.Diagnostics.AddError(fmt.Sprintf("unexpected response from API. Got an unexpected response code %v", res.StatusCode), debugResponse(res.RawResponse))
 		return
 	}
-	if res.AddClouds200ApplicationJSONObject == nil {
+	if res.Object == nil {
 		resp.Diagnostics.AddError("unexpected response from API. No response body", debugResponse(res.RawResponse))
 		return
 	}
-	data.RefreshFromCreateResponse(res.AddClouds200ApplicationJSONObject)
+	data.RefreshFromCreateResponse(res.Object)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

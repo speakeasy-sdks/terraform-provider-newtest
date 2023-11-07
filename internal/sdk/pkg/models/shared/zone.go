@@ -8,113 +8,113 @@ import (
 	"time"
 )
 
-type ZoneAccount struct {
+type Account struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *ZoneAccount) GetID() *int64 {
+func (o *Account) GetID() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ID
 }
 
-func (o *ZoneAccount) GetName() *string {
+func (o *Account) GetName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Name
 }
 
-type ZoneConfigType string
+type ConfigType string
 
 const (
-	ZoneConfigTypeZoneVcenterConfig ZoneConfigType = "zoneVcenterConfig"
-	ZoneConfigTypeZoneAwsConfig     ZoneConfigType = "zoneAwsConfig"
-	ZoneConfigTypeZoneAzureConfig   ZoneConfigType = "zoneAzureConfig"
-	ZoneConfigTypeZoneGcpConfig     ZoneConfigType = "zoneGcpConfig"
+	ConfigTypeZoneVcenterConfig ConfigType = "zoneVcenterConfig"
+	ConfigTypeZoneAwsConfig     ConfigType = "zoneAwsConfig"
+	ConfigTypeZoneAzureConfig   ConfigType = "zoneAzureConfig"
+	ConfigTypeZoneGcpConfig     ConfigType = "zoneGcpConfig"
 )
 
-type ZoneConfig struct {
+type Config struct {
 	ZoneVcenterConfig *ZoneVcenterConfig
 	ZoneAwsConfig     *ZoneAwsConfig
 	ZoneAzureConfig   *ZoneAzureConfig
 	ZoneGcpConfig     *ZoneGcpConfig
 
-	Type ZoneConfigType
+	Type ConfigType
 }
 
-func CreateZoneConfigZoneVcenterConfig(zoneVcenterConfig ZoneVcenterConfig) ZoneConfig {
-	typ := ZoneConfigTypeZoneVcenterConfig
+func CreateConfigZoneVcenterConfig(zoneVcenterConfig ZoneVcenterConfig) Config {
+	typ := ConfigTypeZoneVcenterConfig
 
-	return ZoneConfig{
+	return Config{
 		ZoneVcenterConfig: &zoneVcenterConfig,
 		Type:              typ,
 	}
 }
 
-func CreateZoneConfigZoneAwsConfig(zoneAwsConfig ZoneAwsConfig) ZoneConfig {
-	typ := ZoneConfigTypeZoneAwsConfig
+func CreateConfigZoneAwsConfig(zoneAwsConfig ZoneAwsConfig) Config {
+	typ := ConfigTypeZoneAwsConfig
 
-	return ZoneConfig{
+	return Config{
 		ZoneAwsConfig: &zoneAwsConfig,
 		Type:          typ,
 	}
 }
 
-func CreateZoneConfigZoneAzureConfig(zoneAzureConfig ZoneAzureConfig) ZoneConfig {
-	typ := ZoneConfigTypeZoneAzureConfig
+func CreateConfigZoneAzureConfig(zoneAzureConfig ZoneAzureConfig) Config {
+	typ := ConfigTypeZoneAzureConfig
 
-	return ZoneConfig{
+	return Config{
 		ZoneAzureConfig: &zoneAzureConfig,
 		Type:            typ,
 	}
 }
 
-func CreateZoneConfigZoneGcpConfig(zoneGcpConfig ZoneGcpConfig) ZoneConfig {
-	typ := ZoneConfigTypeZoneGcpConfig
+func CreateConfigZoneGcpConfig(zoneGcpConfig ZoneGcpConfig) Config {
+	typ := ConfigTypeZoneGcpConfig
 
-	return ZoneConfig{
+	return Config{
 		ZoneGcpConfig: &zoneGcpConfig,
 		Type:          typ,
 	}
 }
 
-func (u *ZoneConfig) UnmarshalJSON(data []byte) error {
+func (u *Config) UnmarshalJSON(data []byte) error {
 
 	zoneGcpConfig := new(ZoneGcpConfig)
 	if err := utils.UnmarshalJSON(data, &zoneGcpConfig, "", true, true); err == nil {
 		u.ZoneGcpConfig = zoneGcpConfig
-		u.Type = ZoneConfigTypeZoneGcpConfig
+		u.Type = ConfigTypeZoneGcpConfig
 		return nil
 	}
 
 	zoneAwsConfig := new(ZoneAwsConfig)
 	if err := utils.UnmarshalJSON(data, &zoneAwsConfig, "", true, true); err == nil {
 		u.ZoneAwsConfig = zoneAwsConfig
-		u.Type = ZoneConfigTypeZoneAwsConfig
+		u.Type = ConfigTypeZoneAwsConfig
 		return nil
 	}
 
 	zoneAzureConfig := new(ZoneAzureConfig)
 	if err := utils.UnmarshalJSON(data, &zoneAzureConfig, "", true, true); err == nil {
 		u.ZoneAzureConfig = zoneAzureConfig
-		u.Type = ZoneConfigTypeZoneAzureConfig
+		u.Type = ConfigTypeZoneAzureConfig
 		return nil
 	}
 
 	zoneVcenterConfig := new(ZoneVcenterConfig)
 	if err := utils.UnmarshalJSON(data, &zoneVcenterConfig, "", true, true); err == nil {
 		u.ZoneVcenterConfig = zoneVcenterConfig
-		u.Type = ZoneConfigTypeZoneVcenterConfig
+		u.Type = ConfigTypeZoneVcenterConfig
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u ZoneConfig) MarshalJSON() ([]byte, error) {
+func (u Config) MarshalJSON() ([]byte, error) {
 	if u.ZoneVcenterConfig != nil {
 		return utils.MarshalJSON(u.ZoneVcenterConfig, "", true)
 	}
@@ -134,211 +134,211 @@ func (u ZoneConfig) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-type ZoneCredential2 struct {
+type Two struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Type *string `json:"type,omitempty"`
 }
 
-func (o *ZoneCredential2) GetID() *int64 {
+func (o *Two) GetID() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ID
 }
 
-func (o *ZoneCredential2) GetName() *string {
+func (o *Two) GetName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Name
 }
 
-func (o *ZoneCredential2) GetType() *string {
+func (o *Two) GetType() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Type
 }
 
-type ZoneCredential1 struct {
+type One struct {
 	Type *string `json:"type,omitempty"`
 }
 
-func (o *ZoneCredential1) GetType() *string {
+func (o *One) GetType() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Type
 }
 
-type ZoneCredentialType string
+type CredentialType string
 
 const (
-	ZoneCredentialTypeZoneCredential1 ZoneCredentialType = "zone_credential_1"
-	ZoneCredentialTypeZoneCredential2 ZoneCredentialType = "zone_credential_2"
+	CredentialTypeOne CredentialType = "1"
+	CredentialTypeTwo CredentialType = "2"
 )
 
-type ZoneCredential struct {
-	ZoneCredential1 *ZoneCredential1
-	ZoneCredential2 *ZoneCredential2
+type Credential struct {
+	One *One
+	Two *Two
 
-	Type ZoneCredentialType
+	Type CredentialType
 }
 
-func CreateZoneCredentialZoneCredential1(zoneCredential1 ZoneCredential1) ZoneCredential {
-	typ := ZoneCredentialTypeZoneCredential1
+func CreateCredentialOne(one One) Credential {
+	typ := CredentialTypeOne
 
-	return ZoneCredential{
-		ZoneCredential1: &zoneCredential1,
-		Type:            typ,
+	return Credential{
+		One:  &one,
+		Type: typ,
 	}
 }
 
-func CreateZoneCredentialZoneCredential2(zoneCredential2 ZoneCredential2) ZoneCredential {
-	typ := ZoneCredentialTypeZoneCredential2
+func CreateCredentialTwo(two Two) Credential {
+	typ := CredentialTypeTwo
 
-	return ZoneCredential{
-		ZoneCredential2: &zoneCredential2,
-		Type:            typ,
+	return Credential{
+		Two:  &two,
+		Type: typ,
 	}
 }
 
-func (u *ZoneCredential) UnmarshalJSON(data []byte) error {
+func (u *Credential) UnmarshalJSON(data []byte) error {
 
-	zoneCredential1 := new(ZoneCredential1)
-	if err := utils.UnmarshalJSON(data, &zoneCredential1, "", true, true); err == nil {
-		u.ZoneCredential1 = zoneCredential1
-		u.Type = ZoneCredentialTypeZoneCredential1
+	one := new(One)
+	if err := utils.UnmarshalJSON(data, &one, "", true, true); err == nil {
+		u.One = one
+		u.Type = CredentialTypeOne
 		return nil
 	}
 
-	zoneCredential2 := new(ZoneCredential2)
-	if err := utils.UnmarshalJSON(data, &zoneCredential2, "", true, true); err == nil {
-		u.ZoneCredential2 = zoneCredential2
-		u.Type = ZoneCredentialTypeZoneCredential2
+	two := new(Two)
+	if err := utils.UnmarshalJSON(data, &two, "", true, true); err == nil {
+		u.Two = two
+		u.Type = CredentialTypeTwo
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u ZoneCredential) MarshalJSON() ([]byte, error) {
-	if u.ZoneCredential1 != nil {
-		return utils.MarshalJSON(u.ZoneCredential1, "", true)
+func (u Credential) MarshalJSON() ([]byte, error) {
+	if u.One != nil {
+		return utils.MarshalJSON(u.One, "", true)
 	}
 
-	if u.ZoneCredential2 != nil {
-		return utils.MarshalJSON(u.ZoneCredential2, "", true)
+	if u.Two != nil {
+		return utils.MarshalJSON(u.Two, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-type ZoneGroups struct {
+type Groups struct {
 	AccountID *int64  `json:"accountId,omitempty"`
 	ID        *int64  `json:"id,omitempty"`
 	Name      *string `json:"name,omitempty"`
 }
 
-func (o *ZoneGroups) GetAccountID() *int64 {
+func (o *Groups) GetAccountID() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.AccountID
 }
 
-func (o *ZoneGroups) GetID() *int64 {
+func (o *Groups) GetID() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ID
 }
 
-func (o *ZoneGroups) GetName() *string {
+func (o *Groups) GetName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Name
 }
 
-type ZoneNetworkDomain struct {
+type NetworkDomain struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *ZoneNetworkDomain) GetID() *int64 {
+func (o *NetworkDomain) GetID() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ID
 }
 
-func (o *ZoneNetworkDomain) GetName() *string {
+func (o *NetworkDomain) GetName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Name
 }
 
-type ZoneNetworkServer struct {
+type NetworkServer struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *ZoneNetworkServer) GetID() *int64 {
+func (o *NetworkServer) GetID() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ID
 }
 
-func (o *ZoneNetworkServer) GetName() *string {
+func (o *NetworkServer) GetName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Name
 }
 
-type ZoneOwner struct {
+type Owner struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *ZoneOwner) GetID() *int64 {
+func (o *Owner) GetID() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ID
 }
 
-func (o *ZoneOwner) GetName() *string {
+func (o *Owner) GetName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Name
 }
 
-type ZoneSecurityServer struct {
+type SecurityServer struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *ZoneSecurityServer) GetID() *int64 {
+func (o *SecurityServer) GetID() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ID
 }
 
-func (o *ZoneSecurityServer) GetName() *string {
+func (o *SecurityServer) GetName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Name
 }
 
-type ZoneStatsServerCounts struct {
+type ServerCounts struct {
 	All           *int64 `json:"all,omitempty"`
 	Baremetal     *int64 `json:"baremetal,omitempty"`
 	ContainerHost *int64 `json:"containerHost,omitempty"`
@@ -348,87 +348,87 @@ type ZoneStatsServerCounts struct {
 	VM            *int64 `json:"vm,omitempty"`
 }
 
-func (o *ZoneStatsServerCounts) GetAll() *int64 {
+func (o *ServerCounts) GetAll() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.All
 }
 
-func (o *ZoneStatsServerCounts) GetBaremetal() *int64 {
+func (o *ServerCounts) GetBaremetal() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Baremetal
 }
 
-func (o *ZoneStatsServerCounts) GetContainerHost() *int64 {
+func (o *ServerCounts) GetContainerHost() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ContainerHost
 }
 
-func (o *ZoneStatsServerCounts) GetHost() *int64 {
+func (o *ServerCounts) GetHost() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Host
 }
 
-func (o *ZoneStatsServerCounts) GetHypervisor() *int64 {
+func (o *ServerCounts) GetHypervisor() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Hypervisor
 }
 
-func (o *ZoneStatsServerCounts) GetUnmanaged() *int64 {
+func (o *ServerCounts) GetUnmanaged() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Unmanaged
 }
 
-func (o *ZoneStatsServerCounts) GetVM() *int64 {
+func (o *ServerCounts) GetVM() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.VM
 }
 
-type ZoneStats struct {
-	ServerCounts *ZoneStatsServerCounts `json:"serverCounts,omitempty"`
+type Stats struct {
+	ServerCounts *ServerCounts `json:"serverCounts,omitempty"`
 }
 
-func (o *ZoneStats) GetServerCounts() *ZoneStatsServerCounts {
+func (o *Stats) GetServerCounts() *ServerCounts {
 	if o == nil {
 		return nil
 	}
 	return o.ServerCounts
 }
 
-type ZoneZoneType struct {
+type ZoneType struct {
 	Code *string `json:"code,omitempty"`
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *ZoneZoneType) GetCode() *string {
+func (o *ZoneType) GetCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Code
 }
 
-func (o *ZoneZoneType) GetID() *int64 {
+func (o *ZoneType) GetID() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.ID
 }
 
-func (o *ZoneZoneType) GetName() *string {
+func (o *ZoneType) GetName() *string {
 	if o == nil {
 		return nil
 	}
@@ -436,62 +436,62 @@ func (o *ZoneZoneType) GetName() *string {
 }
 
 type Zone struct {
-	Account               *ZoneAccount    `json:"account,omitempty"`
-	AccountID             *int64          `json:"accountId,omitempty"`
-	AgentMode             *string         `json:"agentMode,omitempty"`
-	APIProxy              *string         `json:"apiProxy,omitempty"`
-	AutoRecoverPowerState *bool           `json:"autoRecoverPowerState,omitempty"`
-	Code                  *string         `json:"code,omitempty"`
-	Config                *ZoneConfig     `json:"config,omitempty"`
-	ConsoleKeymap         *string         `json:"consoleKeymap,omitempty"`
-	ContainerMode         *string         `json:"containerMode,omitempty"`
-	CostLastSync          *time.Time      `json:"costLastSync,omitempty"`
-	CostLastSyncDuration  *int64          `json:"costLastSyncDuration,omitempty"`
-	CostStatus            *string         `json:"costStatus,omitempty"`
-	CostStatusDate        *time.Time      `json:"costStatusDate,omitempty"`
-	CostStatusMessage     *string         `json:"costStatusMessage,omitempty"`
-	CostingMode           *string         `json:"costingMode,omitempty"`
-	Credential            *ZoneCredential `json:"credential,omitempty"`
+	Account               *Account    `json:"account,omitempty"`
+	AccountID             *int64      `json:"accountId,omitempty"`
+	AgentMode             *string     `json:"agentMode,omitempty"`
+	APIProxy              *string     `json:"apiProxy,omitempty"`
+	AutoRecoverPowerState *bool       `json:"autoRecoverPowerState,omitempty"`
+	Code                  *string     `json:"code,omitempty"`
+	Config                *Config     `json:"config,omitempty"`
+	ConsoleKeymap         *string     `json:"consoleKeymap,omitempty"`
+	ContainerMode         *string     `json:"containerMode,omitempty"`
+	CostLastSync          *time.Time  `json:"costLastSync,omitempty"`
+	CostLastSyncDuration  *int64      `json:"costLastSyncDuration,omitempty"`
+	CostStatus            *string     `json:"costStatus,omitempty"`
+	CostStatusDate        *time.Time  `json:"costStatusDate,omitempty"`
+	CostStatusMessage     *string     `json:"costStatusMessage,omitempty"`
+	CostingMode           *string     `json:"costingMode,omitempty"`
+	Credential            *Credential `json:"credential,omitempty"`
 	// Dark logo image URL
-	DarkImagePath *string      `json:"darkImagePath,omitempty"`
-	DateCreated   *time.Time   `json:"dateCreated,omitempty"`
-	DomainName    *string      `json:"domainName,omitempty"`
-	Enabled       *bool        `json:"enabled,omitempty"`
-	ExternalID    *string      `json:"externalId,omitempty"`
-	Groups        []ZoneGroups `json:"groups,omitempty"`
-	GuidanceMode  *string      `json:"guidanceMode,omitempty"`
-	ID            *int64       `json:"id,omitempty"`
+	DarkImagePath *string    `json:"darkImagePath,omitempty"`
+	DateCreated   *time.Time `json:"dateCreated,omitempty"`
+	DomainName    *string    `json:"domainName,omitempty"`
+	Enabled       *bool      `json:"enabled,omitempty"`
+	ExternalID    *string    `json:"externalId,omitempty"`
+	Groups        []Groups   `json:"groups,omitempty"`
+	GuidanceMode  *string    `json:"guidanceMode,omitempty"`
+	ID            *int64     `json:"id,omitempty"`
 	// Logo image URL
-	ImagePath         *string             `json:"imagePath,omitempty"`
-	InventoryLevel    *string             `json:"inventoryLevel,omitempty"`
-	LastSync          *time.Time          `json:"lastSync,omitempty"`
-	LastSyncDuration  *int64              `json:"lastSyncDuration,omitempty"`
-	LastUpdated       *time.Time          `json:"lastUpdated,omitempty"`
-	Location          *string             `json:"location,omitempty"`
-	Name              *string             `json:"name,omitempty"`
-	NetworkDomain     *ZoneNetworkDomain  `json:"networkDomain,omitempty"`
-	NetworkServer     *ZoneNetworkServer  `json:"networkServer,omitempty"`
-	NextRunDate       *time.Time          `json:"nextRunDate,omitempty"`
-	Owner             *ZoneOwner          `json:"owner,omitempty"`
-	ProvisioningProxy *string             `json:"provisioningProxy,omitempty"`
-	RegionCode        *string             `json:"regionCode,omitempty"`
-	ScalePriority     *int64              `json:"scalePriority,omitempty"`
-	SecurityMode      *string             `json:"securityMode,omitempty"`
-	SecurityServer    *ZoneSecurityServer `json:"securityServer,omitempty"`
-	ServerCount       *int64              `json:"serverCount,omitempty"`
-	ServiceVersion    *string             `json:"serviceVersion,omitempty"`
-	Stats             *ZoneStats          `json:"stats,omitempty"`
-	Status            *string             `json:"status,omitempty"`
-	StatusDate        *time.Time          `json:"statusDate,omitempty"`
-	StatusMessage     *string             `json:"statusMessage,omitempty"`
-	StorageMode       *string             `json:"storageMode,omitempty"`
-	Timezone          *string             `json:"timezone,omitempty"`
-	UserDataLinux     *string             `json:"userDataLinux,omitempty"`
-	UserDataWindows   *string             `json:"userDataWindows,omitempty"`
-	UUID              *string             `json:"uuid,omitempty"`
-	Visibility        *string             `json:"visibility,omitempty"`
-	ZoneType          *ZoneZoneType       `json:"zoneType,omitempty"`
-	ZoneTypeID        *int64              `json:"zoneTypeId,omitempty"`
+	ImagePath         *string         `json:"imagePath,omitempty"`
+	InventoryLevel    *string         `json:"inventoryLevel,omitempty"`
+	LastSync          *time.Time      `json:"lastSync,omitempty"`
+	LastSyncDuration  *int64          `json:"lastSyncDuration,omitempty"`
+	LastUpdated       *time.Time      `json:"lastUpdated,omitempty"`
+	Location          *string         `json:"location,omitempty"`
+	Name              *string         `json:"name,omitempty"`
+	NetworkDomain     *NetworkDomain  `json:"networkDomain,omitempty"`
+	NetworkServer     *NetworkServer  `json:"networkServer,omitempty"`
+	NextRunDate       *time.Time      `json:"nextRunDate,omitempty"`
+	Owner             *Owner          `json:"owner,omitempty"`
+	ProvisioningProxy *string         `json:"provisioningProxy,omitempty"`
+	RegionCode        *string         `json:"regionCode,omitempty"`
+	ScalePriority     *int64          `json:"scalePriority,omitempty"`
+	SecurityMode      *string         `json:"securityMode,omitempty"`
+	SecurityServer    *SecurityServer `json:"securityServer,omitempty"`
+	ServerCount       *int64          `json:"serverCount,omitempty"`
+	ServiceVersion    *string         `json:"serviceVersion,omitempty"`
+	Stats             *Stats          `json:"stats,omitempty"`
+	Status            *string         `json:"status,omitempty"`
+	StatusDate        *time.Time      `json:"statusDate,omitempty"`
+	StatusMessage     *string         `json:"statusMessage,omitempty"`
+	StorageMode       *string         `json:"storageMode,omitempty"`
+	Timezone          *string         `json:"timezone,omitempty"`
+	UserDataLinux     *string         `json:"userDataLinux,omitempty"`
+	UserDataWindows   *string         `json:"userDataWindows,omitempty"`
+	UUID              *string         `json:"uuid,omitempty"`
+	Visibility        *string         `json:"visibility,omitempty"`
+	ZoneType          *ZoneType       `json:"zoneType,omitempty"`
+	ZoneTypeID        *int64          `json:"zoneTypeId,omitempty"`
 }
 
 func (z Zone) MarshalJSON() ([]byte, error) {
@@ -505,7 +505,7 @@ func (z *Zone) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *Zone) GetAccount() *ZoneAccount {
+func (o *Zone) GetAccount() *Account {
 	if o == nil {
 		return nil
 	}
@@ -547,7 +547,7 @@ func (o *Zone) GetCode() *string {
 	return o.Code
 }
 
-func (o *Zone) GetConfig() *ZoneConfig {
+func (o *Zone) GetConfig() *Config {
 	if o == nil {
 		return nil
 	}
@@ -610,7 +610,7 @@ func (o *Zone) GetCostingMode() *string {
 	return o.CostingMode
 }
 
-func (o *Zone) GetCredential() *ZoneCredential {
+func (o *Zone) GetCredential() *Credential {
 	if o == nil {
 		return nil
 	}
@@ -652,7 +652,7 @@ func (o *Zone) GetExternalID() *string {
 	return o.ExternalID
 }
 
-func (o *Zone) GetGroups() []ZoneGroups {
+func (o *Zone) GetGroups() []Groups {
 	if o == nil {
 		return nil
 	}
@@ -722,14 +722,14 @@ func (o *Zone) GetName() *string {
 	return o.Name
 }
 
-func (o *Zone) GetNetworkDomain() *ZoneNetworkDomain {
+func (o *Zone) GetNetworkDomain() *NetworkDomain {
 	if o == nil {
 		return nil
 	}
 	return o.NetworkDomain
 }
 
-func (o *Zone) GetNetworkServer() *ZoneNetworkServer {
+func (o *Zone) GetNetworkServer() *NetworkServer {
 	if o == nil {
 		return nil
 	}
@@ -743,7 +743,7 @@ func (o *Zone) GetNextRunDate() *time.Time {
 	return o.NextRunDate
 }
 
-func (o *Zone) GetOwner() *ZoneOwner {
+func (o *Zone) GetOwner() *Owner {
 	if o == nil {
 		return nil
 	}
@@ -778,7 +778,7 @@ func (o *Zone) GetSecurityMode() *string {
 	return o.SecurityMode
 }
 
-func (o *Zone) GetSecurityServer() *ZoneSecurityServer {
+func (o *Zone) GetSecurityServer() *SecurityServer {
 	if o == nil {
 		return nil
 	}
@@ -799,7 +799,7 @@ func (o *Zone) GetServiceVersion() *string {
 	return o.ServiceVersion
 }
 
-func (o *Zone) GetStats() *ZoneStats {
+func (o *Zone) GetStats() *Stats {
 	if o == nil {
 		return nil
 	}
@@ -869,7 +869,7 @@ func (o *Zone) GetVisibility() *string {
 	return o.Visibility
 }
 
-func (o *Zone) GetZoneType() *ZoneZoneType {
+func (o *Zone) GetZoneType() *ZoneType {
 	if o == nil {
 		return nil
 	}

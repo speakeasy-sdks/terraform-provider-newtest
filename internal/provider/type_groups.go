@@ -4,6 +4,8 @@ package provider
 
 import "github.com/hashicorp/terraform-plugin-framework/types"
 
-type ZoneCreateZoneType2 struct {
-	Code types.String `tfsdk:"code"`
+type Groups struct {
+	AccountID types.Int64  `tfsdk:"account_id"`
+	ID        types.Int64  `tfsdk:"id"`
+	Name      types.String `tfsdk:"name"`
 }

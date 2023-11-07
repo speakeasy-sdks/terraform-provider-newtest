@@ -3,6 +3,6 @@
 package provider
 
 type ZoneCreateZoneType struct {
-	ZoneCreateZoneType1 *ZoneCreateZoneType1 `tfsdk:"zone_create_zone_type_1"`
-	ZoneCreateZoneType2 *ZoneCreateZoneType2 `tfsdk:"zone_create_zone_type_2"`
+	ZoneCreate1 *ZoneCreate1 `tfsdk:"zone_create_1"`
+	ZoneCreate2 *ZoneCreate2 `tfsdk:"zone_create_2"`
 }
