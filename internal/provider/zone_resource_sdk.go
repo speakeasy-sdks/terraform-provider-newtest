@@ -4,8 +4,8 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"newtest/internal/sdk/pkg/models/operations"
-	"newtest/internal/sdk/pkg/models/shared"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/models/operations"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/models/shared"
 	"time"
 )
 
@@ -97,10 +97,10 @@ func (r *ZoneResourceModel) ToCreateSDKType() *shared.ZoneCreate {
 	}
 	var zoneType shared.ZoneCreateZoneType
 	var zoneCreate1 *shared.ZoneCreate1
-	if r.ZoneType.ZoneCreate1 != nil {
+	if r.ZoneType.One != nil {
 		id1 := new(int64)
-		if !r.ZoneType.ZoneCreate1.ID.IsUnknown() && !r.ZoneType.ZoneCreate1.ID.IsNull() {
-			*id1 = r.ZoneType.ZoneCreate1.ID.ValueInt64()
+		if !r.ZoneType.One.ID.IsUnknown() && !r.ZoneType.One.ID.IsNull() {
+			*id1 = r.ZoneType.One.ID.ValueInt64()
 		} else {
 			id1 = nil
 		}
@@ -114,10 +114,10 @@ func (r *ZoneResourceModel) ToCreateSDKType() *shared.ZoneCreate {
 		}
 	}
 	var zoneCreate2 *shared.ZoneCreate2
-	if r.ZoneType.ZoneCreate2 != nil {
+	if r.ZoneType.Two != nil {
 		code1 := new(string)
-		if !r.ZoneType.ZoneCreate2.Code.IsUnknown() && !r.ZoneType.ZoneCreate2.Code.IsNull() {
-			*code1 = r.ZoneType.ZoneCreate2.Code.ValueString()
+		if !r.ZoneType.Two.Code.IsUnknown() && !r.ZoneType.Two.Code.IsNull() {
+			*code1 = r.ZoneType.Two.Code.ValueString()
 		} else {
 			code1 = nil
 		}

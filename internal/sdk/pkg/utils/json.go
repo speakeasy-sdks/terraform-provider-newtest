@@ -12,7 +12,7 @@ import (
 	"time"
 	"unsafe"
 
-	"newtest/internal/sdk/pkg/types"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/types"
 
 	"github.com/ericlagergren/decimal"
 )

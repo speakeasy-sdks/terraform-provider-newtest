@@ -4,8 +4,8 @@ package provider
 
 import (
 	"context"
-	"newtest/internal/sdk"
-	"newtest/internal/sdk/pkg/models/shared"
+	"github.com/testing/terraform-provider-newtest/internal/sdk"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/models/shared"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/provider"

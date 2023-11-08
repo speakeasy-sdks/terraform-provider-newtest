@@ -4,7 +4,7 @@ package shared
 
 import (
 	"errors"
-	"newtest/internal/sdk/pkg/utils"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/utils"
 	"time"
 )
 

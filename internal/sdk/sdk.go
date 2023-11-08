@@ -5,9 +5,9 @@ package sdk
 import (
 	"context"
 	"fmt"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/models/shared"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/utils"
 	"net/http"
-	"newtest/internal/sdk/pkg/models/shared"
-	"newtest/internal/sdk/pkg/utils"
 	"time"
 )
 
@@ -162,9 +162,9 @@ func New(opts ...SDKOption) *Newtest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "6.1.1",
-			SDKVersion:        "0.11.0",
-			GenVersion:        "2.181.1",
-			UserAgent:         "speakeasy-sdk/go 0.11.0 2.181.1 6.1.1 newtest",
+			SDKVersion:        "0.12.0",
+			GenVersion:        "2.183.0",
+			UserAgent:         "speakeasy-sdk/go 0.12.0 2.183.0 6.1.1 newtest",
 			ServerDefaults: []map[string]string{
 				{
 					"serverURL": "CHANGEME",

@@ -8,7 +8,7 @@ import (
 	"log"
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
-	"newtest/internal/provider"
+	"github.com/testing/terraform-provider-newtest/internal/provider"
 )
 
 // Run "go generate" to format example terraform files and generate the docs for the registry/website

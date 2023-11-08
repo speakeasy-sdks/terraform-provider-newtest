@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/models/shared"
 	"net/http"
-	"newtest/internal/sdk/pkg/models/shared"
 )
 
 type AddCloudsRequestBody struct {

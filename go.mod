@@ -1,4 +1,4 @@
-module newtest
+module github.com/testing/terraform-provider-newtest
 
 go 1.18
 

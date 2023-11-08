@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: ab96939a530bd3f5fae0f5b4d7390b5a
   docVersion: 6.1.1
-  speakeasyVersion: 1.114.1
-  generationVersion: 2.181.1
+  speakeasyVersion: 1.115.0
+  generationVersion: 2.183.0
 generation:
   comments: {}
   sdkClassName: newtest
@@ -11,12 +11,12 @@ generation:
 features:
   terraform:
     constsAndDefaults: 0.1.1
-    core: 3.2.1
+    core: 3.3.0
     globalSecurity: 2.81.1
     globalServerURLs: 2.82.0
     unions: 2.81.5
 terraform:
-  version: 0.11.0
+  version: 0.12.0
   author: testing
   imports:
     option: openapi

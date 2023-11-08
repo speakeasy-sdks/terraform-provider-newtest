@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"newtest/internal/sdk/pkg/utils"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/utils"
 )
 
 // ZoneCreateConfig - Map containing zone configuration settings. See the section on specific zone types for details.

@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/models/operations"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/models/sdkerrors"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/models/shared"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/utils"
 	"io"
 	"net/http"
-	"newtest/internal/sdk/pkg/models/operations"
-	"newtest/internal/sdk/pkg/models/sdkerrors"
-	"newtest/internal/sdk/pkg/models/shared"
-	"newtest/internal/sdk/pkg/utils"
 	"strings"
 )
 
