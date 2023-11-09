@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: ab96939a530bd3f5fae0f5b4d7390b5a
   docVersion: 6.1.1
-  speakeasyVersion: 1.115.0
-  generationVersion: 2.183.0
+  speakeasyVersion: 1.116.0
+  generationVersion: 2.185.0
 generation:
   comments: {}
   sdkClassName: newtest
@@ -11,12 +11,12 @@ generation:
 features:
   terraform:
     constsAndDefaults: 0.1.1
-    core: 3.3.0
+    core: 3.3.1
     globalSecurity: 2.81.1
     globalServerURLs: 2.82.0
     unions: 2.81.5
 terraform:
-  version: 0.12.0
+  version: 0.12.1
   author: testing
   imports:
     option: openapi
@@ -26,6 +26,8 @@ terraform:
       operations: operations
       shared: shared
       webhooks: webhooks
+  inputModelSuffix: input
+  outputModelSuffix: output
   packageName: newtest
   published: true
   repoSubDirectory: .
