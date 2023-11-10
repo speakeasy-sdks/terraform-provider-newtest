@@ -184,14 +184,14 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					stringplanmodifier.RequiresReplace(),
 				},
 				Optional: true,
+				MarkdownDescription: `must be one of ["private", "public"]; Default: "private"` + "\n" +
+					`private or public`,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"private",
 						"public",
 					),
 				},
-				MarkdownDescription: `must be one of ["private", "public"]; Default: "private"` + "\n" +
-					`private or public`,
 			},
 			"zone": schema.SingleNestedAttribute{
 				Computed: true,
