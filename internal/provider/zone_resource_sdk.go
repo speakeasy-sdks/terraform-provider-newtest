@@ -908,8 +908,10 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 		} else {
 			r.Zone.ExternalID = types.StringNull()
 		}
-		r.Zone.Groups = nil
-		for _, groupsItem := range resp.Zone.Groups {
+		if len(r.Zone.Groups) > len(resp.Zone.Groups) {
+			r.Zone.Groups = r.Zone.Groups[:len(resp.Zone.Groups)]
+		}
+		for groupsCount, groupsItem := range resp.Zone.Groups {
 			var groups1 Groups
 			if groupsItem.AccountID != nil {
 				groups1.AccountID = types.Int64Value(*groupsItem.AccountID)
@@ -926,7 +928,13 @@ func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddClouds
 			} else {
 				groups1.Name = types.StringNull()
 			}
-			r.Zone.Groups = append(r.Zone.Groups, groups1)
+			if groupsCount+1 > len(r.Zone.Groups) {
+				r.Zone.Groups = append(r.Zone.Groups, groups1)
+			} else {
+				r.Zone.Groups[groupsCount].AccountID = groups1.AccountID
+				r.Zone.Groups[groupsCount].ID = groups1.ID
+				r.Zone.Groups[groupsCount].Name = groups1.Name
+			}
 		}
 		if resp.Zone.GuidanceMode != nil {
 			r.Zone.GuidanceMode = types.StringValue(*resp.Zone.GuidanceMode)
