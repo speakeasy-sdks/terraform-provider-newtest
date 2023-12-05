@@ -162,9 +162,9 @@ func New(opts ...SDKOption) *Newtest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "6.1.1",
-			SDKVersion:        "0.14.1",
-			GenVersion:        "2.202.2",
-			UserAgent:         "speakeasy-sdk/go 0.14.1 2.202.2 6.1.1 newtest",
+			SDKVersion:        "0.14.2",
+			GenVersion:        "2.210.3",
+			UserAgent:         "speakeasy-sdk/go 0.14.2 2.210.3 6.1.1 newtest",
 			ServerDefaults: []map[string]string{
 				{
 					"serverURL": "CHANGEME",
