@@ -32,7 +32,7 @@ resource "newtest_zone" "my_zone" {
   security_mode     = "...my_security_mode..."
   visibility        = "public"
   zone_type = {
-    zone_create_1 = {
+    one = {
       id = 12
     }
   }
