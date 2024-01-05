@@ -1,24 +1,10 @@
-configVersion: 1.0.0
-management:
-  docChecksum: ab96939a530bd3f5fae0f5b4d7390b5a
-  docVersion: 6.1.1
-  speakeasyVersion: 1.126.4
-  generationVersion: 2.214.10
+configVersion: 2.0.0
 generation:
-  comments: {}
   sdkClassName: newtest
-  repoURL: https://github.com/speakeasy-sdks/terraform-provider-newtest.git
   usageSnippets:
     optionalPropertyRendering: withExample
   fixes:
     nameResolutionDec2023: false
-features:
-  terraform:
-    constsAndDefaults: 0.1.2
-    core: 3.6.3
-    globalSecurity: 2.81.2
-    globalServerURLs: 2.82.1
-    unions: 2.81.7
 terraform:
   version: 0.15.0
   author: testing
@@ -33,5 +19,3 @@ terraform:
   inputModelSuffix: input
   outputModelSuffix: output
   packageName: newtest
-  published: true
-  repoSubDirectory: .
