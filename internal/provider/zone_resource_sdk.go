@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func (r *ZoneResourceModel) ToCreateSDKType() *shared.ZoneCreate {
+func (r *ZoneResourceModel) ToSharedZoneCreate() *shared.ZoneCreate {
 	accountID := new(int64)
 	if !r.AccountID.IsUnknown() && !r.AccountID.IsNull() {
 		*accountID = r.AccountID.ValueInt64()
@@ -150,7 +150,7 @@ func (r *ZoneResourceModel) ToCreateSDKType() *shared.ZoneCreate {
 	return &out
 }
 
-func (r *ZoneResourceModel) RefreshFromCreateResponse(resp *operations.AddCloudsResponseBody) {
+func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *operations.AddCloudsResponseBody) {
 	if resp.Success != nil {
 		r.Success = types.BoolValue(*resp.Success)
 	} else {
