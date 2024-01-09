@@ -4,16 +4,16 @@ management:
   docChecksum: ab96939a530bd3f5fae0f5b4d7390b5a
   docVersion: 6.1.1
   speakeasyVersion: internal
-  generationVersion: 2.228.1
-  releaseVersion: 0.16.0
-  configChecksum: 00d3e28a8eb6806114d3967af6d7712c
+  generationVersion: 2.230.1
+  releaseVersion: 0.16.1
+  configChecksum: f99d322732d4828b5471334db9c7ebac
   repoURL: https://github.com/speakeasy-sdks/terraform-provider-newtest.git
   repoSubDirectory: .
   published: true
 features:
   terraform:
     constsAndDefaults: 0.1.2
-    core: 3.8.0
+    core: 3.8.1
     globalSecurity: 2.81.2
     globalServerURLs: 2.82.1
     unions: 2.81.7
@@ -69,6 +69,15 @@ generatedFiles:
   - internal/validators/ExactlyOneChild.go
   - internal/validators/JSONParseValidator.go
   - internal/validators/RFC3339Validator.go
+  - internal/validators/boolvalidators/not_null.go
+  - internal/validators/float64validators/not_null.go
+  - internal/validators/int64validators/not_null.go
+  - internal/validators/listvalidators/not_null.go
+  - internal/validators/mapvalidators/not_null.go
+  - internal/validators/numbervalidators/not_null.go
+  - internal/validators/objectvalidators/not_null.go
+  - internal/validators/setvalidators/not_null.go
+  - internal/validators/stringvalidators/not_null.go
   - main.go
   - terraform-registry-manifest.json
   - tools/tools.go

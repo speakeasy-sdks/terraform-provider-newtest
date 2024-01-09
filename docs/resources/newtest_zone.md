@@ -44,29 +44,24 @@ resource "newtest_zone" "my_zone" {
 
 ### Required
 
-- `group_id` (Number) Specifies which Server group this cloud should be assigned to
-- `name` (String) A unique name scoped to your account for the cloud
-- `zone_type` (Attributes) (see [below for nested schema](#nestedatt--zone_type))
+- `group_id` (Number) Specifies which Server group this cloud should be assigned to. Requires replacement if changed.
+- `name` (String) A unique name scoped to your account for the cloud. Requires replacement if changed.
+- `zone_type` (Attributes) Requires replacement if changed. (see [below for nested schema](#nestedatt--zone_type))
 
 ### Optional
 
-- `account_id` (Number) Specifies which Tenant this cloud should be assigned to
-- `auto_recover_power_state` (Boolean) Default: false
-Automatically Power on VMs
-- `code` (String) Optional code for use with policies
-- `config` (Attributes) Map containing zone configuration settings. See the section on specific zone types for details. (see [below for nested schema](#nestedatt--config))
-- `credential` (Attributes) Map containing Credential ID. Setting `type` to `local` means use the values set in the local cloud config instead of associating a credential. (see [below for nested schema](#nestedatt--credential))
-- `description` (String) Optional description field if you want to put more info there
-- `enabled` (Boolean) Default: true
-Can be used to disable the cloud
-- `linked_account_id` (Number) Linked Account ID (enter commercial ID to get costing for AWS Govcloud)
-- `location` (String) Optional location for your cloud
-- `scale_priority` (Number) Default: 1
-Scale Priority
-- `security_mode` (String) Default: "off"
-host firewall. `off` or `internal`. a.k.a. "local firewall"
-- `visibility` (String) must be one of ["private", "public"]; Default: "private"
-private or public
+- `account_id` (Number) Specifies which Tenant this cloud should be assigned to. Requires replacement if changed.
+- `auto_recover_power_state` (Boolean) Automatically Power on VMs. Requires replacement if changed. ; Default: false
+- `code` (String) Optional code for use with policies. Requires replacement if changed.
+- `config` (Attributes) Map containing zone configuration settings. See the section on specific zone types for details. Requires replacement if changed. (see [below for nested schema](#nestedatt--config))
+- `credential` (Attributes) Map containing Credential ID. Setting `type` to `local` means use the values set in the local cloud config instead of associating a credential. Requires replacement if changed. (see [below for nested schema](#nestedatt--credential))
+- `description` (String) Optional description field if you want to put more info there. Requires replacement if changed.
+- `enabled` (Boolean) Can be used to disable the cloud. Requires replacement if changed. ; Default: true
+- `linked_account_id` (Number) Linked Account ID (enter commercial ID to get costing for AWS Govcloud). Requires replacement if changed.
+- `location` (String) Optional location for your cloud. Requires replacement if changed.
+- `scale_priority` (Number) Scale Priority. Requires replacement if changed. ; Default: 1
+- `security_mode` (String) host firewall. `off` or `internal`. a.k.a. "local firewall". Requires replacement if changed. ; Default: "off"
+- `visibility` (String) private or public. Requires replacement if changed. ; must be one of ["private", "public"]; Default: "private"
 
 ### Read-Only
 
@@ -78,15 +73,15 @@ private or public
 
 Optional:
 
-- `one` (Attributes) Map containing the Cloud (zone) type ID. See the zone-types API to fetch a list of all available Cloud (zone) types and their IDs. (see [below for nested schema](#nestedatt--zone_type--one))
-- `two` (Attributes) Map containing the Cloud (zone) code name. See the zone-types API to fetch a list of all available Cloud (zone) types and their codes. (see [below for nested schema](#nestedatt--zone_type--two))
+- `one` (Attributes) Map containing the Cloud (zone) type ID. See the zone-types API to fetch a list of all available Cloud (zone) types and their IDs. Requires replacement if changed. (see [below for nested schema](#nestedatt--zone_type--one))
+- `two` (Attributes) Map containing the Cloud (zone) code name. See the zone-types API to fetch a list of all available Cloud (zone) types and their codes. Requires replacement if changed. (see [below for nested schema](#nestedatt--zone_type--two))
 
 <a id="nestedatt--zone_type--one"></a>
 ### Nested Schema for `zone_type.one`
 
 Optional:
 
-- `id` (Number)
+- `id` (Number) Requires replacement if changed.
 
 
 <a id="nestedatt--zone_type--two"></a>
@@ -94,7 +89,7 @@ Optional:
 
 Optional:
 
-- `code` (String)
+- `code` (String) Requires replacement if changed.
 
 
 
@@ -107,8 +102,8 @@ Optional:
 
 Optional:
 
-- `id` (Number)
-- `type` (String) Default: "local"
+- `id` (Number) Requires replacement if changed.
+- `type` (String) Requires replacement if changed. ; Default: "local"
 
 
 <a id="nestedatt--zone"></a>
