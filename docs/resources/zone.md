@@ -51,17 +51,17 @@ resource "newtest_zone" "my_zone" {
 ### Optional
 
 - `account_id` (Number) Specifies which Tenant this cloud should be assigned to. Requires replacement if changed.
-- `auto_recover_power_state` (Boolean) Automatically Power on VMs. Requires replacement if changed. ; Default: false
+- `auto_recover_power_state` (Boolean) Automatically Power on VMs. Requires replacement if changed.
 - `code` (String) Optional code for use with policies. Requires replacement if changed.
 - `config` (Attributes) Map containing zone configuration settings. See the section on specific zone types for details. Requires replacement if changed. (see [below for nested schema](#nestedatt--config))
 - `credential` (Attributes) Map containing Credential ID. Setting `type` to `local` means use the values set in the local cloud config instead of associating a credential. Requires replacement if changed. (see [below for nested schema](#nestedatt--credential))
 - `description` (String) Optional description field if you want to put more info there. Requires replacement if changed.
-- `enabled` (Boolean) Can be used to disable the cloud. Requires replacement if changed. ; Default: true
+- `enabled` (Boolean) Can be used to disable the cloud. Requires replacement if changed.
 - `linked_account_id` (Number) Linked Account ID (enter commercial ID to get costing for AWS Govcloud). Requires replacement if changed.
 - `location` (String) Optional location for your cloud. Requires replacement if changed.
-- `scale_priority` (Number) Scale Priority. Requires replacement if changed. ; Default: 1
-- `security_mode` (String) host firewall. `off` or `internal`. a.k.a. "local firewall". Requires replacement if changed. ; Default: "off"
-- `visibility` (String) private or public. Requires replacement if changed. ; must be one of ["private", "public"]; Default: "private"
+- `scale_priority` (Number) Scale Priority. Requires replacement if changed.
+- `security_mode` (String) host firewall. `off` or `internal`. a.k.a. "local firewall". Requires replacement if changed.
+- `visibility` (String) private or public. Requires replacement if changed. ; must be one of ["private", "public"]
 
 ### Read-Only
 
@@ -103,7 +103,7 @@ Optional:
 Optional:
 
 - `id` (Number) Requires replacement if changed.
-- `type` (String) Requires replacement if changed. ; Default: "local"
+- `type` (String) Requires replacement if changed.
 
 
 <a id="nestedatt--zone"></a>

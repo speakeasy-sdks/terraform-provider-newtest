@@ -76,7 +76,7 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					boolplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `Automatically Power on VMs. Requires replacement if changed. ; Default: false`,
+				Description: `Automatically Power on VMs. Requires replacement if changed. `,
 			},
 			"code": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -111,7 +111,7 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 							stringplanmodifier.RequiresReplaceIfConfigured(),
 						},
 						Optional:    true,
-						Description: `Requires replacement if changed. ; Default: "local"`,
+						Description: `Requires replacement if changed. `,
 					},
 				},
 				Description: `Map containing Credential ID. Setting ` + "`" + `type` + "`" + ` to ` + "`" + `local` + "`" + ` means use the values set in the local cloud config instead of associating a credential. Requires replacement if changed. `,
@@ -128,7 +128,7 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					boolplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `Can be used to disable the cloud. Requires replacement if changed. ; Default: true`,
+				Description: `Can be used to disable the cloud. Requires replacement if changed. `,
 			},
 			"group_id": schema.Int64Attribute{
 				PlanModifiers: []planmodifier.Int64{
@@ -163,14 +163,14 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					int64planmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `Scale Priority. Requires replacement if changed. ; Default: 1`,
+				Description: `Scale Priority. Requires replacement if changed. `,
 			},
 			"security_mode": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `host firewall. ` + "`" + `off` + "`" + ` or ` + "`" + `internal` + "`" + `. a.k.a. "local firewall". Requires replacement if changed. ; Default: "off"`,
+				Description: `host firewall. ` + "`" + `off` + "`" + ` or ` + "`" + `internal` + "`" + `. a.k.a. "local firewall". Requires replacement if changed. `,
 			},
 			"success": schema.BoolAttribute{
 				Computed: true,
@@ -180,7 +180,7 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `private or public. Requires replacement if changed. ; must be one of ["private", "public"]; Default: "private"`,
+				Description: `private or public. Requires replacement if changed. ; must be one of ["private", "public"]`,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"private",
