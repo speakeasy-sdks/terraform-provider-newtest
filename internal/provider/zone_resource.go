@@ -8,10 +8,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -72,11 +75,13 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				Description: `Specifies which Tenant this cloud should be assigned to. Requires replacement if changed. `,
 			},
 			"auto_recover_power_state": schema.BoolAttribute{
+				Computed: true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `Automatically Power on VMs. Requires replacement if changed. `,
+				Default:     booldefault.StaticBool(false),
+				Description: `Automatically Power on VMs. Requires replacement if changed. ; Default: false`,
 			},
 			"code": schema.StringAttribute{
 				PlanModifiers: []planmodifier.String{
@@ -107,11 +112,13 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 						Description: `Requires replacement if changed. `,
 					},
 					"type": schema.StringAttribute{
+						Computed: true,
 						PlanModifiers: []planmodifier.String{
 							stringplanmodifier.RequiresReplaceIfConfigured(),
 						},
 						Optional:    true,
-						Description: `Requires replacement if changed. `,
+						Default:     stringdefault.StaticString("local"),
+						Description: `Requires replacement if changed. ; Default: "local"`,
 					},
 				},
 				Description: `Map containing Credential ID. Setting ` + "`" + `type` + "`" + ` to ` + "`" + `local` + "`" + ` means use the values set in the local cloud config instead of associating a credential. Requires replacement if changed. `,
@@ -124,11 +131,13 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				Description: `Optional description field if you want to put more info there. Requires replacement if changed. `,
 			},
 			"enabled": schema.BoolAttribute{
+				Computed: true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `Can be used to disable the cloud. Requires replacement if changed. `,
+				Default:     booldefault.StaticBool(true),
+				Description: `Can be used to disable the cloud. Requires replacement if changed. ; Default: true`,
 			},
 			"group_id": schema.Int64Attribute{
 				PlanModifiers: []planmodifier.Int64{
@@ -159,28 +168,34 @@ func (r *ZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				Description: `A unique name scoped to your account for the cloud. Requires replacement if changed. `,
 			},
 			"scale_priority": schema.Int64Attribute{
+				Computed: true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `Scale Priority. Requires replacement if changed. `,
+				Default:     int64default.StaticInt64(1),
+				Description: `Scale Priority. Requires replacement if changed. ; Default: 1`,
 			},
 			"security_mode": schema.StringAttribute{
+				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `host firewall. ` + "`" + `off` + "`" + ` or ` + "`" + `internal` + "`" + `. a.k.a. "local firewall". Requires replacement if changed. `,
+				Default:     stringdefault.StaticString("off"),
+				Description: `host firewall. ` + "`" + `off` + "`" + ` or ` + "`" + `internal` + "`" + `. a.k.a. "local firewall". Requires replacement if changed. ; Default: "off"`,
 			},
 			"success": schema.BoolAttribute{
 				Computed: true,
 			},
 			"visibility": schema.StringAttribute{
+				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplaceIfConfigured(),
 				},
 				Optional:    true,
-				Description: `private or public. Requires replacement if changed. ; must be one of ["private", "public"]`,
+				Default:     stringdefault.StaticString("private"),
+				Description: `private or public. Requires replacement if changed. ; must be one of ["private", "public"]; Default: "private"`,
 				Validators: []validator.String{
 					stringvalidator.OneOf(
 						"private",
