@@ -202,7 +202,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 					r.Zone.Config.ZoneAwsConfig.NetworkServer = &ZoneAwsConfigNetworkServer{}
 					r.Zone.Config.ZoneAwsConfig.NetworkServer.ID = types.StringPointerValue(resp.Zone.Config.ZoneAwsConfig.NetworkServer.ID)
 				}
-				r.Zone.Config.ZoneAwsConfig.ID = types.StringPointerValue(resp.Zone.Config.ZoneAwsConfig.ID)
+				r.Zone.Config.ZoneAwsConfig.NetworkServerID = types.StringPointerValue(resp.Zone.Config.ZoneAwsConfig.NetworkServerID)
 				r.Zone.Config.ZoneAwsConfig.ReplicationMode = types.StringPointerValue(resp.Zone.Config.ZoneAwsConfig.ReplicationMode)
 				r.Zone.Config.ZoneAwsConfig.SecretKey = types.StringPointerValue(resp.Zone.Config.ZoneAwsConfig.SecretKey)
 				r.Zone.Config.ZoneAwsConfig.SecretKeyHash = types.StringPointerValue(resp.Zone.Config.ZoneAwsConfig.SecretKeyHash)
@@ -242,7 +242,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 					r.Zone.Config.ZoneAzureConfig.NetworkServer = &ZoneAwsConfigNetworkServer{}
 					r.Zone.Config.ZoneAzureConfig.NetworkServer.ID = types.StringPointerValue(resp.Zone.Config.ZoneAzureConfig.NetworkServer.ID)
 				}
-				r.Zone.Config.ZoneAzureConfig.ID = types.StringPointerValue(resp.Zone.Config.ZoneAzureConfig.ID)
+				r.Zone.Config.ZoneAzureConfig.NetworkServerID = types.StringPointerValue(resp.Zone.Config.ZoneAzureConfig.NetworkServerID)
 				r.Zone.Config.ZoneAzureConfig.ReplicationMode = types.StringPointerValue(resp.Zone.Config.ZoneAzureConfig.ReplicationMode)
 				r.Zone.Config.ZoneAzureConfig.ResourceGroup = types.StringPointerValue(resp.Zone.Config.ZoneAzureConfig.ResourceGroup)
 				r.Zone.Config.ZoneAzureConfig.RPCMode = types.StringPointerValue(resp.Zone.Config.ZoneAzureConfig.RPCMode)
@@ -269,7 +269,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 					r.Zone.Config.ZoneGcpConfig.NetworkServer = &ZoneAwsConfigNetworkServer{}
 					r.Zone.Config.ZoneGcpConfig.NetworkServer.ID = types.StringPointerValue(resp.Zone.Config.ZoneGcpConfig.NetworkServer.ID)
 				}
-				r.Zone.Config.ZoneGcpConfig.ID = types.StringPointerValue(resp.Zone.Config.ZoneGcpConfig.ID)
+				r.Zone.Config.ZoneGcpConfig.NetworkServerID = types.StringPointerValue(resp.Zone.Config.ZoneGcpConfig.NetworkServerID)
 				r.Zone.Config.ZoneGcpConfig.PrivateKey = types.StringPointerValue(resp.Zone.Config.ZoneGcpConfig.PrivateKey)
 				r.Zone.Config.ZoneGcpConfig.PrivateKeyHash = types.StringPointerValue(resp.Zone.Config.ZoneGcpConfig.PrivateKeyHash)
 				r.Zone.Config.ZoneGcpConfig.ProjectID = types.StringPointerValue(resp.Zone.Config.ZoneGcpConfig.ProjectID)
@@ -307,7 +307,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 					r.Zone.Config.ZoneVcenterConfig.NetworkServer = &ZoneAwsConfigNetworkServer{}
 					r.Zone.Config.ZoneVcenterConfig.NetworkServer.ID = types.StringPointerValue(resp.Zone.Config.ZoneVcenterConfig.NetworkServer.ID)
 				}
-				r.Zone.Config.ZoneVcenterConfig.ID = types.StringPointerValue(resp.Zone.Config.ZoneVcenterConfig.ID)
+				r.Zone.Config.ZoneVcenterConfig.NetworkServerID = types.StringPointerValue(resp.Zone.Config.ZoneVcenterConfig.NetworkServerID)
 				r.Zone.Config.ZoneVcenterConfig.Password = types.StringPointerValue(resp.Zone.Config.ZoneVcenterConfig.Password)
 				r.Zone.Config.ZoneVcenterConfig.PasswordHash = types.StringPointerValue(resp.Zone.Config.ZoneVcenterConfig.PasswordHash)
 				r.Zone.Config.ZoneVcenterConfig.ReplicationMode = types.StringPointerValue(resp.Zone.Config.ZoneVcenterConfig.ReplicationMode)

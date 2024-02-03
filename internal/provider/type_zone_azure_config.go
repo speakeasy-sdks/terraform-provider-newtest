@@ -29,7 +29,7 @@ type ZoneAzureConfig struct {
 	ImportExisting      types.String                `tfsdk:"import_existing"`
 	InventoryLevel      types.String                `tfsdk:"inventory_level"`
 	NetworkServer       *ZoneAwsConfigNetworkServer `tfsdk:"network_server"`
-	ID                  types.String                `tfsdk:"network_server_id"`
+	NetworkServerID     types.String                `tfsdk:"network_server_id"`
 	ReplicationMode     types.String                `tfsdk:"replication_mode"`
 	ResourceGroup       types.String                `tfsdk:"resource_group"`
 	RPCMode             types.String                `tfsdk:"rpc_mode"`

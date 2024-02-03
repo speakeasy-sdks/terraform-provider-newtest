@@ -28,7 +28,7 @@ type ZoneVcenterConfig struct {
 	ImportExisting             types.String                `tfsdk:"import_existing"`
 	KubeURL                    types.String                `tfsdk:"kube_url"`
 	NetworkServer              *ZoneAwsConfigNetworkServer `tfsdk:"network_server"`
-	ID                         types.String                `tfsdk:"network_server_id"`
+	NetworkServerID            types.String                `tfsdk:"network_server_id"`
 	Password                   types.String                `tfsdk:"password"`
 	PasswordHash               types.String                `tfsdk:"password_hash"`
 	ReplicationMode            types.String                `tfsdk:"replication_mode"`

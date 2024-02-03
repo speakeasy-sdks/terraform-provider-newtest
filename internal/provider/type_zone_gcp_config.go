@@ -15,7 +15,7 @@ type ZoneGcpConfig struct {
 	GoogleRegionID      types.String                `tfsdk:"google_region_id"`
 	ImportExisting      types.String                `tfsdk:"import_existing"`
 	NetworkServer       *ZoneAwsConfigNetworkServer `tfsdk:"network_server"`
-	ID                  types.String                `tfsdk:"network_server_id"`
+	NetworkServerID     types.String                `tfsdk:"network_server_id"`
 	PrivateKey          types.String                `tfsdk:"private_key"`
 	PrivateKeyHash      types.String                `tfsdk:"private_key_hash"`
 	ProjectID           types.String                `tfsdk:"project_id"`

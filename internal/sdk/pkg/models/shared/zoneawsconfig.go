@@ -37,7 +37,7 @@ type ZoneAwsConfig struct {
 	ImageStoreID         *string                     `json:"imageStoreId,omitempty"`
 	IsVpc                *string                     `json:"isVpc,omitempty"`
 	NetworkServer        *ZoneAwsConfigNetworkServer `json:"networkServer,omitempty"`
-	ID                   *string                     `json:"networkServer.id,omitempty"`
+	NetworkServerID      *string                     `json:"networkServer.id,omitempty"`
 	ReplicationMode      *string                     `json:"replicationMode,omitempty"`
 	SecretKey            *string                     `json:"secretKey,omitempty"`
 	SecretKeyHash        *string                     `json:"secretKeyHash,omitempty"`
@@ -208,11 +208,11 @@ func (o *ZoneAwsConfig) GetNetworkServer() *ZoneAwsConfigNetworkServer {
 	return o.NetworkServer
 }
 
-func (o *ZoneAwsConfig) GetID() *string {
+func (o *ZoneAwsConfig) GetNetworkServerID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.ID
+	return o.NetworkServerID
 }
 
 func (o *ZoneAwsConfig) GetReplicationMode() *string {

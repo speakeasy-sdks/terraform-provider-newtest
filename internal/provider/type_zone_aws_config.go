@@ -28,7 +28,7 @@ type ZoneAwsConfig struct {
 	ImageStoreID         types.String                `tfsdk:"image_store_id"`
 	IsVpc                types.String                `tfsdk:"is_vpc"`
 	NetworkServer        *ZoneAwsConfigNetworkServer `tfsdk:"network_server"`
-	ID                   types.String                `tfsdk:"network_server_id"`
+	NetworkServerID      types.String                `tfsdk:"network_server_id"`
 	ReplicationMode      types.String                `tfsdk:"replication_mode"`
 	SecretKey            types.String                `tfsdk:"secret_key"`
 	SecretKeyHash        types.String                `tfsdk:"secret_key_hash"`

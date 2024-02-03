@@ -24,7 +24,7 @@ type ZoneGcpConfig struct {
 	GoogleRegionID      *string                     `json:"googleRegionId,omitempty"`
 	ImportExisting      *string                     `json:"importExisting,omitempty"`
 	NetworkServer       *ZoneGcpConfigNetworkServer `json:"networkServer,omitempty"`
-	ID                  *string                     `json:"networkServer.id,omitempty"`
+	NetworkServerID     *string                     `json:"networkServer.id,omitempty"`
 	PrivateKey          *string                     `json:"privateKey,omitempty"`
 	PrivateKeyHash      *string                     `json:"privateKeyHash,omitempty"`
 	ProjectID           *string                     `json:"projectId,omitempty"`
@@ -103,11 +103,11 @@ func (o *ZoneGcpConfig) GetNetworkServer() *ZoneGcpConfigNetworkServer {
 	return o.NetworkServer
 }
 
-func (o *ZoneGcpConfig) GetID() *string {
+func (o *ZoneGcpConfig) GetNetworkServerID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.ID
+	return o.NetworkServerID
 }
 
 func (o *ZoneGcpConfig) GetPrivateKey() *string {

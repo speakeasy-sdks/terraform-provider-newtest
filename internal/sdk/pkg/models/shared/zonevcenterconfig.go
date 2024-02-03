@@ -37,7 +37,7 @@ type ZoneVcenterConfig struct {
 	ImportExisting             *string                         `json:"importExisting,omitempty"`
 	KubeURL                    *string                         `json:"kubeUrl,omitempty"`
 	NetworkServer              *ZoneVcenterConfigNetworkServer `json:"networkServer,omitempty"`
-	ID                         *string                         `json:"networkServer.id,omitempty"`
+	NetworkServerID            *string                         `json:"networkServer.id,omitempty"`
 	Password                   *string                         `json:"password,omitempty"`
 	PasswordHash               *string                         `json:"passwordHash,omitempty"`
 	ReplicationMode            *string                         `json:"replicationMode,omitempty"`
@@ -211,11 +211,11 @@ func (o *ZoneVcenterConfig) GetNetworkServer() *ZoneVcenterConfigNetworkServer {
 	return o.NetworkServer
 }
 
-func (o *ZoneVcenterConfig) GetID() *string {
+func (o *ZoneVcenterConfig) GetNetworkServerID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.ID
+	return o.NetworkServerID
 }
 
 func (o *ZoneVcenterConfig) GetPassword() *string {

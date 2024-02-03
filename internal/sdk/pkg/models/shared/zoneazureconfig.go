@@ -38,7 +38,7 @@ type ZoneAzureConfig struct {
 	ImportExisting      *string                       `json:"importExisting,omitempty"`
 	InventoryLevel      *string                       `json:"inventoryLevel,omitempty"`
 	NetworkServer       *ZoneAzureConfigNetworkServer `json:"networkServer,omitempty"`
-	ID                  *string                       `json:"networkServer.id,omitempty"`
+	NetworkServerID     *string                       `json:"networkServer.id,omitempty"`
 	ReplicationMode     *string                       `json:"replicationMode,omitempty"`
 	ResourceGroup       *string                       `json:"resourceGroup,omitempty"`
 	RPCMode             *string                       `json:"rpcMode,omitempty"`
@@ -217,11 +217,11 @@ func (o *ZoneAzureConfig) GetNetworkServer() *ZoneAzureConfigNetworkServer {
 	return o.NetworkServer
 }
 
-func (o *ZoneAzureConfig) GetID() *string {
+func (o *ZoneAzureConfig) GetNetworkServerID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.ID
+	return o.NetworkServerID
 }
 
 func (o *ZoneAzureConfig) GetReplicationMode() *string {
