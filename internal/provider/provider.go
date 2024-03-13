@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/testing/terraform-provider-newtest/internal/sdk"
 	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/models/shared"
+	"net/http"
 )
 
 var _ provider.Provider = &NewtestProvider{}
@@ -75,6 +76,7 @@ func (p *NewtestProvider) Configure(ctx context.Context, req provider.ConfigureR
 	opts := []sdk.SDKOption{
 		sdk.WithServerURL(ServerURL),
 		sdk.WithSecurity(security),
+		sdk.WithClient(http.DefaultClient),
 	}
 	client := sdk.New(opts...)
 
