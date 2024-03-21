@@ -19,8 +19,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	tfTypes "github.com/testing/terraform-provider-newtest/internal/provider/types"
 	"github.com/testing/terraform-provider-newtest/internal/sdk"
-	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/models/operations"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/models/operations"
 	"github.com/testing/terraform-provider-newtest/internal/validators"
 )
 
@@ -39,23 +40,23 @@ type ZoneResource struct {
 
 // ZoneResourceModel describes the resource data model.
 type ZoneResourceModel struct {
-	AccountID             types.Int64           `tfsdk:"account_id"`
-	AutoRecoverPowerState types.Bool            `tfsdk:"auto_recover_power_state"`
-	Code                  types.String          `tfsdk:"code"`
-	Config                *ZoneCreateConfig     `tfsdk:"config"`
-	Credential            *ZoneCreateCredential `tfsdk:"credential"`
-	Description           types.String          `tfsdk:"description"`
-	Enabled               types.Bool            `tfsdk:"enabled"`
-	GroupID               types.Int64           `tfsdk:"group_id"`
-	LinkedAccountID       types.Int64           `tfsdk:"linked_account_id"`
-	Location              types.String          `tfsdk:"location"`
-	Name                  types.String          `tfsdk:"name"`
-	ScalePriority         types.Int64           `tfsdk:"scale_priority"`
-	SecurityMode          types.String          `tfsdk:"security_mode"`
-	Success               types.Bool            `tfsdk:"success"`
-	Visibility            types.String          `tfsdk:"visibility"`
-	Zone                  *Zone                 `tfsdk:"zone"`
-	ZoneType              ZoneCreateZoneType    `tfsdk:"zone_type"`
+	AccountID             types.Int64                   `tfsdk:"account_id"`
+	AutoRecoverPowerState types.Bool                    `tfsdk:"auto_recover_power_state"`
+	Code                  types.String                  `tfsdk:"code"`
+	Config                *tfTypes.ZoneCreateConfig     `tfsdk:"config"`
+	Credential            *tfTypes.ZoneCreateCredential `tfsdk:"credential"`
+	Description           types.String                  `tfsdk:"description"`
+	Enabled               types.Bool                    `tfsdk:"enabled"`
+	GroupID               types.Int64                   `tfsdk:"group_id"`
+	LinkedAccountID       types.Int64                   `tfsdk:"linked_account_id"`
+	Location              types.String                  `tfsdk:"location"`
+	Name                  types.String                  `tfsdk:"name"`
+	ScalePriority         types.Int64                   `tfsdk:"scale_priority"`
+	SecurityMode          types.String                  `tfsdk:"security_mode"`
+	Success               types.Bool                    `tfsdk:"success"`
+	Visibility            types.String                  `tfsdk:"visibility"`
+	Zone                  *tfTypes.Zone                 `tfsdk:"zone"`
+	ZoneType              tfTypes.ZoneCreateZoneType    `tfsdk:"zone_type"`
 }
 
 func (r *ZoneResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {

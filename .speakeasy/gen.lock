@@ -3,24 +3,54 @@ id: 257e00b4-68bd-4549-9f39-6d01f364735a
 management:
   docChecksum: ab96939a530bd3f5fae0f5b4d7390b5a
   docVersion: 6.1.1
-  speakeasyVersion: 1.207.1
-  generationVersion: 2.280.6
-  releaseVersion: 0.19.1
-  configChecksum: 668cb91de146fbe1cb8c5ba670b0d428
+  speakeasyVersion: 1.215.1
+  generationVersion: 2.286.4
+  releaseVersion: 0.20.0
+  configChecksum: fcb72003f817390815c5be6282ed5485
   repoURL: https://github.com/speakeasy-sdks/terraform-provider-newtest.git
   repoSubDirectory: .
   published: true
 features:
   terraform:
     constsAndDefaults: 0.1.4
-    core: 3.10.3
-    globalSecurity: 2.81.5
+    core: 3.11.1
+    globalSecurity: 2.81.6
     globalServerURLs: 2.82.1
-    unions: 2.81.9
+    unions: 2.81.10
 generatedFiles:
   - internal/sdk/appliancesettings.go
   - internal/sdk/clouds.go
-  - internal/sdk/sdk.go
+  - internal/sdk/newtest.go
+  - internal/sdk/models/errors/sdkerror.go
+  - internal/sdk/types/bigint.go
+  - internal/sdk/types/date.go
+  - internal/sdk/types/datetime.go
+  - internal/sdk/types/decimal.go
+  - internal/sdk/types/pointers.go
+  - internal/sdk/internal/utils/contenttype.go
+  - internal/sdk/internal/utils/form.go
+  - internal/sdk/internal/utils/headers.go
+  - internal/sdk/internal/utils/json.go
+  - internal/sdk/internal/utils/pathparams.go
+  - internal/sdk/internal/utils/queryparams.go
+  - internal/sdk/internal/utils/requestbody.go
+  - internal/sdk/internal/utils/retries.go
+  - internal/sdk/internal/utils/security.go
+  - internal/sdk/internal/utils/utils.go
+  - internal/sdk/models/operations/setappliancesettingsmaintenancemode.go
+  - internal/sdk/models/operations/addclouds.go
+  - internal/sdk/models/shared/defaulterror.go
+  - internal/sdk/models/shared/twohundredsuccess.go
+  - internal/sdk/models/shared/zone.go
+  - internal/sdk/models/shared/zonevcenterconfig.go
+  - internal/sdk/models/shared/zoneawsconfig.go
+  - internal/sdk/models/shared/zoneazureconfig.go
+  - internal/sdk/models/shared/zonegcpconfig.go
+  - internal/sdk/models/shared/zonecreate.go
+  - internal/sdk/models/shared/security.go
+  - internal/sdk/.gitignore
+  - internal/sdk/.gitattributes
+  - internal/sdk/internal/hooks/hooks.go
   - examples/README.md
   - go.mod
   - go.sum
@@ -49,22 +79,6 @@ generatedFiles:
   - internal/provider/reflect/slice.go
   - internal/provider/reflect/struct.go
   - internal/provider/utils.go
-  - internal/sdk/pkg/models/sdkerrors/sdkerror.go
-  - internal/sdk/pkg/types/bigint.go
-  - internal/sdk/pkg/types/date.go
-  - internal/sdk/pkg/types/datetime.go
-  - internal/sdk/pkg/types/decimal.go
-  - internal/sdk/pkg/types/pointers.go
-  - internal/sdk/pkg/utils/contenttype.go
-  - internal/sdk/pkg/utils/form.go
-  - internal/sdk/pkg/utils/headers.go
-  - internal/sdk/pkg/utils/json.go
-  - internal/sdk/pkg/utils/pathparams.go
-  - internal/sdk/pkg/utils/queryparams.go
-  - internal/sdk/pkg/utils/requestbody.go
-  - internal/sdk/pkg/utils/retries.go
-  - internal/sdk/pkg/utils/security.go
-  - internal/sdk/pkg/utils/utils.go
   - internal/validators/DateValidator.go
   - internal/validators/ExactlyOneChild.go
   - internal/validators/JSONParseValidator.go
@@ -81,37 +95,26 @@ generatedFiles:
   - main.go
   - terraform-registry-manifest.json
   - tools/tools.go
-  - internal/sdk/pkg/models/operations/setappliancesettingsmaintenancemode.go
-  - internal/sdk/pkg/models/operations/addclouds.go
-  - internal/sdk/pkg/models/shared/defaulterror.go
-  - internal/sdk/pkg/models/shared/twohundredsuccess.go
-  - internal/sdk/pkg/models/shared/zone.go
-  - internal/sdk/pkg/models/shared/zonevcenterconfig.go
-  - internal/sdk/pkg/models/shared/zoneawsconfig.go
-  - internal/sdk/pkg/models/shared/zoneazureconfig.go
-  - internal/sdk/pkg/models/shared/zonegcpconfig.go
-  - internal/sdk/pkg/models/shared/zonecreate.go
-  - internal/sdk/pkg/models/shared/security.go
-  - internal/provider/type_zone_create_config.go
-  - internal/provider/type_zone_create_credential.go
-  - internal/provider/type_account.go
-  - internal/provider/type_zone_aws_config_network_server.go
-  - internal/provider/type_zone_aws_config.go
-  - internal/provider/type_zone_azure_config.go
-  - internal/provider/type_zone_gcp_config.go
-  - internal/provider/type_zone_vcenter_config.go
-  - internal/provider/type_config.go
-  - internal/provider/type_one.go
-  - internal/provider/type_two.go
-  - internal/provider/type_credential.go
-  - internal/provider/type_groups.go
-  - internal/provider/type_server_counts.go
-  - internal/provider/type_stats.go
-  - internal/provider/type_zone_type.go
-  - internal/provider/type_zone.go
-  - internal/provider/type_zone_create1.go
-  - internal/provider/type_zone_create2.go
-  - internal/provider/type_zone_create_zone_type.go
+  - internal/provider/types/zone_create_config.go
+  - internal/provider/types/zone_create_credential.go
+  - internal/provider/types/account.go
+  - internal/provider/types/zone_aws_config_network_server.go
+  - internal/provider/types/zone_aws_config.go
+  - internal/provider/types/zone_azure_config.go
+  - internal/provider/types/zone_gcp_config.go
+  - internal/provider/types/zone_vcenter_config.go
+  - internal/provider/types/config.go
+  - internal/provider/types/one.go
+  - internal/provider/types/two.go
+  - internal/provider/types/credential.go
+  - internal/provider/types/groups.go
+  - internal/provider/types/server_counts.go
+  - internal/provider/types/stats.go
+  - internal/provider/types/zone_type.go
+  - internal/provider/types/zone.go
+  - internal/provider/types/zone_create1.go
+  - internal/provider/types/zone_create2.go
+  - internal/provider/types/zone_create_zone_type.go
   - USAGE.md
   - internal/provider/provider.go
   - examples/provider/provider.tf

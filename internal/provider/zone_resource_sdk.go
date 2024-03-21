@@ -4,8 +4,9 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/models/operations"
-	"github.com/testing/terraform-provider-newtest/internal/sdk/pkg/models/shared"
+	tfTypes "github.com/testing/terraform-provider-newtest/internal/provider/types"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/models/operations"
+	"github.com/testing/terraform-provider-newtest/internal/sdk/models/shared"
 	"time"
 )
 
@@ -156,11 +157,11 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 		if resp.Zone == nil {
 			r.Zone = nil
 		} else {
-			r.Zone = &Zone{}
+			r.Zone = &tfTypes.Zone{}
 			if resp.Zone.Account == nil {
 				r.Zone.Account = nil
 			} else {
-				r.Zone.Account = &Account{}
+				r.Zone.Account = &tfTypes.Account{}
 				r.Zone.Account.ID = types.Int64PointerValue(resp.Zone.Account.ID)
 				r.Zone.Account.Name = types.StringPointerValue(resp.Zone.Account.Name)
 			}
@@ -172,9 +173,9 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 			if resp.Zone.Config == nil {
 				r.Zone.Config = nil
 			} else {
-				r.Zone.Config = &Config{}
+				r.Zone.Config = &tfTypes.Config{}
 				if resp.Zone.Config.ZoneAwsConfig != nil {
-					r.Zone.Config.ZoneAwsConfig = &ZoneAwsConfig{}
+					r.Zone.Config.ZoneAwsConfig = &tfTypes.ZoneAwsConfig{}
 					r.Zone.Config.ZoneAwsConfig.UseHostCredentials = types.StringPointerValue(resp.Zone.Config.ZoneAwsConfig.UseHostCredentials)
 					r.Zone.Config.ZoneAwsConfig.AccessKey = types.StringPointerValue(resp.Zone.Config.ZoneAwsConfig.AccessKey)
 					r.Zone.Config.ZoneAwsConfig.ApplianceURL = types.StringPointerValue(resp.Zone.Config.ZoneAwsConfig.ApplianceURL)
@@ -200,7 +201,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 					if resp.Zone.Config.ZoneAwsConfig.NetworkServer == nil {
 						r.Zone.Config.ZoneAwsConfig.NetworkServer = nil
 					} else {
-						r.Zone.Config.ZoneAwsConfig.NetworkServer = &ZoneAwsConfigNetworkServer{}
+						r.Zone.Config.ZoneAwsConfig.NetworkServer = &tfTypes.ZoneAwsConfigNetworkServer{}
 						r.Zone.Config.ZoneAwsConfig.NetworkServer.ID = types.StringPointerValue(resp.Zone.Config.ZoneAwsConfig.NetworkServer.ID)
 					}
 					r.Zone.Config.ZoneAwsConfig.NetworkServerID = types.StringPointerValue(resp.Zone.Config.ZoneAwsConfig.NetworkServerID)
@@ -213,7 +214,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 					r.Zone.Config.ZoneAwsConfig.Vpc = types.StringPointerValue(resp.Zone.Config.ZoneAwsConfig.Vpc)
 				}
 				if resp.Zone.Config.ZoneAzureConfig != nil {
-					r.Zone.Config.ZoneAzureConfig = &ZoneAzureConfig{}
+					r.Zone.Config.ZoneAzureConfig = &tfTypes.ZoneAzureConfig{}
 					r.Zone.Config.ZoneAzureConfig.AccountType = types.StringPointerValue(resp.Zone.Config.ZoneAzureConfig.AccountType)
 					r.Zone.Config.ZoneAzureConfig.ApplianceURL = types.StringPointerValue(resp.Zone.Config.ZoneAzureConfig.ApplianceURL)
 					r.Zone.Config.ZoneAzureConfig.AzureCostingMode = types.StringPointerValue(resp.Zone.Config.ZoneAzureConfig.AzureCostingMode)
@@ -240,7 +241,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 					if resp.Zone.Config.ZoneAzureConfig.NetworkServer == nil {
 						r.Zone.Config.ZoneAzureConfig.NetworkServer = nil
 					} else {
-						r.Zone.Config.ZoneAzureConfig.NetworkServer = &ZoneAwsConfigNetworkServer{}
+						r.Zone.Config.ZoneAzureConfig.NetworkServer = &tfTypes.ZoneAwsConfigNetworkServer{}
 						r.Zone.Config.ZoneAzureConfig.NetworkServer.ID = types.StringPointerValue(resp.Zone.Config.ZoneAzureConfig.NetworkServer.ID)
 					}
 					r.Zone.Config.ZoneAzureConfig.NetworkServerID = types.StringPointerValue(resp.Zone.Config.ZoneAzureConfig.NetworkServerID)
@@ -254,7 +255,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 					r.Zone.Config.ZoneAzureConfig.TenantID = types.StringPointerValue(resp.Zone.Config.ZoneAzureConfig.TenantID)
 				}
 				if resp.Zone.Config.ZoneGcpConfig != nil {
-					r.Zone.Config.ZoneGcpConfig = &ZoneGcpConfig{}
+					r.Zone.Config.ZoneGcpConfig = &tfTypes.ZoneGcpConfig{}
 					r.Zone.Config.ZoneGcpConfig.ApplianceURL = types.StringPointerValue(resp.Zone.Config.ZoneGcpConfig.ApplianceURL)
 					r.Zone.Config.ZoneGcpConfig.BackupMode = types.StringPointerValue(resp.Zone.Config.ZoneGcpConfig.BackupMode)
 					r.Zone.Config.ZoneGcpConfig.CertificateProvider = types.StringPointerValue(resp.Zone.Config.ZoneGcpConfig.CertificateProvider)
@@ -267,7 +268,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 					if resp.Zone.Config.ZoneGcpConfig.NetworkServer == nil {
 						r.Zone.Config.ZoneGcpConfig.NetworkServer = nil
 					} else {
-						r.Zone.Config.ZoneGcpConfig.NetworkServer = &ZoneAwsConfigNetworkServer{}
+						r.Zone.Config.ZoneGcpConfig.NetworkServer = &tfTypes.ZoneAwsConfigNetworkServer{}
 						r.Zone.Config.ZoneGcpConfig.NetworkServer.ID = types.StringPointerValue(resp.Zone.Config.ZoneGcpConfig.NetworkServer.ID)
 					}
 					r.Zone.Config.ZoneGcpConfig.NetworkServerID = types.StringPointerValue(resp.Zone.Config.ZoneGcpConfig.NetworkServerID)
@@ -279,7 +280,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 					r.Zone.Config.ZoneGcpConfig.ServiceRegistryID = types.StringPointerValue(resp.Zone.Config.ZoneGcpConfig.ServiceRegistryID)
 				}
 				if resp.Zone.Config.ZoneVcenterConfig != nil {
-					r.Zone.Config.ZoneVcenterConfig = &ZoneVcenterConfig{}
+					r.Zone.Config.ZoneVcenterConfig = &tfTypes.ZoneVcenterConfig{}
 					r.Zone.Config.ZoneVcenterConfig.EnableNetworkTypeSelection = types.StringPointerValue(resp.Zone.Config.ZoneVcenterConfig.EnableNetworkTypeSelection)
 					r.Zone.Config.ZoneVcenterConfig.APIURL = types.StringPointerValue(resp.Zone.Config.ZoneVcenterConfig.APIURL)
 					r.Zone.Config.ZoneVcenterConfig.APIVersion = types.StringPointerValue(resp.Zone.Config.ZoneVcenterConfig.APIVersion)
@@ -305,7 +306,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 					if resp.Zone.Config.ZoneVcenterConfig.NetworkServer == nil {
 						r.Zone.Config.ZoneVcenterConfig.NetworkServer = nil
 					} else {
-						r.Zone.Config.ZoneVcenterConfig.NetworkServer = &ZoneAwsConfigNetworkServer{}
+						r.Zone.Config.ZoneVcenterConfig.NetworkServer = &tfTypes.ZoneAwsConfigNetworkServer{}
 						r.Zone.Config.ZoneVcenterConfig.NetworkServer.ID = types.StringPointerValue(resp.Zone.Config.ZoneVcenterConfig.NetworkServer.ID)
 					}
 					r.Zone.Config.ZoneVcenterConfig.NetworkServerID = types.StringPointerValue(resp.Zone.Config.ZoneVcenterConfig.NetworkServerID)
@@ -340,13 +341,13 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 			if resp.Zone.Credential == nil {
 				r.Zone.Credential = nil
 			} else {
-				r.Zone.Credential = &Credential{}
+				r.Zone.Credential = &tfTypes.Credential{}
 				if resp.Zone.Credential.One != nil {
-					r.Zone.Credential.One = &One{}
+					r.Zone.Credential.One = &tfTypes.One{}
 					r.Zone.Credential.One.Type = types.StringPointerValue(resp.Zone.Credential.One.Type)
 				}
 				if resp.Zone.Credential.Two != nil {
-					r.Zone.Credential.Two = &Two{}
+					r.Zone.Credential.Two = &tfTypes.Two{}
 					r.Zone.Credential.Two.ID = types.Int64PointerValue(resp.Zone.Credential.Two.ID)
 					r.Zone.Credential.Two.Name = types.StringPointerValue(resp.Zone.Credential.Two.Name)
 					r.Zone.Credential.Two.Type = types.StringPointerValue(resp.Zone.Credential.Two.Type)
@@ -365,7 +366,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 				r.Zone.Groups = r.Zone.Groups[:len(resp.Zone.Groups)]
 			}
 			for groupsCount, groupsItem := range resp.Zone.Groups {
-				var groups1 Groups
+				var groups1 tfTypes.Groups
 				groups1.AccountID = types.Int64PointerValue(groupsItem.AccountID)
 				groups1.ID = types.Int64PointerValue(groupsItem.ID)
 				groups1.Name = types.StringPointerValue(groupsItem.Name)
@@ -397,14 +398,14 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 			if resp.Zone.NetworkDomain == nil {
 				r.Zone.NetworkDomain = nil
 			} else {
-				r.Zone.NetworkDomain = &Account{}
+				r.Zone.NetworkDomain = &tfTypes.Account{}
 				r.Zone.NetworkDomain.ID = types.Int64PointerValue(resp.Zone.NetworkDomain.ID)
 				r.Zone.NetworkDomain.Name = types.StringPointerValue(resp.Zone.NetworkDomain.Name)
 			}
 			if resp.Zone.NetworkServer == nil {
 				r.Zone.NetworkServer = nil
 			} else {
-				r.Zone.NetworkServer = &Account{}
+				r.Zone.NetworkServer = &tfTypes.Account{}
 				r.Zone.NetworkServer.ID = types.Int64PointerValue(resp.Zone.NetworkServer.ID)
 				r.Zone.NetworkServer.Name = types.StringPointerValue(resp.Zone.NetworkServer.Name)
 			}
@@ -416,7 +417,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 			if resp.Zone.Owner == nil {
 				r.Zone.Owner = nil
 			} else {
-				r.Zone.Owner = &Account{}
+				r.Zone.Owner = &tfTypes.Account{}
 				r.Zone.Owner.ID = types.Int64PointerValue(resp.Zone.Owner.ID)
 				r.Zone.Owner.Name = types.StringPointerValue(resp.Zone.Owner.Name)
 			}
@@ -427,7 +428,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 			if resp.Zone.SecurityServer == nil {
 				r.Zone.SecurityServer = nil
 			} else {
-				r.Zone.SecurityServer = &Account{}
+				r.Zone.SecurityServer = &tfTypes.Account{}
 				r.Zone.SecurityServer.ID = types.Int64PointerValue(resp.Zone.SecurityServer.ID)
 				r.Zone.SecurityServer.Name = types.StringPointerValue(resp.Zone.SecurityServer.Name)
 			}
@@ -436,11 +437,11 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 			if resp.Zone.Stats == nil {
 				r.Zone.Stats = nil
 			} else {
-				r.Zone.Stats = &Stats{}
+				r.Zone.Stats = &tfTypes.Stats{}
 				if resp.Zone.Stats.ServerCounts == nil {
 					r.Zone.Stats.ServerCounts = nil
 				} else {
-					r.Zone.Stats.ServerCounts = &ServerCounts{}
+					r.Zone.Stats.ServerCounts = &tfTypes.ServerCounts{}
 					r.Zone.Stats.ServerCounts.All = types.Int64PointerValue(resp.Zone.Stats.ServerCounts.All)
 					r.Zone.Stats.ServerCounts.Baremetal = types.Int64PointerValue(resp.Zone.Stats.ServerCounts.Baremetal)
 					r.Zone.Stats.ServerCounts.ContainerHost = types.Int64PointerValue(resp.Zone.Stats.ServerCounts.ContainerHost)
@@ -466,7 +467,7 @@ func (r *ZoneResourceModel) RefreshFromOperationsAddCloudsResponseBody(resp *ope
 			if resp.Zone.ZoneType == nil {
 				r.Zone.ZoneType = nil
 			} else {
-				r.Zone.ZoneType = &ZoneType{}
+				r.Zone.ZoneType = &tfTypes.ZoneType{}
 				r.Zone.ZoneType.Code = types.StringPointerValue(resp.Zone.ZoneType.Code)
 				r.Zone.ZoneType.ID = types.Int64PointerValue(resp.Zone.ZoneType.ID)
 				r.Zone.ZoneType.Name = types.StringPointerValue(resp.Zone.ZoneType.Name)
