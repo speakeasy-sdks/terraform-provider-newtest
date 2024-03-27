@@ -164,8 +164,8 @@ func New(opts ...SDKOption) *Newtest {
 			Language:          "go",
 			OpenAPIDocVersion: "6.1.1",
 			SDKVersion:        "0.0.1",
-			GenVersion:        "2.286.4",
-			UserAgent:         "speakeasy-sdk/go 0.0.1 2.286.4 6.1.1 github.com/testing/terraform-provider-newtest/internal/sdk",
+			GenVersion:        "2.291.0",
+			UserAgent:         "speakeasy-sdk/go 0.0.1 2.291.0 6.1.1 github.com/testing/terraform-provider-newtest/internal/sdk",
 			ServerDefaults: []map[string]string{
 				{
 					"serverURL": "CHANGEME",
